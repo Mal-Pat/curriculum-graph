@@ -1,0 +1,42 @@
+[
+  {
+    "id": "CS101",
+    "name": "Intro to Computer Science",
+    "credits": 3,
+    "major": "Computer Science",
+    "minor": null,
+    "prerequisites": []
+  },
+  {
+    "id": "CS102",
+    "name": "Data Structures",
+    "credits": 3,
+    "major": "Computer Science",
+    "minor": null,
+    "prerequisites": ["CS101"]
+  },
+  {
+    "id": "MATH101",
+    "name": "Calculus I",
+    "credits": 4,
+    "major": "Mathematics",
+    "minor": "Mathematics",
+    "prerequisites": []
+  },
+  {
+    "id": "MATH201",
+    "name": "Linear Algebra",
+    "credits": 3,
+    "major": "Mathematics",
+    "minor": "Mathematics",
+    "prerequisites": ["MATH101"]
+  },
+  {
+    "id": "PHYS101",
+    "name": "Physics I",
+    "credits": 4,
+    "major": "Physics",
+    "minor": null,
+    "prerequisites": []
+  }
+]
