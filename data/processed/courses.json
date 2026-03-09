@@ -1,0 +1,933 @@
+[
+    {
+        "course_code": "EC3424",
+        "title": "Isotope Geochemistry",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40EC3424.pdf"
+    },
+    {
+        "course_code": "EC4613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40EC4613.pdf"
+    },
+    {
+        "course_code": "TD2213",
+        "title": "Thermodynamics",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40TD2213.pdf"
+    },
+    {
+        "course_code": "BI5245",
+        "title": "Research Seminar",
+        "credits": 5,
+        "prerequisites": "Mandatory for 2nd year Biology iPhD students",
+        "file": "c40BI5245.pdf"
+    },
+    {
+        "course_code": "MT3613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "depends on project instructor",
+        "file": "c40MT3613.pdf"
+    },
+    {
+        "course_code": "CH4214",
+        "title": "Organotransition Metal Catalysis",
+        "credits": 4,
+        "prerequisites": "NONE",
+        "file": "c40CH4214.pdf"
+    },
+    {
+        "course_code": "SE4213",
+        "title": "Research Methods in Science Education",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40SE4213.pdf"
+    },
+    {
+        "course_code": "PH4263",
+        "title": "Astronomy and Astrophysics II",
+        "credits": 3,
+        "prerequisites": "Good background in Electrodynamics, Classical Mechanics.",
+        "file": "c40PH4263.pdf"
+    },
+    {
+        "course_code": "MT1213",
+        "title": "Calculus II",
+        "credits": 3,
+        "prerequisites": "Single Variable Calculus",
+        "file": "c40MT1213.pdf"
+    },
+    {
+        "course_code": "CH3234",
+        "title": "Transition metal Chemistry",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40CH3234.pdf"
+    },
+    {
+        "course_code": "DS3414",
+        "title": "Computational functional genomics",
+        "credits": 4,
+        "prerequisites": "Bioinformatics course + Proficiency in programming + Good",
+        "file": "c40DS3414.pdf"
+    },
+    {
+        "course_code": "MT3214",
+        "title": "Complex Analysis",
+        "credits": 4,
+        "prerequisites": "Real Analysis I",
+        "file": "c40MT3214.pdf"
+    },
+    {
+        "course_code": "CH4613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "Supervisor has to be a IISER Pune faculty. Requires prior",
+        "file": "c40CH4613.pdf"
+    },
+    {
+        "course_code": "HS3114",
+        "title": "Disasters and Society",
+        "credits": 4,
+        "prerequisites": "None except for discipline for reading and writing.",
+        "file": "c40HS3114.pdf"
+    },
+    {
+        "course_code": "BI3434",
+        "title": "Evolutionary Biology",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40BI3434.pdf"
+    },
+    {
+        "course_code": "MT4234",
+        "title": "Riemannian Geometry",
+        "credits": 4,
+        "prerequisites": "MT3184-Differential Geometry and Lie Groups",
+        "file": "c40MT4234.pdf"
+    },
+    {
+        "course_code": "MT4224",
+        "title": "Fourier Analysis",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40MT4224.pdf"
+    },
+    {
+        "course_code": "BI3424",
+        "title": "Statistical learning and data science",
+        "credits": 4,
+        "prerequisites": "None specified",
+        "file": "c40BI3424.pdf"
+    },
+    {
+        "course_code": "BI4613",
+        "title": "Lab/Theory Project",
+        "credits": 3,
+        "prerequisites": "None specified",
+        "file": "c40BI4613.pdf"
+    },
+    {
+        "course_code": "EC3224",
+        "title": "Geophysical Fluid Dynamics",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40EC3224.pdf"
+    },
+    {
+        "course_code": "PH3244",
+        "title": "Physics Lab IV",
+        "credits": 4,
+        "prerequisites": "Basic quantum and statistical mechanics, condensed matter",
+        "file": "c40PH3244.pdf"
+    },
+    {
+        "course_code": "DS3214",
+        "title": "Statistical Learning and Data Science",
+        "credits": 4,
+        "prerequisites": "None specified",
+        "file": "c40DS3214.pdf"
+    },
+    {
+        "course_code": "CH1223",
+        "title": "General Chemistry Practicals I",
+        "credits": 3,
+        "prerequisites": "none",
+        "file": "c40CH1223.pdf"
+    },
+    {
+        "course_code": "CH3224",
+        "title": "Organic Synthesis-I",
+        "credits": 4,
+        "prerequisites": "Physical Organic Chemistry Advisable",
+        "file": "c40CH3224.pdf"
+    },
+    {
+        "course_code": "BI3234",
+        "title": "Animal Behaviour",
+        "credits": 4,
+        "prerequisites": "NIL",
+        "file": "c40BI3234.pdf"
+    },
+    {
+        "course_code": "PH3253",
+        "title": "Group Theory in Physics",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40PH3253.pdf"
+    },
+    {
+        "course_code": "PH2213",
+        "title": "Classical mechanics (E )",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40PH2213.pdf"
+    },
+    {
+        "course_code": "DS3613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40DS3613.pdf"
+    },
+    {
+        "course_code": "EC1223",
+        "title": "The Solid Earth",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40EC1223.pdf"
+    },
+    {
+        "course_code": "PH4413",
+        "title": "Quantum Field Theory II",
+        "credits": 3,
+        "prerequisites": "Quantum Field Theory I, Mathematical Methods I and II,",
+        "file": "c40PH4413.pdf"
+    },
+    {
+        "course_code": "BI2213",
+        "title": "Cell Biology(E )",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40BI2213.pdf"
+    },
+    {
+        "course_code": "PH3234",
+        "title": "Statistical Mechanics I",
+        "credits": 4,
+        "prerequisites": "Basic working knowledge in classical and quantum",
+        "file": "c40PH3234.pdf"
+    },
+    {
+        "course_code": "BI3284",
+        "title": "Advanced Biochemistry II",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40BI3284.pdf"
+    },
+    {
+        "course_code": "HS3613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40HS3613.pdf"
+    },
+    {
+        "course_code": "PH5532",
+        "title": "Carbon Nanotube, Graphene and Quantum Hall Effect",
+        "credits": 2,
+        "prerequisites": "Condensed Matter 1",
+        "file": "c40PH5532.pdf"
+    },
+    {
+        "course_code": "MT4254",
+        "title": "Stochastic Processes",
+        "credits": 4,
+        "prerequisites": "Real Analysis-I and II, Measure Theory and Integration,",
+        "file": "c40MT4254.pdf"
+    },
+    {
+        "course_code": "MT2223",
+        "title": "Real Analysis I (E )",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40MT2223.pdf"
+    },
+    {
+        "course_code": "CH4274",
+        "title": "Medicinal Chemistry",
+        "credits": 4,
+        "prerequisites": "Physical Organic Chemistry, Bioorganic Chemistry and",
+        "file": "c40CH4274.pdf"
+    },
+    {
+        "course_code": "DS3273",
+        "title": "Image and video processing with deep learning",
+        "credits": 3,
+        "prerequisites": "Proficiency in python, calculus, linear algebra",
+        "file": "c40DS3273.pdf"
+    },
+    {
+        "course_code": "BI3293",
+        "title": "Ecology II",
+        "credits": 3,
+        "prerequisites": "BI3184",
+        "file": "c40BI3293.pdf"
+    },
+    {
+        "course_code": "BI3244",
+        "title": "From Planets to cells",
+        "credits": 4,
+        "prerequisites": "Basic background in biochemistry, earth sciences and",
+        "file": "c40BI3244.pdf"
+    },
+    {
+        "course_code": "EC4262",
+        "title": "Research-1",
+        "credits": 2,
+        "prerequisites": "Objectives",
+        "file": "c40EC4262.pdf"
+    },
+    {
+        "course_code": "BI3453",
+        "title": "Genome Biology",
+        "credits": 3,
+        "prerequisites": "Introductory Biology, Note: Students who have taken",
+        "file": "c40BI3453.pdf"
+    },
+    {
+        "course_code": "EC2213",
+        "title": "Principles of Planetary Climate (E )",
+        "credits": 3,
+        "prerequisites": "Introduction to the Climate System and (Python",
+        "file": "c40EC2213.pdf"
+    },
+    {
+        "course_code": "PH4213",
+        "title": "Cosmology",
+        "credits": 3,
+        "prerequisites": "Basic Physics courses in Classical mechanics, Quantum",
+        "file": "c40PH4213.pdf"
+    },
+    {
+        "course_code": "EC3253",
+        "title": "Introduction to Field Techniques",
+        "credits": 3,
+        "prerequisites": "Earth and Planetary Materials* Sedimentology and",
+        "file": "c40EC3253.pdf"
+    },
+    {
+        "course_code": "EC3284",
+        "title": "Satellite Data Analysis & Image Processing",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40EC3284.pdf"
+    },
+    {
+        "course_code": "BI3254",
+        "title": "Microbiology",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40BI3254.pdf"
+    },
+    {
+        "course_code": "CH4264",
+        "title": "Advanced Molecular Spectroscopy",
+        "credits": 4,
+        "prerequisites": "Fundamentals of Molecular Spectroscopy or similar course",
+        "file": "c40CH4264.pdf"
+    },
+    {
+        "course_code": "DS3263",
+        "title": "Signal Processing",
+        "credits": 3,
+        "prerequisites": "Proficiency in linear algebra",
+        "file": "c40DS3263.pdf"
+    },
+    {
+        "course_code": "MT2233",
+        "title": "Discrete Structures (E )",
+        "credits": 3,
+        "prerequisites": "N/A",
+        "file": "c40MT2233.pdf"
+    },
+    {
+        "course_code": "CH2213",
+        "title": "Analytical Chemistry (E )",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40CH2213.pdf"
+    },
+    {
+        "course_code": "PH5522",
+        "title": "Python & Qiskit",
+        "credits": 2,
+        "prerequisites": "Quantum Mechanics - I",
+        "file": "c40PH5522.pdf"
+    },
+    {
+        "course_code": "BI5223",
+        "title": "Lab Training",
+        "credits": 3,
+        "prerequisites": "Mandatory for 1st year Biology iPhD students",
+        "file": "c40BI5223.pdf"
+    },
+    {
+        "course_code": "CH3253",
+        "title": "Advanced Inorganic Chemistry Laboratory",
+        "credits": 3,
+        "prerequisites": "CH1223 - General Chemistry Practicals I",
+        "file": "c40CH3253.pdf"
+    },
+    {
+        "course_code": "PH3224",
+        "title": "Condensed Matter Physics I",
+        "credits": 4,
+        "prerequisites": "Electrodynamics 1, Quantum Mechanics 1, Statistical",
+        "file": "c40PH3224.pdf"
+    },
+    {
+        "course_code": "BI5236",
+        "title": "Research Project",
+        "credits": 6,
+        "prerequisites": "Mandatory for 2nd year Biology iPhD students",
+        "file": "c40BI5236.pdf"
+    },
+    {
+        "course_code": "MT3264",
+        "title": "Algorithms",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40MT3264.pdf"
+    },
+    {
+        "course_code": "CH2223",
+        "title": "Principles of Organic Chemistry II (E)",
+        "credits": 3,
+        "prerequisites": "CH1113- Principles of Organic Chemistry I, Basic",
+        "file": "c40CH2223.pdf"
+    },
+    {
+        "course_code": "PH3294",
+        "title": "Quantum Information and Quantum Computing",
+        "credits": 4,
+        "prerequisites": "QM-I",
+        "file": "c40PH3294 (1).pdf"
+    },
+    {
+        "course_code": "MT5234",
+        "title": "Topology II",
+        "credits": 4,
+        "prerequisites": "A course in general topology and real analysis",
+        "file": "c40MT5234.pdf"
+    },
+    {
+        "course_code": "EC4254",
+        "title": "Indian geology and resources",
+        "credits": 4,
+        "prerequisites": "Basic concepts of General Geology",
+        "file": "c40EC4254.pdf"
+    },
+    {
+        "course_code": "PH3214",
+        "title": "Quantum Mechanics II",
+        "credits": 4,
+        "prerequisites": "Quantum Mechanics I",
+        "file": "c40PH3214.pdf"
+    },
+    {
+        "course_code": "CH4243",
+        "title": "Organometallic Chemistry",
+        "credits": 3,
+        "prerequisites": "OS-I and II Advisable",
+        "file": "c40CH4243.pdf"
+    },
+    {
+        "course_code": "HS4613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40HS4613.pdf"
+    },
+    {
+        "course_code": "BI2233",
+        "title": "Genetics(E )",
+        "credits": 3,
+        "prerequisites": "1st year Biology courses",
+        "file": "c40BI2233.pdf"
+    },
+    {
+        "course_code": "CH4323",
+        "title": "Environmental Chemistry and Sustainability",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40CH4323.pdf"
+    },
+    {
+        "course_code": "MT7224",
+        "title": "Mathematics Lab II",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40MT7224.pdf"
+    },
+    {
+        "course_code": "MT3254",
+        "title": "Coding Theory",
+        "credits": 4,
+        "prerequisites": "Although the mathematics courses of the first and second",
+        "file": "c40MT3254.pdf"
+    },
+    {
+        "course_code": "PH1213",
+        "title": "Introductory Electricity and Magnetism",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40PH1213.pdf"
+    },
+    {
+        "course_code": "MT3444",
+        "title": "Combinatorial Optimization",
+        "credits": 4,
+        "prerequisites": "Working knowledge of python.",
+        "file": "c40MT3444.pdf"
+    },
+    {
+        "course_code": "EC4243",
+        "title": "Geological Field Training",
+        "credits": 3,
+        "prerequisites": "Basics of General Geology, and Sequence Stratigraphy",
+        "file": "c40EC4243.pdf"
+    },
+    {
+        "course_code": "HS3433",
+        "title": "Introduction to Indian Writing in English: Prose and Poetry",
+        "credits": 3,
+        "prerequisites": "This is a reading heavy course, so an interest in studying",
+        "file": "c40HS3433.pdf"
+    },
+    {
+        "course_code": "CH4254",
+        "title": "Structural Methods and Analysis",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40CH4254.pdf"
+    },
+    {
+        "course_code": "MT3294",
+        "title": "Topics: Computational number theory with Sage",
+        "credits": 4,
+        "prerequisites": "Some familiarity with programming and Group Theory",
+        "file": "c40MT3294.pdf"
+    },
+    {
+        "course_code": "DS3294",
+        "title": "Data Science Practice",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40DS3294.pdf"
+    },
+    {
+        "course_code": "MT2213",
+        "title": "Group Theory (E )",
+        "credits": 3,
+        "prerequisites": "Mathematics XI and XII, linear algebra \u2013 BS-MS 1st Year.",
+        "file": "c40MT2213.pdf"
+    },
+    {
+        "course_code": "HS3153",
+        "title": "Economics and Public Policy",
+        "credits": 3,
+        "prerequisites": "HS 2123 Economics module",
+        "file": "c40HS3153.pdf"
+    },
+    {
+        "course_code": "BI3274",
+        "title": "Chemical Ecology",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40BI3274.pdf"
+    },
+    {
+        "course_code": "BI4254",
+        "title": "Biology and Disease",
+        "credits": 4,
+        "prerequisites": "Advanced Molecular Biology",
+        "file": "c40BI4254.pdf"
+    },
+    {
+        "course_code": "PH4233",
+        "title": "Physics Lab VI",
+        "credits": 3,
+        "prerequisites": "for physics majors only* Physics lab V (3rd year), quantum",
+        "file": "c40PH4233.pdf"
+    },
+    {
+        "course_code": "BI5214",
+        "title": "Literature Review",
+        "credits": 4,
+        "prerequisites": "Nil* Mandatory course for Biology PhD students",
+        "file": "c40BI5214.pdf"
+    },
+    {
+        "course_code": "PH4423",
+        "title": "Experimental Techniques in High Energy Physics",
+        "credits": 3,
+        "prerequisites": "Electronics-I, Electrodynamics, Condensed Matter-I,",
+        "file": "c40PH4423.pdf"
+    },
+    {
+        "course_code": "MT3244",
+        "title": "Calculus on Manifolds",
+        "credits": 4,
+        "prerequisites": "Multivariable Calculus and LInear Algebra",
+        "file": "c40MT3244.pdf"
+    },
+    {
+        "course_code": "BI2223",
+        "title": "Physiology(E )",
+        "credits": 3,
+        "prerequisites": "None.",
+        "file": "c40BI2223.pdf"
+    },
+    {
+        "course_code": "CH4284",
+        "title": "Chemistry for Alternative Energy",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40CH4284.pdf"
+    },
+    {
+        "course_code": "HS1223",
+        "title": "Science and Society",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40HS1223.pdf"
+    },
+    {
+        "course_code": "EC3264",
+        "title": "Physical Oceanography",
+        "credits": 4,
+        "prerequisites": "Geophysical Fluid Dynamics needs to be taken in the same",
+        "file": "c40EC3264.pdf"
+    },
+    {
+        "course_code": "PH4224",
+        "title": "Atomic and Molecular Physics",
+        "credits": 4,
+        "prerequisites": "Quantum Mechanics I and Mathematical Methods (3rd",
+        "file": "c40PH4224.pdf"
+    },
+    {
+        "course_code": "MT5224",
+        "title": "Analysis II",
+        "credits": 4,
+        "prerequisites": "Analysis I",
+        "file": "c40MT5224.pdf"
+    },
+    {
+        "course_code": "CH2233",
+        "title": "Fundamentals of Molecular Spectroscopy (E)",
+        "credits": 3,
+        "prerequisites": "This course is a pre-requisite for \u201cAdvanced Molecular",
+        "file": "c40CH2233.pdf"
+    },
+    {
+        "course_code": "BI3464",
+        "title": "Computational functional genomics",
+        "credits": 4,
+        "prerequisites": "Bioinformatics course + Proficiency in programming + Good",
+        "file": "c40BI3464.pdf"
+    },
+    {
+        "course_code": "MT4264",
+        "title": "Partial Differential Equations",
+        "credits": 4,
+        "prerequisites": "Measure theorey and integration",
+        "file": "c40MT4264.pdf"
+    },
+    {
+        "course_code": "EC3613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40EC3613.pdf"
+    },
+    {
+        "course_code": "EC2243",
+        "title": "Atmosphere and Ocean Chemistry (E)",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40EC2243.pdf"
+    },
+    {
+        "course_code": "DS3434",
+        "title": "Mathematical and Statistical Optimization",
+        "credits": 4,
+        "prerequisites": "Linear algebra, probability, statistics (at the level of IISER-",
+        "file": "c40DS3434.pdf"
+    },
+    {
+        "course_code": "MT4613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "depends on project instructor",
+        "file": "c40MT4613.pdf"
+    },
+    {
+        "course_code": "DS4213",
+        "title": "Natural Language Processing",
+        "credits": 3,
+        "prerequisites": "DS3273 Image / Video Processing (completed, not",
+        "file": "c40DS4213.pdf"
+    },
+    {
+        "course_code": "CH3214",
+        "title": "Quantum Chemistry",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40CH3214.pdf"
+    },
+    {
+        "course_code": "MT3424",
+        "title": "Geometry of Relations in Groups",
+        "credits": 4,
+        "prerequisites": "Point Set Topology and Group Theory",
+        "file": "c40MT3424.pdf"
+    },
+    {
+        "course_code": "PH4243",
+        "title": "Advanced Gravitation",
+        "credits": 3,
+        "prerequisites": "PH4183 Gravitation compulsory, QFT1 is preferable",
+        "file": "c40PH4243.pdf"
+    },
+    {
+        "course_code": "HS6264",
+        "title": "Research Methods, Fieldwork, and Ethics",
+        "credits": 4,
+        "prerequisites": "Open only to HSS PhD students",
+        "file": "c40HS6264.pdf"
+    },
+    {
+        "course_code": "SE4233",
+        "title": "Philosophy of Science",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40SE4233.pdf"
+    },
+    {
+        "course_code": "HS3123",
+        "title": "Evolution of Cinema",
+        "credits": 3,
+        "prerequisites": "1. Good writing skills in English and an interest in audio-",
+        "file": "c40HS3123.pdf"
+    },
+    {
+        "course_code": "BI4153",
+        "title": "Undergraduate Research Experiments",
+        "credits": 3,
+        "prerequisites": "Though there are no pre-requisites, students will not able to",
+        "file": "c40BI4153.pdf"
+    },
+    {
+        "course_code": "PH2223",
+        "title": "Thermal & Statistical Physics (E )",
+        "credits": 3,
+        "prerequisites": "Basic calculus and probability and basic level physics learnt",
+        "file": "c40PH2223.pdf"
+    },
+    {
+        "course_code": "CH3613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "Supervisor has to be a IISER Pune faculty. Requires prior",
+        "file": "c40CH3613.pdf"
+    },
+    {
+        "course_code": "BI3414",
+        "title": "Physical Biochemistry",
+        "credits": 4,
+        "prerequisites": "Introductory biology and chemistry courses",
+        "file": "c40BI3414.pdf"
+    },
+    {
+        "course_code": "HS3323",
+        "title": "Philosophy of the Constitution of India",
+        "credits": 3,
+        "prerequisites": "\u2022 Ability to distinguish between personal ideological beliefs",
+        "file": "c40HS3323.pdf"
+    },
+    {
+        "course_code": "EC3214",
+        "title": "Geo and Cosmochemistry",
+        "credits": 4,
+        "prerequisites": "Earth and Planetary Materials",
+        "file": "c40EC3214.pdf"
+    },
+    {
+        "course_code": "PH4283",
+        "title": "Advanced Particle Physics",
+        "credits": 3,
+        "prerequisites": "QFT 1, Group theory (A course on Gravitation will be",
+        "file": "c40PH4283.pdf"
+    },
+    {
+        "course_code": "CH1213",
+        "title": "Principles of Physical Chemistry",
+        "credits": 3,
+        "prerequisites": "NO",
+        "file": "c40CH1213.pdf"
+    },
+    {
+        "course_code": "MT3234",
+        "title": "Measure Theory and Integration",
+        "credits": 4,
+        "prerequisites": "Real Analysis I, Real Analysis II",
+        "file": "c40MT3234.pdf"
+    },
+    {
+        "course_code": "MT3224",
+        "title": "Algebraic Number Theory",
+        "credits": 4,
+        "prerequisites": "Group theory, Rings and modules, Field extensions and",
+        "file": "c40MT3224.pdf"
+    },
+    {
+        "course_code": "HS6114",
+        "title": "PhD Reading Course",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40HS6114.pdf"
+    },
+    {
+        "course_code": "BI3613",
+        "title": "Lab/Theory Project",
+        "credits": 3,
+        "prerequisites": "None specified",
+        "file": "c40BI3613.pdf"
+    },
+    {
+        "course_code": "CH4233",
+        "title": "Thermal Pericyclic and Photochemical Reactions",
+        "credits": 3,
+        "prerequisites": "Principles of Organic Chemistry II",
+        "file": "c40CH4233.pdf"
+    },
+    {
+        "course_code": "EC4224",
+        "title": "Climate Modeling",
+        "credits": 4,
+        "prerequisites": "EC3224 Geophysical Fluid Dynamics",
+        "file": "c40EC4224.pdf"
+    },
+    {
+        "course_code": "PH3264",
+        "title": "Computational Physics",
+        "credits": 4,
+        "prerequisites": "Quantum Mech-1, Statistical Physics-1",
+        "file": "c40PH3264.pdf"
+    },
+    {
+        "course_code": "HS3454",
+        "title": "Public Policy I",
+        "credits": 4,
+        "prerequisites": "None",
+        "file": "c40HS3454.pdf"
+    },
+    {
+        "course_code": "PH4293",
+        "title": "Physics of Soft Matter",
+        "credits": 3,
+        "prerequisites": "Statistical physics I , Basics of electrodynamics",
+        "file": "c40PH4293.pdf"
+    },
+    {
+        "course_code": "BI1213",
+        "title": "Introduction to Biomolecules",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40BI1213.pdf"
+    },
+    {
+        "course_code": "EC3414",
+        "title": "Geodynamics-1",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40EC3414.pdf"
+    },
+    {
+        "course_code": "PH2233",
+        "title": "Physics Lab - II (E )",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40PH2233.pdf"
+    },
+    {
+        "course_code": "TD2223",
+        "title": "Data Analysis",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40TD2223.pdf"
+    },
+    {
+        "course_code": "CH4224",
+        "title": "Advanced Material Science",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40CH4224.pdf"
+    },
+    {
+        "course_code": "SE4223",
+        "title": "Cognitive Bases of Science",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40SE4223.pdf"
+    },
+    {
+        "course_code": "MT3434",
+        "title": "Topics in Number Theory",
+        "credits": 4,
+        "prerequisites": "Real Analysis - I and II, Complex Analysis (can be taken",
+        "file": "c40MT3434.pdf"
+    },
+    {
+        "course_code": "MT1223",
+        "title": "Linear Algebra",
+        "credits": 3,
+        "prerequisites": "None",
+        "file": "c40MT1223.pdf"
+    },
+    {
+        "course_code": "PH4253",
+        "title": "Quantum Optics",
+        "credits": 3,
+        "prerequisites": "Optics, Quantum Mechanics, Exposure to experimental",
+        "file": "c40PH4253.pdf"
+    },
+    {
+        "course_code": "DS3424",
+        "title": "Computational Thinking for Science",
+        "credits": 4,
+        "prerequisites": "Objectives",
+        "file": "c40DS3424.pdf"
+    },
+    {
+        "course_code": "EC2253",
+        "title": "Introductory Seismology (E )",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40EC2253.pdf"
+    },
+    {
+        "course_code": "DS4613",
+        "title": "Semester Project",
+        "credits": 3,
+        "prerequisites": "Objectives",
+        "file": "c40DS4613.pdf"
+    }
+]
