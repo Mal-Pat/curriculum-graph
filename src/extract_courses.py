@@ -5,7 +5,7 @@ Extract IISER course information from PDFs and save as JSON
 import os
 import re
 import json
-import fitz  # PyMuPDF
+import fitz   # PyMuPDF
 
 
 # --------------------------------------------------
@@ -21,13 +21,17 @@ OUTPUT_FILE = "data/processed/courses.json"
 # --------------------------------------------------
 
 def clean_text(text):
-    """Remove PDF artifacts and extra spaces"""
+    """Remove PDF artifacts and normalize spacing"""
 
     if not text:
         return None
 
+    # remove page headers
     text = re.sub(r'Page \d+ of \d+', '', text)
     text = re.sub(r'IISER Pune - Course Content', '', text)
+
+    # remove extra spaces/newlines
+    text = text.replace("\n", " ")
     text = re.sub(r'\s+', ' ', text)
 
     return text.strip()
@@ -57,11 +61,14 @@ def extract_text(pdf_path):
 # --------------------------------------------------
 
 def extract_section(text, start, end):
-    """Extract text between two headings"""
+    """
+    Extract text between two headings.
+    Works even if section spans multiple lines.
+    """
 
-    pattern = start + r"(.*?)" + end
+    pattern = rf"{start}(.*?){end}"
 
-    match = re.search(pattern, text, re.DOTALL)
+    match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
 
     if match:
         return clean_text(match.group(1))
@@ -76,9 +83,13 @@ def extract_section(text, start, end):
 def parse_course(text):
 
     code = re.search(r'Course Code\s*(\w+)', text)
+
     title = re.search(r'Course title\s*(.*)', text)
+
     semester = re.search(r'Open to Semester\s*(\d+)', text)
+
     nature = re.search(r'Nature of Course\s*(.*)', text)
+
     credits = re.search(r'Credit\s*(\d+)', text)
 
     prereq = extract_section(text, "Pre-requisites", "Objectives")
@@ -90,6 +101,7 @@ def parse_course(text):
     evaluation = extract_section(text, "Evaluation", "Suggested readings")
 
     readings = extract_section(text, "Suggested readings", "When Next")
+
 
     return {
 
@@ -141,8 +153,14 @@ def main():
 
     os.makedirs("data/processed", exist_ok=True)
 
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump(courses, f, indent=4)
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+
+        json.dump(
+            courses,
+            f,
+            indent=4,
+            ensure_ascii=False   # FIXES \u2013 issue
+        )
 
     print("\nSaved", len(courses), "courses to", OUTPUT_FILE)
 

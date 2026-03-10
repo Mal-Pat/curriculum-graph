@@ -2,14 +2,15 @@
     :@ayush
 I am thinking of doing it like:
 
-    1. using iiser pune cources --> extract --> JSON
+    1. using iiser pune Course Contents --> extract --> JSON
     2. building a graph using that with all the requred conditions for major and minor etc 
     3. simple visualization
     4. then try to generalize(idk how but maybe doable)
+
+
+
 
 after doing this:
     1. Interactiive thing etc..
 
  """
-
-any suggestions.

@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# virtual environment
+new_env/
+venv/
+.env/
+
+# Mac files
+.DS_Store
+
+# Data folders
+data/raw/
+data/IISER_P_official_data/
+
+# Generated data
+data/processed/*.json
+
+# notebooks checkpoints
+.ipynb_checkpoints/
