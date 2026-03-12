@@ -1,79 +1,82 @@
 import json
 import re
 import networkx as nx
-import matplotlib.pyplot as plt
 
-# -----------------------------------------
-# Load courses
-# -----------------------------------------
+# -----------------------
+# LOAD DATA
+# -----------------------
 
-with open("data/processed/courses.json", "r") as f:
+with open("data/processed/courses.json") as f:
     courses = json.load(f)
-
-# -----------------------------------------
-# Create graph
-# -----------------------------------------
 
 G = nx.DiGraph()
 
-# -----------------------------------------
-# Add course nodes
-# -----------------------------------------
+# -----------------------
+# ADD NODES
+# -----------------------
 
-for course in courses:
+for c in courses:
 
-    code = course.get("course_code")
+    code = c.get("course_code")
+
+    if not code:
+        continue
+
+    dept = code[:2]
 
     G.add_node(
         code,
-        title=course.get("title"),
-        credits=course.get("credits"),
-        semester=course.get("semester")
+        department=dept,
+        title=c.get("title"),
+        credits=c.get("credits"),
+        semester=c.get("semester")
     )
 
-# -----------------------------------------
-# Add prerequisite edges
-# -----------------------------------------
 
-for course in courses:
+# -----------------------
+# ADD EDGES
+# -----------------------
 
-    course_code = course.get("course_code")
-    prereq_text = course.get("prerequisites")
+for c in courses:
 
-    # skip empty prerequisites
+    course_code = c.get("course_code")
+    prereq_text = c.get("prerequisites")
+
     if not prereq_text:
         continue
 
-    # find course codes like MT3214, PH3244
-    prereq_codes = re.findall(r"[A-Z]{2}\d{4}", prereq_text)
+    prereqs = re.findall(r"[A-Z]{2}\d{4}", prereq_text)
 
-    for prereq in prereq_codes:
-        G.add_edge(prereq, course_code)
+    for p in prereqs:
 
-# -----------------------------------------
-# Print basic graph info
-# -----------------------------------------
+        if p in G.nodes:
+            G.add_edge(p, course_code)
 
-print("Total courses:", G.number_of_nodes())
-print("Total prerequisite links:", G.number_of_edges())
 
-# -----------------------------------------
-# Draw graph
-# -----------------------------------------
+print("\nTotal Courses:", G.number_of_nodes())
+print("Total Prerequisite Links:", G.number_of_edges())
 
-plt.figure(figsize=(14,10))
 
-pos = nx.kamada_kawai_layout(G)
+# -----------------------
+# PRINT DEPARTMENT GRAPHS
+# -----------------------
 
-nx.draw(
-    G,
-    pos,
-    with_labels=True,
-    node_color="lightblue",
-    node_size=2000,
-    font_size=8,
-    arrows=True
-)
+departments = sorted(set(nx.get_node_attributes(G,"department").values()))
 
-plt.title("Curriculum Graph (Courses and Prerequisites)")
-plt.show()
+for dept in departments:
+
+    print("\n============================")
+    print("Department:", dept)
+    print("============================")
+
+    dept_nodes = [n for n in G.nodes if G.nodes[n]["department"] == dept]
+
+    for node in dept_nodes:
+
+        children = list(G.successors(node))
+
+        if children:
+            for c in children:
+                print(f"{node}  --->  {c}")
+        else:
+            print(f"{node}")
