@@ -17,22 +17,33 @@
       "type": "object",
       "properties": {
         "course_code": { "type": "string" },
-        "subject": { "type": "string" },
+        "subject": { "type": "string", "enum": [
+          "Biology", 
+          "Chemistry", 
+          "Physics", 
+          "Mathematics", 
+          "Earth and Climate Science", 
+          "Data Science", 
+          "Trans Disciplinary", 
+          "Science Education", 
+          "Humanities and Social Sciences"
+        ]
+        },
         "course_name": { "type": "string" },
         "credits": { "type": "integer" },
-        "semesters" : {
+        "semesters": {
           "type": "array",
           "items": { "type": "integer" }
         },
-        "prerequisites" : {
+        "prerequisites": {
           "type": "array",
           "items": { "type": "string" }
         },
-        "aliases" : {
+        "aliases": {
           "type": "array",
           "items": { "type": "string" }
         },
-        "kind" : { "type": "string" }
+        "kind": { "type": "string", "enum": ["normal", "lab", "semester_project"] }
       },
       "required": [
         "course_code",
