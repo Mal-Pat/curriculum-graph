@@ -12,9 +12,20 @@
     "program_metadata": {
       "type": "object",
       "properties": {
-        "subject_name": { "type": "string" },
-        "program_type": { "type": "string", "enum": ["Major", "Minor"] }
-      }
+        "subject": { "type": "string", "enum": [
+          "Biology", 
+          "Chemistry", 
+          "Physics", 
+          "Mathematics", 
+          "Earth and Climate Science", 
+          "Data Science", 
+          "Trans Disciplinary", 
+          "Science Education", 
+          "Humanities and Social Sciences"
+        ] },
+        "major_or_minor": { "type": "string", "enum": ["Major", "Minor"] }
+      },
+      "required": ["subject", "major_or_minor"]
     },
     "overall_requirements": {
       "type": "object",
