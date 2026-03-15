@@ -1,3 +1,4 @@
+import sys
 import json
 import streamlit as st
 from yfiles_graphs_for_streamlit import StreamlitGraphWidget, Node, Edge, Layout
@@ -67,9 +68,15 @@ def make_graph(courses):
     widget.show(graph_layout=Layout.HIERARCHIC)
 
 if __name__ == "__main__":
-    st.set_page_config(layout="wide", page_title="Curriculum Visualizer")
+
+    if len(sys.argv) > 1:
+        data_path = sys.argv[1]
+    else:
+        data_path = "IISER-P/all_courses.json"
+
+    st.set_page_config(layout="wide", page_title="Course Graph")
     
-    with open("data/IISER-P/all_courses.json", "r") as file:
+    with open(f"data/{data_path}", "r") as file:
         courses = json.load(file)
 
     make_graph(courses)
