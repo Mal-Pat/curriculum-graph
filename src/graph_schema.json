@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Graph Schema",
+  "description": "Final Structure to be displayed on the Visual Interface",
+  "type": "object",
+  "required": [
+    "number_of_semesters",
+    "semesters"
+  ],
+  "properties": {
+    "number_of_semesters": {"type": "integer"},
+    "semesters": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/semester" }
+    }
+  },
+  "$defs": {
+    "course": { "type": "string" },
+    "semester": {
+      "type": "object",
+      "properties": {
+        "semester_number": {"type": "integer"},
+        "total_credits": {"type": "integer", "default": 0},
+        "chosen": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        },
+        "necessary_major": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        },
+        "necessary_minor": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        },
+        "compulsory": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        },
+        "other": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        },
+        "reject": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        }
+      }
+    }
+  }
+}
