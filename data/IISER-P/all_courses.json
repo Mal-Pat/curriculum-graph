@@ -1,0 +1,2604 @@
+{
+  "all_courses": [
+    {
+      "course_code": "BI1113",
+      "subject": "Biology",
+      "course_name": "Introductory Biology - I",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI1123",
+      "subject": "Biology",
+      "course_name": "Experimental Biology",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH1113",
+      "subject": "Chemistry",
+      "course_name": "Principles of Organic Chemistry",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC1213",
+      "subject": "Earth and Climate Science",
+      "course_name": "Evolution of Earth and life",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT1113",
+      "subject": "Mathematics",
+      "course_name": "Calculus - 1",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH1113",
+      "subject": "Physics",
+      "course_name": "Introductory Mechanics",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH1123",
+      "subject": "Physics",
+      "course_name": "Physics Lab-1",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "TD1113",
+      "subject": "Trans Disciplinary",
+      "course_name": "Introduction to computing",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "TD1123",
+      "subject": "Trans Disciplinary",
+      "course_name": "Academic Communication Skills",
+      "credits": 3,
+      "semesters": [1],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI1213",
+      "subject": "Biology",
+      "course_name": "Introduction to Biomolecules",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH1213",
+      "subject": "Chemistry",
+      "course_name": "Principles of Physical Chemistry",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH1223",
+      "subject": "Chemistry",
+      "course_name": "General Chemistry Practicals I",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC1223",
+      "subject": "Earth and Climate Science",
+      "course_name": "The Solid Earth",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS1223",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Science and Society",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT1213",
+      "subject": "Mathematics",
+      "course_name": "Calculus II",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT1223",
+      "subject": "Mathematics",
+      "course_name": "Linear Algebra",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH1213",
+      "subject": "Physics",
+      "course_name": "Introductory Electricity and Magnetism",
+      "credits": 3,
+      "semesters": [2],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI2113",
+      "subject": "Biology",
+      "course_name": "Ecology and Evolution",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH2113",
+      "subject": "Chemistry",
+      "course_name": "Principles of Inorganic Chemistry",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC2113",
+      "subject": "Earth and Climate Science",
+      "course_name": "Introduction to Climate Science",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS2123",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Introduction to HSS",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT2113",
+      "subject": "Mathematics",
+      "course_name": "Introduction to Probability",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH2113",
+      "subject": "Physics",
+      "course_name": "Introductory Quantum Physics",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI2123",
+      "subject": "Biology",
+      "course_name": "Introduction to Biological Systems",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH2243",
+      "subject": "Chemistry",
+      "course_name": "General Chemistry Practical II",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC2123",
+      "subject": "Earth and Climate Science",
+      "course_name": "Landscapes and Their Evolution",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT2123",
+      "subject": "Mathematics",
+      "course_name": "Advanced Linear Algebra",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH2123",
+      "subject": "Physics",
+      "course_name": "Mathematical Methods for Physics",
+      "credits": 3,
+      "semesters": [3],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "TD2213",
+      "subject": "Trans Disciplinary",
+      "course_name": "Thermodynamics",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "TD2223",
+      "subject": "Trans Disciplinary",
+      "course_name": "Data Analysis",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI2213",
+      "subject": "Biology",
+      "course_name": "Cell Biology",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI2223",
+      "subject": "Biology",
+      "course_name": "Physiology",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI2233",
+      "subject": "Biology",
+      "course_name": "Genetics",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3124",
+      "subject": "Biology",
+      "course_name": "Advanced Molecular Biology",
+      "credits": 4,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3134",
+      "subject": "Biology",
+      "course_name": "Bioinformatics",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3144",
+      "subject": "Biology",
+      "course_name": "Cellular Biophysics - 1",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3154",
+      "subject": "Biology",
+      "course_name": "Neurobiology - 1",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3164",
+      "subject": "Biology",
+      "course_name": "Plant Biology-1",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3174",
+      "subject": "Biology",
+      "course_name": "Advanced Biochemistry - 1",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3184",
+      "subject": "Biology",
+      "course_name": "Ecology-1",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3194",
+      "subject": "Biology",
+      "course_name": "Developmental Biology",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3313",
+      "subject": "Biology",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "BI3323",
+      "subject": "Biology",
+      "course_name": "Structural Biology",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3344",
+      "subject": "Biology",
+      "course_name": "Microbial Genetics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4113",
+      "subject": "Biology",
+      "course_name": "Animal Physiology - II",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["BI3214"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4123",
+      "subject": "Biology",
+      "course_name": "Advanced Immunology",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["BI3224"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4153",
+      "subject": "Biology",
+      "course_name": "Undergraduate research experiments",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4164",
+      "subject": "Biology",
+      "course_name": "Computational Functional Genomics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": ["DS4124"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4313",
+      "subject": "Biology",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "BI3214",
+      "subject": "Biology",
+      "course_name": "Animal Physiology I",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3224",
+      "subject": "Biology",
+      "course_name": "Introductory Immunology",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["BI2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3234",
+      "subject": "Biology",
+      "course_name": "Animal Behaviour",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3254",
+      "subject": "Biology",
+      "course_name": "Microbiology",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3264",
+      "subject": "Biology",
+      "course_name": "Mathematical & Computational Biology",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3274",
+      "subject": "Biology",
+      "course_name": "Chemical Ecology",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3284",
+      "subject": "Biology",
+      "course_name": "Advanced Biochemistry II",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3333",
+      "subject": "Biology",
+      "course_name": "Disease and Discourse",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": ["HS3173"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3413",
+      "subject": "Biology",
+      "course_name": "Physical Biochemistry",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3424",
+      "subject": "Biology",
+      "course_name": "Statistical learning and data science",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3444",
+      "subject": "Biology",
+      "course_name": "Genome Biology and Epigenetics",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI3613",
+      "subject": "Biology",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "BI4213",
+      "subject": "Biology",
+      "course_name": "Applied Plant Biology",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["BI3164"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4223",
+      "subject": "Biology",
+      "course_name": "Neurobiology II",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["BI3154"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4233",
+      "subject": "Biology",
+      "course_name": "Cellular Biophysics II",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["BI3144"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "BI4613",
+      "subject": "Biology",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "CH2213",
+      "subject": "Chemistry",
+      "course_name": "Analytical Chemistry",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH2223",
+      "subject": "Chemistry",
+      "course_name": "Principles of Organic Chemistry II",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH2233",
+      "subject": "Chemistry",
+      "course_name": "Fundamentals of Molecular Spectroscopy",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3114",
+      "subject": "Chemistry",
+      "course_name": "Physical Organic Chemistry",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3124",
+      "subject": "Chemistry",
+      "course_name": "Main Group Chemistry",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3134",
+      "subject": "Chemistry",
+      "course_name": "Symmetry and Group Theory",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3143",
+      "subject": "Chemistry",
+      "course_name": "Self-Assembly in Chemistry",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3154",
+      "subject": "Chemistry",
+      "course_name": "Chemical Equilibrium and Kinetics",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3163*",
+      "subject": "Chemistry",
+      "course_name": "Advanced Organic Chemistry Laboratory*",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "CH3313",
+      "subject": "Chemistry",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "CH4114",
+      "subject": "Chemistry",
+      "course_name": "Organic Synthesis - II",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["CH3224"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4124",
+      "subject": "Chemistry",
+      "course_name": "Bioinorganic Chemistry",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4134",
+      "subject": "Chemistry",
+      "course_name": "Polymer Chemistry",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4144",
+      "subject": "Chemistry",
+      "course_name": "Statistical Thermodynamics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4153*",
+      "subject": "Chemistry",
+      "course_name": "Advanced Physical Chemistry Laboratory*",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "CH4164",
+      "subject": "Chemistry",
+      "course_name": "Bioorganic Chemistry and Chemical Biology",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4173",
+      "subject": "Chemistry",
+      "course_name": "Solid State Chemistry",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4184",
+      "subject": "Chemistry",
+      "course_name": "Electrochemistry",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4194",
+      "subject": "Chemistry",
+      "course_name": "Fundamentals of Solution-State NMR Spectroscopy: Principles and Applications",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4313",
+      "subject": "Chemistry",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "CH3214",
+      "subject": "Chemistry",
+      "course_name": "Quantum Chemistry",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3224",
+      "subject": "Chemistry",
+      "course_name": "Organic Synthesis-1",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3234",
+      "subject": "Chemistry",
+      "course_name": "Transition metal Chemistry",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH3253*",
+      "subject": "Chemistry",
+      "course_name": "Advanced Inorganic Chemistry Laboratory*",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "CH3613",
+      "subject": "Chemistry",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "CH4214",
+      "subject": "Chemistry",
+      "course_name": "Organotransition Metal Catalysis",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4224",
+      "subject": "Chemistry",
+      "course_name": "Advanced Material Science",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4233",
+      "subject": "Chemistry",
+      "course_name": "Thermal Pericyclic and Photochemical Reactions",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4243",
+      "subject": "Chemistry",
+      "course_name": "Organometallic Chemistry",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4254",
+      "subject": "Chemistry",
+      "course_name": "Structural Methods and Analysis",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4264",
+      "subject": "Chemistry",
+      "course_name": "Fundamentals of Advanced Molecular Spectroscopy",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["CH2233"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4274",
+      "subject": "Chemistry",
+      "course_name": "Medicinal Chemistry",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4284",
+      "subject": "Chemistry",
+      "course_name": "Chemistry for Alternative Energy",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4323",
+      "subject": "Chemistry",
+      "course_name": "Environmental Chemistry and Sustainability",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "CH4613",
+      "subject": "Chemistry",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "DS3184",
+      "subject": "Data Science",
+      "course_name": "Data Assimilation",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": ["EC3344"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS3313",
+      "subject": "Data Science",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "DS4124",
+      "subject": "Data Science",
+      "course_name": "Computational Functional Genomics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": ["BI4164"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS4133",
+      "subject": "Data Science",
+      "course_name": "Deep Neural Networks",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS4313",
+      "subject": "Data Science",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "DS3223",
+      "subject": "Data Science",
+      "course_name": "Causal inference",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS3244",
+      "subject": "Data Science",
+      "course_name": "Numerical Linear Algebra",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS3254",
+      "subject": "Data Science",
+      "course_name": "Systems and Implementation of Algorithms",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS3263",
+      "subject": "Data Science",
+      "course_name": "Signal Processing",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS3273",
+      "subject": "Data Science",
+      "course_name": "Image and video processing with deep learning",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS3613",
+      "subject": "Data Science",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "DS4213",
+      "subject": "Data Science",
+      "course_name": "Natural Language Processing",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["DS4133"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS4223",
+      "subject": "Data Science",
+      "course_name": "Generalized Linear Models and their Applications",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS4233",
+      "subject": "Data Science",
+      "course_name": "Time Series Analysis and Forecasting",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS4244",
+      "subject": "Data Science",
+      "course_name": "Bayesian theory and practice",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": ["MT4294"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "DS4613",
+      "subject": "Data Science",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "EC2213",
+      "subject": "Earth and Climate Science",
+      "course_name": "Principles of Planetary Climate",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC2243",
+      "subject": "Earth and Climate Science",
+      "course_name": "Atmosphere and Ocean Chemistry",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC2253",
+      "subject": "Earth and Climate Science",
+      "course_name": "Introductory Seismology",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3124",
+      "subject": "Earth and Climate Science",
+      "course_name": "Physics of the Atmosphere",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3154",
+      "subject": "Earth and Climate Science",
+      "course_name": "Sedimentology and Stratigraphy",
+      "credits": 4,
+      "semesters": [5],
+      "prerequisites": ["EC3164"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3164",
+      "subject": "Earth and Climate Science",
+      "course_name": "Earth and Planetary Materials",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3174",
+      "subject": "Earth and Climate Science",
+      "course_name": "Structural Geology and Tectonics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3183",
+      "subject": "Earth and Climate Science",
+      "course_name": "Parameter Estimation and Inverse Theory",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3194",
+      "subject": "Earth and Climate Science",
+      "course_name": "Paleobiology",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3313",
+      "subject": "Earth and Climate Science",
+      "course_name": "Semester Project*",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "EC3323",
+      "subject": "Earth and Climate Science",
+      "course_name": "Hydrology",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3344",
+      "subject": "Earth and Climate Science",
+      "course_name": "Data Assimilation",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": ["DS3184"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4114",
+      "subject": "Earth and Climate Science",
+      "course_name": "Atmosphere and Ocean Dynamics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["EC3224"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4123",
+      "subject": "Earth and Climate Science",
+      "course_name": "Sedimentology & Palaeontology Lab",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["EC3154"],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "EC4134",
+      "subject": "Earth and Climate Science",
+      "course_name": "Exploration Seismology",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["EC2253"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4144",
+      "subject": "Earth and Climate Science",
+      "course_name": "Tropical Meteorology",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["EC3224", "EC3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4153",
+      "subject": "Earth and Climate Science",
+      "course_name": "Sequence Stratigraphy",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["EC3154"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4164",
+      "subject": "Earth and Climate Science",
+      "course_name": "Igneous and Metamorphic Petrology",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["EC3164", "EC3214"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4173",
+      "subject": "Earth and Climate Science",
+      "course_name": "Igneous and Metamorphic Petrology Lab",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["EC4164"],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "EC4313",
+      "subject": "Earth and Climate Science",
+      "course_name": "Semester Project*",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "EC3214",
+      "subject": "Earth and Climate Science",
+      "course_name": "Geo and Cosmochemistry",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["EC3164"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3224",
+      "subject": "Earth and Climate Science",
+      "course_name": "Geophysical Fluid Dynamics",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3243",
+      "subject": "Earth and Climate Science",
+      "course_name": "Analytical Geochemistry Lab",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["EC3214"],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "EC3253",
+      "subject": "Earth and Climate Science",
+      "course_name": "Introduction to Field Techniques",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["EC3164", "EC3154", "EC3174"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3264",
+      "subject": "Earth and Climate Science",
+      "course_name": "Physical Oceanography",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["EC3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3274",
+      "subject": "Earth and Climate Science",
+      "course_name": "Geoelectromagnetic Exploration",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3284",
+      "subject": "Earth and Climate Science",
+      "course_name": "Satellite Data Analysis & Image Processing",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["EC3164"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3293",
+      "subject": "Earth and Climate Science",
+      "course_name": "Isotope Geochemistry",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3414",
+      "subject": "Earth and Climate Science",
+      "course_name": "Geodynamics-1",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC3613",
+      "subject": "Earth and Climate Science",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "EC4224",
+      "subject": "Earth and Climate Science",
+      "course_name": "Climate Modelling",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["EC3224", "EC3124", "EC3264"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4243",
+      "subject": "Earth and Climate Science",
+      "course_name": "Geological Field Training",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": ["EC3154", "EC4153"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4254",
+      "subject": "Earth and Climate Science",
+      "course_name": "Indian geology and resources",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["EC3154", "EC3214", "EC4164"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4274",
+      "subject": "Earth and Climate Science",
+      "course_name": "Gravity and Magnetic Exploration",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4283",
+      "subject": "Earth and Climate Science",
+      "course_name": "Geophysics Field Experiment and Data Analysis",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": ["EC4134", "EC4274", "EC3274"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "EC4613",
+      "subject": "Earth and Climate Science",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "HS3144",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Select Key Political Concepts",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3153",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Economics and Public Policy",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3173",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Disease and Discourse",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": ["BI3333"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3183",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "History of India through 75 objects: Culture and Society",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3213",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Introduction to Paninian Grammar",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3234",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Science as Narrative in Literature and Cinema",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3253",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Introduction to Political Ecology",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3313",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "HS3364",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "City and Cinema",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS4313",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "HS3114",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Disasters and Society",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3123",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Evolution of Cinema",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3283",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Development of Mathematical Astronomy in India",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3323",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Philosophy of the Constitution of India",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3433",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Introduction to Indian Writing in English",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3453",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Public Policy I",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3463",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Introduction to Archaeological Science",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "HS3613",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "HS4613",
+      "subject": "Humanities and Social Sciences",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "MT2213",
+      "subject": "Mathematics",
+      "course_name": "Group Theory",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT2223",
+      "subject": "Mathematics",
+      "course_name": "Real Analysis I",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT2233",
+      "subject": "Mathematics",
+      "course_name": "Discrete Structures",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3114",
+      "subject": "Mathematics",
+      "course_name": "Rings and Modules",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["MT2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3124",
+      "subject": "Mathematics",
+      "course_name": "Real Analysis II",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["MT2223"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3134",
+      "subject": "Mathematics",
+      "course_name": "Point Set Topology",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["MT2223"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3144",
+      "subject": "Mathematics",
+      "course_name": "Ordinary Differential Equations",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["MT2223"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3154",
+      "subject": "Mathematics",
+      "course_name": "Graph Theory",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["MT2233"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3174",
+      "subject": "Mathematics",
+      "course_name": "Fields and Galois theory",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": ["MT2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3184",
+      "subject": "Mathematics",
+      "course_name": "Differential geometry and Lie groups",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["MT2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3313",
+      "subject": "Mathematics",
+      "course_name": "Semester project",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "MT4114",
+      "subject": "Mathematics",
+      "course_name": "Algebraic Topology",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["MT2213", "MT3134"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4124",
+      "subject": "Mathematics",
+      "course_name": "Functional Analysis",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["MT3234"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4134",
+      "subject": "Mathematics",
+      "course_name": "Probability",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["MT3234"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4144",
+      "subject": "Mathematics",
+      "course_name": "Representation theory of Finite Groups",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["MT2123", "MT3224"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4313",
+      "subject": "Mathematics",
+      "course_name": "Semester project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "MT3194",
+      "subject": "Mathematics",
+      "course_name": "Statistical Inference",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3324",
+      "subject": "Mathematics",
+      "course_name": "Markov Chain and its Application",
+      "credits": 4,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3214",
+      "subject": "Mathematics",
+      "course_name": "Complex Analysis",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["MT2223"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3224",
+      "subject": "Mathematics",
+      "course_name": "Algebraic Number Theory",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["MT3174"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3234",
+      "subject": "Mathematics",
+      "course_name": "Measure Theory and Integration",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["MT3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3244",
+      "subject": "Mathematics",
+      "course_name": "Calculus on Manifolds",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["MT3134", "MT3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3254",
+      "subject": "Mathematics",
+      "course_name": "Coding Theory",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["MT2233"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3264",
+      "subject": "Mathematics",
+      "course_name": "Algorithms",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": ["MT3154"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3284",
+      "subject": "Mathematics",
+      "course_name": "Topics: Mathematical Finance",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3294",
+      "subject": "Mathematics",
+      "course_name": "Topics: Computational number theory with Sage",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3413",
+      "subject": "Mathematics",
+      "course_name": "Topics: Symmetry and Lie Groups",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT3613",
+      "subject": "Mathematics",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "MT4214",
+      "subject": "Mathematics",
+      "course_name": "Algebraic Geometry",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["MT3114"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4224",
+      "subject": "Mathematics",
+      "course_name": "Fourier Analysis",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["MT4124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4234",
+      "subject": "Mathematics",
+      "course_name": "Riemannian Geometry",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["MT3184"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4244",
+      "subject": "Mathematics",
+      "course_name": "Cryptography",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["MT2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4254",
+      "subject": "Mathematics",
+      "course_name": "Stochastic Processes",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["MT4134"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4264",
+      "subject": "Mathematics",
+      "course_name": "Partial Differential Equations",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["MT4124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4294",
+      "subject": "Mathematics",
+      "course_name": "Bayesian theory and practice",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": ["DS4244"],
+      "kind": "normal"
+    },
+    {
+      "course_code": "MT4613",
+      "subject": "Mathematics",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "PH2213",
+      "subject": "Physics",
+      "course_name": "Classical mechanics",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH2223",
+      "subject": "Physics",
+      "course_name": "Thermal & Statistical Physics",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH2233",
+      "subject": "Physics",
+      "course_name": "Physics Lab - I1",
+      "credits": 3,
+      "semesters": [4],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "PH3114",
+      "subject": "Physics",
+      "course_name": "Electrodynamics-I",
+      "credits": 4,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3124",
+      "subject": "Physics",
+      "course_name": "Quantum Mechanics-1",
+      "credits": 4,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3134",
+      "subject": "Physics",
+      "course_name": "Optics",
+      "credits": 4,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3144",
+      "subject": "Physics",
+      "course_name": "Electronics-I with lab",
+      "credits": 4,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "PH3153",
+      "subject": "Physics",
+      "course_name": "Methods of Experimental Physics",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3163",
+      "subject": "Physics",
+      "course_name": "Mathematical Methods for Physics II",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3173",
+      "subject": "Physics",
+      "course_name": "Physics Lab-III",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "PH3313",
+      "subject": "Physics",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [5],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "PH4113",
+      "subject": "Physics",
+      "course_name": "Condensed Matter Physics-II",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["PH3224", "PH3234"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4123",
+      "subject": "Physics",
+      "course_name": "Statistical Mechanics - II",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["PH3234"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4133",
+      "subject": "Physics",
+      "course_name": "Quantum Field Theory-1",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["PH3163", "PH3214", "PH3253"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4144",
+      "subject": "Physics",
+      "course_name": "Physics Lab-V",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "PH4154",
+      "subject": "Physics",
+      "course_name": "Nuclear and Particle Physics",
+      "credits": 4,
+      "semesters": [7],
+      "prerequisites": ["PH3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4163",
+      "subject": "Physics",
+      "course_name": "Astronomy and Astrophysics - 1",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4173",
+      "subject": "Physics",
+      "course_name": "Fluid Dynamics",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4183",
+      "subject": "Physics",
+      "course_name": "Gravitation",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4193",
+      "subject": "Physics",
+      "course_name": "Physics at Nanoscales",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["PH3124", "PH3224"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4273",
+      "subject": "Physics",
+      "course_name": "Non-linear Dynamics",
+      "credits": 3,
+      "semesters": [5, 7],
+      "prerequisites": ["PH2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4313",
+      "subject": "Physics",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "PH3214",
+      "subject": "Physics",
+      "course_name": "Quantum Mechanics II",
+      "credits": 4,
+      "semesters": [6],
+      "prerequisites": ["PH3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3224",
+      "subject": "Physics",
+      "course_name": "Condensed Matter Physics |",
+      "credits": 4,
+      "semesters": [6],
+      "prerequisites": ["PH3124", "PH2223"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3234",
+      "subject": "Physics",
+      "course_name": "Statistical Mechanics I",
+      "credits": 4,
+      "semesters": [6],
+      "prerequisites": ["PH2223"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3244",
+      "subject": "Physics",
+      "course_name": "Physics Lab IV",
+      "credits": 4,
+      "semesters": [6],
+      "prerequisites": ["PH2223"],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "PH3253",
+      "subject": "Physics",
+      "course_name": "Group Theory in Physics",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3264",
+      "subject": "Physics",
+      "course_name": "Computational Physics",
+      "credits": 4,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3273",
+      "subject": "Physics",
+      "course_name": "Electronics & Instrumentation",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": ["PH3144"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3283",
+      "subject": "Physics",
+      "course_name": "Electrodynamics II",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": ["PH3114"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3293",
+      "subject": "Physics",
+      "course_name": "Quantum Information and Quantum Computing",
+      "credits": 3,
+      "semesters": [6, 8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH3613",
+      "subject": "Physics",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [6],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "PH4213",
+      "subject": "Physics",
+      "course_name": "Cosmology",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4224",
+      "subject": "Physics",
+      "course_name": "Atomic and Molecular Physics",
+      "credits": 4,
+      "semesters": [8],
+      "prerequisites": ["PH3124", "PH3234"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4233",
+      "subject": "Physics",
+      "course_name": "Physics Lab VI",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "lab"
+    },
+    {
+      "course_code": "PH4243",
+      "subject": "Physics",
+      "course_name": "Advanced Gravitation",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": ["PH4183", "PH4133"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4253",
+      "subject": "Physics",
+      "course_name": "Quantum Optics",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4263",
+      "subject": "Physics",
+      "course_name": "Astronomy and Astrophysics II",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4283",
+      "subject": "Physics",
+      "course_name": "Advanced Particle Physics",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4293",
+      "subject": "Physics",
+      "course_name": "Physics of Soft Matter",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": ["PH3234"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4323",
+      "subject": "Physics",
+      "course_name": "Quantum Information",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["PH3124"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4413",
+      "subject": "Physics",
+      "course_name": "Quantum Field Theory II",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": ["PH4133"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4423",
+      "subject": "Physics",
+      "course_name": "Experimental Techniques in High Energy Physics",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "PH4613",
+      "subject": "Physics",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "PH5113",
+      "subject": "Physics",
+      "course_name": "Advanced Classical Mechanics",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": ["PH2213"],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "SE4113",
+      "subject": "Science Education",
+      "course_name": "The Cognitive Basis of Science",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "SE4123",
+      "subject": "Science Education",
+      "course_name": "Science and the world",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "SE4213",
+      "subject": "Science Education",
+      "course_name": "Pedagogy of Science",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "SE4223",
+      "subject": "Science Education",
+      "course_name": "Role of Media and Models in Science Education",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "SE4233",
+      "subject": "Science Education",
+      "course_name": "Philosophy of Education",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    },
+    {
+      "course_code": "SE4313",
+      "subject": "Science Education",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [7],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "SE4613",
+      "subject": "Science Education",
+      "course_name": "Semester Project",
+      "credits": 3,
+      "semesters": [8],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "semester_project"
+    },
+    {
+      "course_code": "TD3113",
+      "subject": "Trans Disciplinary",
+      "course_name": "Science and Technology Entrepreneurship",
+      "credits": 3,
+      "semesters": [],
+      "prerequisites": [],
+      "aliases": [],
+      "kind": "normal"
+    }
+  ]
+}
