@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Course Schema",
+  "description": "Course Structure",
+  "type": "object",
+  "required": [
+    "course_code",
+    "subject",
+    "course_name",
+    "credits",
+    "semesters",
+    "prerequisites",
+    "aliases",
+    "kind"
+  ],
+  "properties": {
+    "course_code": { "type": "string" },
+    "subject": { "type": "string" },
+    "course_name": { "type": "string" },
+    "credits": { "type": "integer" },
+    "semesters" : {
+      "type": "array",
+      "items": { "type": "integer" }
+    },
+    "prerequisites" : {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "aliases" : {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "kind" : { "type": "string" }
+  }
+}
