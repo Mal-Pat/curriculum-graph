@@ -1,79 +1,75 @@
 import json
-import re
-import networkx as nx
-import matplotlib.pyplot as plt
+import streamlit as st
+from yfiles_graphs_for_streamlit import StreamlitGraphWidget, Node, Edge, Layout
 
-# -----------------------------------------
-# Load courses
-# -----------------------------------------
+def make_graph(courses):
+    courses = courses.get("all_courses", [])
+    nodes, edges = [], []
 
-with open("data/processed/courses.json", "r") as f:
-    courses = json.load(f)
+    # Create unique Group Nodes for each Semester
+    all_sems = sorted(list(set(min(c['semesters']) for c in courses)))
+    for sem in all_sems:
+        nodes.append(Node(
+            id=f"group_sem_{sem}",
+            properties={
+                "label": f"Semester {sem}",
+                "isGroup": True
+            }
+        ))
 
-# -----------------------------------------
-# Create graph
-# -----------------------------------------
+    # Add Course Nodes and assign them to their Semester Group
+    for course in courses:
+        code = course['course_code']
+        min_sem = min(course['semesters'])
+        
+        # Color coding for "kind"
+        color_map = {
+            "normal": "#17a2b8", 
+            "lab": "#28a745", 
+            "semester_project": "#ffc107"
+        }
+        node_color = color_map.get(course['kind'], "#6c757d")
 
-G = nx.DiGraph()
+        nodes.append(Node(
+            id=code,
+            properties={
+                "label": f"{code}\n{course['course_name']}",
+                "parent_id": f"group_sem_{min_sem}",
+                "color": node_color,
+                "credits": course['credits'],
+                "subject": course['subject']
+            }
+        ))
 
-# -----------------------------------------
-# Add course nodes
-# -----------------------------------------
+    # Add Prerequisite Edges
+    for course in courses:
+        target = course['course_code']
+        for prereq in course['prerequisites']:
+            edges.append(Edge(
+                id=f"{prereq}-{target}",
+                start=prereq,
+                end=target
+            ))
 
-for course in courses:
+    st.title("Interactive Course Graph")
+    st.info("Explore all IISER-P courses")
 
-    code = course.get("course_code")
-
-    G.add_node(
-        code,
-        title=course.get("title"),
-        credits=course.get("credits"),
-        semester=course.get("semester")
+    # Initialize and Render the Widget
+    widget = StreamlitGraphWidget(
+        nodes=nodes,
+        edges=edges,
+        node_label_mapping="label",
+        node_color_mapping="color",
+        node_parent_mapping="parent_id"
     )
+    
+    # Call show() with the hierarchic layout constant
+    widget.show(graph_layout=Layout.HIERARCHIC)
 
-# -----------------------------------------
-# Add prerequisite edges
-# -----------------------------------------
+if __name__ == "__main__":
+    st.set_page_config(layout="wide", page_title="Curriculum Visualizer")
+    
+    with open("data/IISER-P/all_courses.json", "r") as file:
+        courses = json.load(file)
 
-for course in courses:
-
-    course_code = course.get("course_code")
-    prereq_text = course.get("prerequisites")
-
-    # skip empty prerequisites
-    if not prereq_text:
-        continue
-
-    # find course codes like MT3214, PH3244
-    prereq_codes = re.findall(r"[A-Z]{2}\d{4}", prereq_text)
-
-    for prereq in prereq_codes:
-        G.add_edge(prereq, course_code)
-
-# -----------------------------------------
-# Print basic graph info
-# -----------------------------------------
-
-print("Total courses:", G.number_of_nodes())
-print("Total prerequisite links:", G.number_of_edges())
-
-# -----------------------------------------
-# Draw graph
-# -----------------------------------------
-
-plt.figure(figsize=(14,10))
-
-pos = nx.kamada_kawai_layout(G)
-
-nx.draw(
-    G,
-    pos,
-    with_labels=True,
-    node_color="lightblue",
-    node_size=2000,
-    font_size=8,
-    arrows=True
-)
-
-plt.title("Curriculum Graph (Courses and Prerequisites)")
-plt.show()
+    make_graph(courses)
