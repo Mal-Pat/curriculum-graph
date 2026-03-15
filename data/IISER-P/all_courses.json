@@ -18,7 +18,7 @@
       "semesters": [1],
       "prerequisites": [],
       "aliases": [],
-      "kind": "normal"
+      "kind": "lab"
     },
     {
       "course_code": "CH1113",
@@ -118,7 +118,7 @@
       "semesters": [2],
       "prerequisites": [],
       "aliases": [],
-      "kind": "normal"
+      "kind": "lab"
     },
     {
       "course_code": "EC1223",
@@ -248,7 +248,7 @@
       "semesters": [3],
       "prerequisites": [],
       "aliases": [],
-      "kind": "normal"
+      "kind": "lab"
     },
     {
       "course_code": "EC2123",
@@ -468,7 +468,7 @@
       "semesters": [5],
       "prerequisites": [],
       "aliases": [],
-      "kind": "normal"
+      "kind": "lab"
     },
     {
       "course_code": "BI4164",
@@ -731,9 +731,9 @@
       "kind": "normal"
     },
     {
-      "course_code": "CH3163*",
+      "course_code": "CH3163",
       "subject": "Chemistry",
-      "course_name": "Advanced Organic Chemistry Laboratory*",
+      "course_name": "Advanced Organic Chemistry Laboratory",
       "credits": 3,
       "semesters": [5, 7],
       "prerequisites": [],
@@ -791,9 +791,9 @@
       "kind": "normal"
     },
     {
-      "course_code": "CH4153*",
+      "course_code": "CH4153",
       "subject": "Chemistry",
-      "course_name": "Advanced Physical Chemistry Laboratory*",
+      "course_name": "Advanced Physical Chemistry Laboratory",
       "credits": 3,
       "semesters": [7],
       "prerequisites": [],
@@ -881,9 +881,9 @@
       "kind": "normal"
     },
     {
-      "course_code": "CH3253*",
+      "course_code": "CH3253",
       "subject": "Chemistry",
-      "course_name": "Advanced Inorganic Chemistry Laboratory*",
+      "course_name": "Advanced Inorganic Chemistry Laboratory",
       "credits": 3,
       "semesters": [6, 8],
       "prerequisites": [],
@@ -1253,7 +1253,7 @@
     {
       "course_code": "EC3313",
       "subject": "Earth and Climate Science",
-      "course_name": "Semester Project*",
+      "course_name": "Semester Project",
       "credits": 3,
       "semesters": [5],
       "prerequisites": [],
@@ -1353,7 +1353,7 @@
     {
       "course_code": "EC4313",
       "subject": "Earth and Climate Science",
-      "course_name": "Semester Project*",
+      "course_name": "Semester Project",
       "credits": 3,
       "semesters": [7],
       "prerequisites": [],
@@ -1508,7 +1508,7 @@
       "semesters": [8],
       "prerequisites": ["EC4134", "EC4274", "EC3274"],
       "aliases": [],
-      "kind": "normal"
+      "kind": "lab"
     },
     {
       "course_code": "EC4613",
