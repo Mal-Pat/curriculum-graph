@@ -2595,7 +2595,7 @@
       "subject": "Trans Disciplinary",
       "course_name": "Science and Technology Entrepreneurship",
       "credits": 3,
-      "semesters": [],
+      "semesters": [5],
       "prerequisites": [],
       "aliases": [],
       "kind": "normal"
