@@ -1,6 +1,7 @@
 import sys
 import json
 import streamlit as st
+import graph_analysis
 from yfiles_graphs_for_streamlit import StreamlitGraphWidget, Node, Edge, Layout
 
 def make_graph(courses):
