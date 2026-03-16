@@ -22,4 +22,4 @@ data/processed/*.json
 .ipynb_checkpoints/
 
 #Data
-/Users/ayush/Desktop/curriculum-graph/data/IISER-P/Course Contents_aug
+data/IISER-P/Course Contents_aug/
