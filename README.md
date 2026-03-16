@@ -58,6 +58,17 @@ curriculum-graph/
     └── test_graph.py         # Unit tests
 ```
 
+## Future Improvements
+
+Major/minor requirement visualization
+
+Course planning optimization
+
+Automatic prerequisite path generation
+
+Improved UI interactions
+
+
 
 ## How to Start
 
@@ -83,3 +94,7 @@ streamlit run src/graph.py <relative-data-path>
 where the `<relative-data-path>` is the path of the Json file (which contains all the courses) relative to `data/`.
 
 You can now open the Streamlit app in your browser at `http://localhost:8501` or the local url displayed in the terminal.
+
+## Status
+
+🚧 Project currently under active development
