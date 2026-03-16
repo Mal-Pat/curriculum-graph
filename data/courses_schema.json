@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "All Courses Schema",
+  "description": "Contains the data of all courses",
+  "type": "object",
+  "required": [
+    "all_courses"
+  ],
+  "properties": {
+    "all_courses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/course_structure" }
+    }
+  },
+  "$defs": {
+    "course_structure": {
+      "type": "object",
+      "properties": {
+        "course_code": { "type": "string" },
+        "subject": { "type": "string", "enum": [
+          "Biology", 
+          "Chemistry", 
+          "Physics", 
+          "Mathematics", 
+          "Earth and Climate Science", 
+          "Data Science", 
+          "Trans Disciplinary", 
+          "Science Education", 
+          "Humanities and Social Sciences"
+        ]
+        },
+        "course_name": { "type": "string" },
+        "credits": { "type": "integer" },
+        "semesters": {
+          "type": "array",
+          "items": { "type": "integer" }
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "kind": { "type": "string", "enum": ["normal", "lab", "semester_project"] }
+      },
+      "required": [
+        "course_code",
+        "subject",
+        "course_name",
+        "credits",
+        "semesters",
+        "prerequisites",
+        "aliases",
+        "kind"
+      ]
+    }
+  }
+}

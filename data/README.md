@@ -11,32 +11,14 @@ data-folder-name/
 
 Format of `courses.csv`:
 
-```json
-[
-  {
-    "course_codes" : ["string"],
-    "subjects" : ["string"],
-    "course_name" : "string",
-    "credits" : "number",
-    "prerequisites" : ["string"]
-  }
-]
-```
+Present in `course_schema.json`
+
 
 ## Major & Minor Requirements
 
 Format of `major_minor_requirements.json`:
 
-```json
-[
-  {
-    "subject" : "string",
-    "credits" : "number",
-    "num_courses" : "number",
-    "compulsory" : ["string"]
-  }
-]
-```
+Present in `major_minor_schema.json`
 
 ## College Constraints
 
@@ -49,3 +31,4 @@ Format of `college_constraints.json`:
   "min_credits_per_sem" : "number",
   "max_credits_per_sem" : "number"
 }
+```
