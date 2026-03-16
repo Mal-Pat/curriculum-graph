@@ -1,6 +1,63 @@
 # Curriculum Graph
 
-A college curriculum graph visualizer - allows users to explore valid pathways to complete a major or minor
+Curriculum Graph is an interactive visualization tool for exploring course dependencies in a college curriculum. It represents courses as nodes and prerequisites as directed edges, allowing users to analyze valid pathways to complete majors or minors.
+
+The system helps students and curriculum planners:
+
+- visualize prerequisite structures
+- identify course progression paths
+- detect cycles in prerequisite definitions
+- explore semester-wise course grouping
+
+## Features
+
+- Interactive course dependency graph
+- Semester-based course grouping
+- Color-coded course types (normal, lab, semester project)
+- Prerequisite edge visualization
+- JSON schema validation for course datasets
+- Streamlit-based interactive UI
+- Cycle detection in prerequisite graph (TO-BE-ADDED)
+
+## Project Structure
+
+
+```
+curriculum-graph/
+│
+├── README.md                 # Project overview and usage instructions
+├── requirements.txt          # Python dependencies
+├── .gitignore                # Files ignored by git
+│
+├── src/                      # Source code
+│   ├── graph.py              # Main Streamlit visualization app
+│   ├── graph_analysis.py     # Graph algorithms (cycle detection, etc.)
+│   ├── validate_schema.py    # JSON schema validation script
+│   └── utils.py              # Helper functions
+│
+├── data/                     # Data files
+│   ├── courses_schema.json
+│   ├── major_minor_schema.json
+│   │
+│   ├── IISER-P/              # Example dataset
+│   │   └── all_courses.json
+│   │
+│   ├── raw/                  # Raw datasets
+│   └── processed/            # Processed datasets used by the app
+│
+├── docs/
+│   └── images/               # Screenshots used in README
+│       ├── graph_overview.png
+│       ├── prerequisite_graph.png
+│       └── semester_grouping.png
+│
+├── notebooks/
+│   └── analysis.ipynb        # Exploratory analysis
+│
+└── tests/
+    └── test_graph.py         # Unit tests
+```
+
 
 ## How to Start
 
