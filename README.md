@@ -21,39 +21,43 @@ The system helps students and curriculum planners:
 
 ## Project Structure
 
-curriculum-graph
+
+```
+curriculum-graph/
 │
 ├── README.md                 # Project overview and usage instructions
 ├── requirements.txt          # Python dependencies
 ├── .gitignore                # Files ignored by git
 │
 ├── src/                      # Source code
-│   ├── graph.py              # Main Streamlit app for visualization
+│   ├── graph.py              # Main Streamlit visualization app
 │   ├── graph_analysis.py     # Graph algorithms (cycle detection, etc.)
 │   ├── validate_schema.py    # JSON schema validation script
-│   └── utils.py              # Helper functions (optional)
+│   └── utils.py              # Helper functions
 │
 ├── data/                     # Data files
-│   ├── courses_schema.json   # JSON schema defining course structure
+│   ├── courses_schema.json
 │   ├── major_minor_schema.json
 │   │
 │   ├── IISER-P/              # Example dataset
 │   │   └── all_courses.json
 │   │
-│   ├── raw/                  # Raw collected datasets
+│   ├── raw/                  # Raw datasets
 │   └── processed/            # Processed datasets used by the app
 │
-├── docs/                     # Documentation assets
-│   └── images/               # Screenshots and plots used in README
+├── docs/
+│   └── images/               # Screenshots used in README
 │       ├── graph_overview.png
 │       ├── prerequisite_graph.png
 │       └── semester_grouping.png
 │
-├── notebooks/                # Experimental analysis / data exploration
-│   └── analysis.ipynb
+├── notebooks/
+│   └── analysis.ipynb        # Exploratory analysis
 │
-└── tests/                    # Unit tests (optional for future expansion)
-    └── test_graph.py
+└── tests/
+    └── test_graph.py         # Unit tests
+```
+
 
 ## How to Start
 
