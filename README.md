@@ -8,6 +8,7 @@ The system helps students and curriculum planners:
 - identify course progression paths
 - detect cycles in prerequisite definitions
 - explore semester-wise course grouping
+- currently we are building this for IISER Pune Data
 
 ## Features
 
@@ -60,14 +61,19 @@ curriculum-graph/
 
 ## Future Improvements
 
-Major/minor requirement visualization
+- Major/minor requirement visualization
 
-Course planning optimization
+- additional information and details of courses
 
-Automatic prerequisite path generation
+- Course planning optimization
 
-Improved UI interactions
+- Automatic prerequisite path generation
 
+- Improved UI interactions
+
+- Generalized for all university curricula
+
+- spacilaized for students or planners 
 
 
 ## How to Start
