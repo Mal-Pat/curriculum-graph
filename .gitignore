@@ -20,3 +20,6 @@ data/processed/*.json
 
 # notebooks checkpoints
 .ipynb_checkpoints/
+
+#Data
+/Users/ayush/Desktop/curriculum-graph/data/IISER-P/Course Contents_aug
