@@ -1,6 +1,13 @@
 # Curriculum Graph
 
-A college curriculum graph visualizer - allows users to explore valid pathways to complete a major or minor
+Curriculum Graph is an interactive visualization tool for exploring course dependencies in a college curriculum. It represents courses as nodes and prerequisites as directed edges, allowing users to analyze valid pathways to complete majors or minors.
+
+The system helps students and curriculum planners:
+
+- visualize prerequisite structures
+- identify course progression paths
+- detect cycles in prerequisite definitions
+- explore semester-wise course grouping
 
 ## How to Start
 
