@@ -1,0 +1,77 @@
+[
+    {
+        "program_metadata": {"subject": "Chemistry", "major_or_minor": "Major"},
+        "overall_requirements" : {"minimum_total_courses": 0, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": null
+        }
+    },
+    {
+        "program_metadata": {"subject": "Chemistry", "major_or_minor": "Major"},
+        "overall_requirements" : {"minimum_total_courses": null, "minimum_total_credits": null},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": [
+                "CH2213",
+                "CH2223",
+                "CH2233",
+                "CH3114",
+                "CH3124",
+                "CH3154",
+                "CH3163",
+                "CH4153",
+                "CH3214",
+                "CH3224",
+                "CH3234",
+                "CH3253"
+            ]
+        }
+    },
+    {
+        "program_metadata": {"subject": "Chemistry", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": null, "minimum_total_credits": null},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": [
+                "CH2213",
+                "CH2223",
+                "CH2233",
+                "CH3114",
+                "CH3124",
+                "CH3134",
+                "CH3143",
+                "CH3154",
+                "CH3163",
+                "CH4114",
+                "CH4124",
+                "CH4134",
+                "CH4144",
+                "CH4153",
+                "CH4164",
+                "CH4173",
+                "CH4184",
+                "CH4194",
+                "CH3214",
+                "CH3224",
+                "CH3234",
+                "CH3253",
+                "CH4214",
+                "CH4224",
+                "CH4233",
+                "CH4243",
+                "CH4254",
+                "CH4264",
+                "CH4274",
+                "CH4284",
+                "CH4323"
+            ]
+        }
+    }
+]
