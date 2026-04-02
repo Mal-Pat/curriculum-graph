@@ -2,51 +2,55 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Major/Minor Criteria",
   "description": "Json Schema for Major/Minor academic requirements",
-  "type": "object",
-  "required": [
-    "program_metadata",
-    "overall_requirements",
-    "requirements_by_set"
-  ],
-  "properties": {
-    "program_metadata": {
-      "type": "object",
-      "properties": {
-        "subject": { "type": "string", "enum": [
-          "Biology", 
-          "Chemistry", 
-          "Physics", 
-          "Mathematics", 
-          "Earth and Climate Science", 
-          "Data Science", 
-          "Trans Disciplinary", 
-          "Science Education", 
-          "Humanities and Social Sciences"
-        ] },
-        "major_or_minor": { "type": "string", "enum": ["Major", "Minor"] }
-      },
-      "required": ["subject", "major_or_minor"]
-    },
-    "overall_requirements": {
-      "type": "object",
-      "properties": {
-        "minimum_total_courses": { "type": ["integer", "null"] },
-        "minimum_total_credits": { "type": ["integer", "null"] }
-      },
-      "required": ["minimum_total_courses", "minimum_total_credits"]
-    },
-    "requirements_by_set": {
-      "type": "object",
-      "properties": {
-        "set_a": { "$ref": "#/$defs/set_a_requirement" },
-        "set_b": { "$ref": "#/$defs/set_b_requirement" },
-        "set_c": { "$ref": "#/$defs/set_c_requirement" },
-        "set_d": { "$ref": "#/$defs/set_d_requirement" }
-      },
-      "required": ["set_a", "set_b", "set_c", "set_d"]
-    }
-  },
+  "type": "array",
+  "items": { "$ref": "#/$defs/course" },
   "$defs": {
+    "requirements": {
+      "type": "object",
+      "required": [
+        "program_metadata",
+        "overall_requirements",
+        "requirements_by_set"
+      ],
+      "properties": {
+        "program_metadata": {
+          "type": "object",
+          "properties": {
+            "subject": { "type": "string", "enum": [
+              "Biology", 
+              "Chemistry", 
+              "Physics", 
+              "Mathematics", 
+              "Earth and Climate Science", 
+              "Data Science", 
+              "Trans Disciplinary", 
+              "Science Education", 
+              "Humanities and Social Sciences"
+            ] },
+            "major_or_minor": { "type": "string", "enum": ["Major", "Minor"] }
+          },
+          "required": ["subject", "major_or_minor"]
+        },
+        "overall_requirements": {
+          "type": "object",
+          "properties": {
+            "minimum_total_courses": { "type": ["integer", "null"] },
+            "minimum_total_credits": { "type": ["integer", "null"] }
+          },
+          "required": ["minimum_total_courses", "minimum_total_credits"]
+        },
+        "requirements_by_set": {
+          "type": "object",
+          "properties": {
+            "set_a": { "$ref": "#/$defs/set_a_requirement" },
+            "set_b": { "$ref": "#/$defs/set_b_requirement" },
+            "set_c": { "$ref": "#/$defs/set_c_requirement" },
+            "set_d": { "$ref": "#/$defs/set_d_requirement" }
+          },
+          "required": ["set_a", "set_b", "set_c", "set_d"]
+        }
+      }
+    },
     "course": { "type": "string" },
     "set_a_requirement": {
       "type": ["object", "null"],
