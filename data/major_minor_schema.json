@@ -3,7 +3,7 @@
   "title": "Major/Minor Criteria",
   "description": "Json Schema for Major/Minor academic requirements",
   "type": "array",
-  "items": { "$ref": "#/$defs/course" },
+  "items": { "$ref": "#/$defs/requirements" },
   "$defs": {
     "requirements": {
       "type": "object",
