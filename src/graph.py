@@ -265,6 +265,128 @@ def make_semester_graph_elements(courses):
     return nodes, edges
 
 
+def _normalized_semesters(semesters):
+    out = set()
+    for sem in semesters or []:
+        try:
+            out.add(int(sem))
+        except (TypeError, ValueError):
+            continue
+    return sorted(out)
+
+
+def _offering_pattern_label(semesters):
+    sems = _normalized_semesters(semesters)
+    if not sems:
+        return "unknown"
+    if sems == [5, 7]:
+        return "offered in 5 and 7"
+    if sems == [6, 8]:
+        return "offered in 6 and 8"
+    if all((sem % 2 == 1) for sem in sems):
+        return "odd-sem offering"
+    if all((sem % 2 == 0) for sem in sems):
+        return "even-sem offering"
+    return "mixed-sem offering"
+
+
+def make_year_semester_graph_elements(courses):
+    """Build graph clustered by year group with semester subgroups.
+
+    Structure: Year group -> Semester subgroup -> Course nodes.
+    Prerequisite edges remain course -> course across all visible courses.
+    """
+
+    nodes = []
+    edges = []
+
+    year_to_semesters = {}
+    for course in courses:
+        first_sem = course_first_sem(course)
+        if first_sem is None:
+            continue
+        year = ((first_sem - 1) // 2) + 1
+        year_to_semesters.setdefault(year, set()).add(first_sem)
+
+    for year in sorted(year_to_semesters):
+        year_group_id = f"group_catalog_year_{year}"
+        nodes.append(
+            Node(
+                id=year_group_id,
+                properties={
+                    "label": f"Year {year}",
+                    "isGroup": True,
+                },
+            )
+        )
+
+        for sem in sorted(year_to_semesters[year]):
+            sem_parity = "Odd" if (sem % 2 == 1) else "Even"
+            nodes.append(
+                Node(
+                    id=f"group_catalog_year_{year}_sem_{sem}",
+                    properties={
+                        "label": f"Semester {sem} ({sem_parity})",
+                        "isGroup": True,
+                        "parent_id": year_group_id,
+                    },
+                )
+            )
+
+    available_codes = _available_codes(courses)
+
+    for course in courses:
+        code = course.get("course_code")
+        first_sem = course_first_sem(course)
+        if not code or first_sem is None:
+            continue
+
+        year = ((first_sem - 1) // 2) + 1
+        semesters = _normalized_semesters(course.get("semesters", []))
+        sem_text = ",".join(map(str, semesters)) if semesters else "-"
+        offering_pattern = _offering_pattern_label(semesters)
+
+        color = COURSE_KIND_COLOR_MAP.get(course.get("kind"), "#6c757d")
+        label = (
+            f"{code}\\n{course.get('course_name', '')}"
+            f"\\nY{year} S{first_sem} | {course.get('credits', 0)}cr"
+            f"\\nOffered: {sem_text} ({offering_pattern})"
+        )
+
+        nodes.append(
+            Node(
+                id=code,
+                properties={
+                    "label": label,
+                    "parent_id": f"group_catalog_year_{year}_sem_{first_sem}",
+                    "color": color,
+                    "credits": course.get("credits"),
+                    "subject": course.get("subject"),
+                    "kind": course.get("kind"),
+                    "offering_pattern": offering_pattern,
+                },
+            )
+        )
+
+    for course in courses:
+        target = course.get("course_code")
+        if not target:
+            continue
+
+        for prereq in course.get("prerequisites", []):
+            if prereq in available_codes:
+                edges.append(
+                    Edge(
+                        id=f"catalog-{prereq}-{target}",
+                        start=prereq,
+                        end=target,
+                        properties={"directed": True, "edge_type": "prerequisite"},
+                    )
+                )
+
+    return nodes, edges
+
+
 def _pick_course_set(code_sets):
     priority = ["set_d", "set_a", "set_b", "set_c", "set_e"]
     for set_name in priority:
