@@ -115,5 +115,103 @@
             "set_d": null,
             "set_e": null
         }
+    },
+    {
+        "program_metadata": {"subject": "Mathematics", "major_or_minor": "Major"},
+        "overall_requirements" : {"minimum_total_courses": 15, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": {
+                "compulsory_courses": [
+                    "MT2213",
+                    "MT2223",
+                    "MT2233",
+                    "MT3114",
+                    "MT3124",
+                    "MT3134",
+                    "MT3144",
+                    "MT3154",
+                    "MT3214"
+                ]
+            },
+            "set_e": null
+        }
+    },
+    {
+        "program_metadata": {"subject": "Mathematics", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": 8, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": null,
+            "set_e": null
+        }
+    },
+    {
+        "program_metadata": {"subject": "Physics", "major_or_minor": "Major"},
+        "overall_requirements" : {"minimum_total_courses": 18, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": {
+                "compulsory_courses": [
+                    "PH2213",
+                    "PH2223",
+                    "PH2233",
+                    "PH3114",
+                    "PH3124",
+                    "PH3134",
+                    "PH3144",
+                    "PH3214",
+                    "PH3224",
+                    "PH3234",
+                    "PH3244",
+                    "PH4144",
+                    "PH4154",
+                    "PH4224"
+                ]
+            },
+            "set_e": {
+                "not_counted_courses": [
+                    "PH3313",
+                    "PH4313",
+                    "PH3613",
+                    "PH4613"
+                ]
+            }
+        }
+    },
+    {
+        "program_metadata": {"subject": "Physics", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": 8, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": null,
+            "set_e": {
+                "not_counted_courses": [
+                    "PH3313",
+                    "PH4313",
+                    "PH3613",
+                    "PH4613"
+                ]
+            }
+        }
+    },
+    {
+        "program_metadata": {"subject": "Physics", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": 8, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": null,
+            "set_e": null
+        }
     }
 ]
