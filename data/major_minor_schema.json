@@ -22,9 +22,7 @@
               "Physics", 
               "Mathematics", 
               "Earth and Climate Science", 
-              "Data Science", 
-              "Trans Disciplinary", 
-              "Science Education", 
+              "Data Science",
               "Humanities and Social Sciences"
             ] },
             "major_or_minor": { "type": "string", "enum": ["Major", "Minor"] }
@@ -45,9 +43,10 @@
             "set_a": { "$ref": "#/$defs/set_a_requirement" },
             "set_b": { "$ref": "#/$defs/set_b_requirement" },
             "set_c": { "$ref": "#/$defs/set_c_requirement" },
-            "set_d": { "$ref": "#/$defs/set_d_requirement" }
+            "set_d": { "$ref": "#/$defs/set_d_requirement" },
+            "set_e": { "$ref": "#/$defs/set_e_requirement" }
           },
-          "required": ["set_a", "set_b", "set_c", "set_d"]
+          "required": ["set_a", "set_b", "set_c", "set_d", "set_e"]
         }
       }
     },
@@ -56,7 +55,7 @@
       "type": ["object", "null"],
       "description": "Some minimum number of courses required from this set.",
       "properties": {
-        "minimum_required_from_set": { "type": "integer", "default": 1 },
+        "minimum_required_from_set": { "type": "integer" },
         "available_courses": {
           "type": "array",
           "items": { "$ref": "#/$defs/course" }
@@ -97,6 +96,17 @@
         }
       },
       "required": ["compulsory_courses"]
+    },
+    "set_e_requirement": {
+      "type": ["object", "null"],
+      "description": "Courses NOT counted for Major/Minor.",
+      "properties": {
+        "not_counted_courses": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        }
+      },
+      "required": ["not_counted_courses"]
     }
   }
 }
