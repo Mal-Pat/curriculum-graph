@@ -1,106 +1,111 @@
-# Curriculum Graph
+# Curriculum Graph Studio
 
-Curriculum Graph is an interactive visualization tool for exploring course dependencies in a college curriculum. It represents courses as nodes and prerequisites as directed edges, allowing users to analyze valid pathways to complete majors or minors.
+Curriculum Graph Studio is a student-first curriculum planning dashboard for IISER Pune data.
+It combines interactive prerequisite graphs, major/minor pathway logic, semester planning, and report generation.
 
-The system helps students and curriculum planners:
+## What This Project Solves
 
-- visualize prerequisite structures
-- identify course progression paths
-- detect cycles in prerequisite definitions
-- explore semester-wise course grouping
-- currently we are building this for IISER Pune Data
+- Explore how courses connect through prerequisites.
+- Understand year-to-year and semester-to-semester transitions.
+- Plan toward the 184-credit target with constraints.
+- Evaluate major/minor combinations with feasibility checks.
+- Generate a detailed report with plots for review and handoff.
 
-## Features
+## Current Dashboard Highlights
 
-- Interactive course dependency graph
-- Semester-based course grouping
-- Color-coded course types (normal, lab, semester project)
-- Prerequisite edge visualization
-- JSON schema validation for course datasets
-- Streamlit-based interactive UI
-- Cycle detection in prerequisite graph (TO-BE-ADDED)
+- Student mode by default (cleaner tabs and graph presets).
+- Advanced analysis tabs available via toggle.
+- Policy-filtered program options:
+    - Majors: Physics, Chemistry, Biology, Earth and Climate Science
+    - Minors: Physics, Chemistry, Biology, Earth and Climate Science, Data Science
+- Catalog graph with year/semester structure and prerequisite flow options.
+- Major/Minor roadmap graph with requirement-aware coloring.
+- Student planner with credit tracking, requirement progress, and constrained term planning.
+- Combination simulator across major-minor pairs.
+- Validation, rules explorer, and data quality diagnostics.
 
-## Project Structure
+## Project Layout
 
-
-```
+```text
 curriculum-graph/
-│
-├── README.md                 # Project overview and usage instructions
-├── requirements.txt          # Python dependencies
-├── .gitignore                # Files ignored by git
-│
-├── src/                      # Source code
-│   ├── graph.py              # Main Streamlit visualization app
-│   ├── graph_analysis.py     # Graph algorithms (cycle detection, etc.)
-│   ├── validate_schema.py    # JSON schema validation script
-│   └── utils.py              # Helper functions
-│
-├── data/                     # Data files
+├── README.md
+├── START_HERE.md
+├── requirements.txt
+├── data/
 │   ├── courses_schema.json
 │   ├── major_minor_schema.json
-│   │
-│   ├── IISER-P/              # Example dataset
-│   │   └── all_courses.json
-│   │
-│   ├── raw/                  # Raw datasets
-│   └── processed/            # Processed datasets used by the app
-│
+│   └── IISER-P/
+│       ├── all_courses.json
+│       ├── major_minor_requirements.json
+│       └── college_constraints.json
 ├── docs/
-│   └── images/               # Screenshots used in README
-│       ├── graph_overview.png
-│       ├── prerequisite_graph.png
-│       └── semester_grouping.png
-│
-├── notebooks/
-│   └── analysis.ipynb        # Exploratory analysis
-│
-└── tests/
-    └── test_graph.py         # Unit tests
+│   ├── note.txt
+│   └── reports/
+│       └── latest/
+│           ├── dashboard_report.md
+│           ├── report_summary.json
+│           └── plots/
+└── src/
+        ├── app.py
+        ├── graph.py
+        ├── validate_major_minor.py
+        ├── generate_dashboard_report.py
+        └── legacy/
 ```
 
-## Future Improvements
+## Quick Start
 
-- Major/minor requirement visualization
-
-- additional information and details of courses
-
-- Course planning optimization
-
-- Automatic prerequisite path generation
-
-- Improved UI interactions
-
-- Generalized for all university curricula
-
-- spacilaized for students or planners 
-
-
-## How to Start
-
-Create a Python virtual environment (using `uv` or `venv` module).
-
-Clone this repository and navigate to the root of the repo.
-
-After activating your virtual environment, run one of the two commands depending on your Python environment:
+1. Create and activate a Python environment.
+2. Install dependencies:
 
 ```bash
-pip install -r requirements.txt # for a venv module env
-uv pip install -r requirements.txt # for a uv venv
+pip install -r requirements.txt
 ```
 
-The data for all courses should be added as a Json file following the Json Schema given at `data/courses_schema.json` inside the `data` directory.
+3. Run the dashboard:
+
+```bash
+streamlit run src/app.py
+```
+
+4. Open the local URL shown in terminal (usually http://localhost:8501).
+
+## Generate Detailed Report With Plots
 
 Run:
 
 ```bash
-streamlit run src/graph.py <relative-data-path>
+/Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_dashboard_report.py \
+    --courses data/IISER-P/all_courses.json \
+    --programs data/IISER-P/major_minor_requirements.json \
+    --constraints data/IISER-P/college_constraints.json \
+    --out-dir docs/reports/latest
 ```
 
-where the `<relative-data-path>` is the path of the Json file (which contains all the courses) relative to `data/`.
+Artifacts produced:
 
-You can now open the Streamlit app in your browser at `http://localhost:8501` or the local url displayed in the terminal.
+- `docs/reports/latest/dashboard_report.md`
+- `docs/reports/latest/report_summary.json`
+- `docs/reports/latest/plots/*.png`
 
-## Status
+## Merge Readiness Checklist
 
-🚧 Project currently under active development
+- Syntax check:
+
+```bash
+/Users/ayush/miniconda3/envs/graph_env/bin/python -m py_compile src/app.py src/graph.py src/validate_major_minor.py src/generate_dashboard_report.py
+```
+
+- Dashboard startup smoke test:
+
+```bash
+PYTHONPATH=src /Users/ayush/miniconda3/envs/graph_env/bin/streamlit run src/app.py --server.headless true --server.port 8522
+```
+
+- Regenerate report before merge (for latest data snapshot).
+
+## Notes
+
+- The app entrypoint is `src/app.py`.
+- `src/graph.py` is the logic layer for data/graph/planning utilities.
+- Legacy scripts are preserved in `src/legacy/` and are not required for main dashboard flow.
