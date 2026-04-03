@@ -269,5 +269,36 @@
             "set_d": null,
             "set_e": null
         }
+    },
+    {
+        "program_metadata": {"subject": "Data Science", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": 5, "minimum_total_credits": 17},
+        "requirements_by_set" : {
+            "set_a": {
+                "minimum_required_from_set": 1,
+                "available_courses": [
+                    "DS4144",
+                    "DS4244",
+                    "DS3184",
+                    "DS4124",
+                    "DS3294"
+                ]
+            },
+            "set_b": {
+                "maximum_allowed_from_set": 2,
+                "available_courses": [
+                    "DS3434",
+                    "DS4233",
+                    "DS4223",
+                    "DS3263",
+                    "DS3424",
+                    "DS3273",
+                    "DS4213"
+                ]
+            },
+            "set_c": null,
+            "set_d": null,
+            "set_e": null
+        }
     }
 ]
