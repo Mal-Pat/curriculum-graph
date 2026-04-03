@@ -72,10 +72,66 @@ def select_criteria(all_criteria: list[dict], subject: str, major_or_minor: str)
             return criteria
     raise ValueError(f"No criteria found for subject='{subject}', type='{major_or_minor}'")
 
+
+def _countable_course_pool(criteria: dict) -> set[str]:
+    """Union of all courses that can contribute to requirement counting."""
+    sets = criteria.get("requirements_by_set", {})
+    pool: set[str] = set()
+
+    set_a = sets.get("set_a") or {}
+    pool.update(set_a.get("available_courses", []))
+
+    set_b = sets.get("set_b") or {}
+    pool.update(set_b.get("available_courses", []))
+
+    set_c = sets.get("set_c") or {}
+    pool.update(set_c.get("available_courses", []))
+
+    set_d = sets.get("set_d") or {}
+    pool.update(set_d.get("compulsory_courses", []))
+
+    return pool
+
 def validate_major_minor_pathway(pathway, criteria, course_credits_map):
+
+    offered = criteria.get("is_offered", True)
+    complete = criteria.get("is_complete", True)
+    prereq_policy = criteria.get("prerequisites_policy", "strict")
+
+    if not offered:
+        return {
+            "is_valid": False,
+            "subject": criteria.get("program_metadata", {}).get("subject"),
+            "type": criteria.get("program_metadata", {}).get("major_or_minor"),
+            "errors": ["This subject does not currently offer the selected Major/Minor."],
+            "total_credits": 0,
+            "total_courses": 0,
+            "counted_courses": [],
+            "is_offered": False,
+            "is_complete": complete,
+            "prerequisites_policy": prereq_policy,
+            "warnings": [],
+        }
+
+    if not complete:
+        return {
+            "is_valid": False,
+            "subject": criteria.get("program_metadata", {}).get("subject"),
+            "type": criteria.get("program_metadata", {}).get("major_or_minor"),
+            "errors": ["Criteria exists but is marked incomplete. Please finalize handbook rules first."],
+            "total_credits": 0,
+            "total_courses": 0,
+            "counted_courses": [],
+            "is_offered": offered,
+            "is_complete": False,
+            "prerequisites_policy": prereq_policy,
+            "warnings": [],
+        }
 
     errors = []
     pathway_set = set(pathway)
+    countable_pool = _countable_course_pool(criteria)
+    counted_pathway_set = pathway_set.intersection(countable_pool) if countable_pool else pathway_set
 
     sets = criteria.get("requirements_by_set", {})
 
@@ -118,14 +174,14 @@ def validate_major_minor_pathway(pathway, criteria, course_credits_map):
     #Course Number check
     overall = criteria.get("overall_requirements", {})
     min_courses = overall.get("minimum_total_courses")
-    if min_courses is not None and len(pathway_set) < min_courses:
+    if min_courses is not None and len(counted_pathway_set) < min_courses:
         errors.append(
-            f"Total courses ({len(pathway_set)}) < minimum required ({min_courses})"
+            f"Total counted courses ({len(counted_pathway_set)}) < minimum required ({min_courses})"
         )
 
     #Course credit check
     min_credits = overall.get("minimum_total_credits")
-    total_credits = sum(course_credits_map.get(c, 0) for c in pathway_set)
+    total_credits = sum(course_credits_map.get(c, 0) for c in counted_pathway_set)
 
     if min_credits is not None and total_credits < min_credits:
         errors.append(
@@ -138,7 +194,12 @@ def validate_major_minor_pathway(pathway, criteria, course_credits_map):
         "type": criteria.get("program_metadata", {}).get("major_or_minor"),
         "errors": errors,
         "total_credits": total_credits,
-        "total_courses": len(pathway_set),
+        "total_courses": len(counted_pathway_set),
+        "counted_courses": sorted(counted_pathway_set),
+        "is_offered": offered,
+        "is_complete": complete,
+        "prerequisites_policy": prereq_policy,
+        "warnings": [],
     }
 
 
@@ -153,6 +214,14 @@ def validate_with_prerequisites(pathway, criteria, all_courses: list[dict]) -> d
         course_credits_map,
     )
 
+    # If program is not offered or criteria is incomplete, return early.
+    if not result.get("is_offered", True) or not result.get("is_complete", True):
+        return result
+
+    prereq_policy = result.get("prerequisites_policy", "strict")
+    if prereq_policy == "off":
+        return result
+
     pathway_set = set(normalized_pathway)
     prereq_errors = []
     for code in pathway_set:
@@ -161,7 +230,10 @@ def validate_with_prerequisites(pathway, criteria, all_courses: list[dict]) -> d
                 prereq_errors.append(f"{code} is missing prerequisite {prereq}")
 
     if prereq_errors:
-        result["is_valid"] = False
-        result["errors"] = result.get("errors", []) + sorted(prereq_errors)
+        if prereq_policy == "strict":
+            result["is_valid"] = False
+            result["errors"] = result.get("errors", []) + sorted(prereq_errors)
+        elif prereq_policy == "advisory":
+            result["warnings"] = result.get("warnings", []) + sorted(prereq_errors)
 
     return result
