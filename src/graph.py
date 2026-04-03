@@ -2,6 +2,7 @@ import json
 import re
 from collections import Counter
 from pathlib import Path
+import networkx as nx
 
 from yfiles_graphs_for_streamlit import Edge, Node
 
@@ -9,6 +10,7 @@ from yfiles_graphs_for_streamlit import Edge, Node
 DATA_DIR = Path("data")
 DEFAULT_COURSES_PATH = Path("IISER-P/all_courses.json")
 DEFAULT_MAJOR_MINOR_PATH = Path("IISER-P/major_minor_requirements.json")
+DEFAULT_CONSTRAINTS_PATH = Path("IISER-P/college_constraints.json")
 
 COURSE_KIND_COLOR_MAP = {
     "normal": "#1f7a8c",
@@ -41,6 +43,11 @@ def load_programs(programs_relative: Path | None = None):
     relative = programs_relative or DEFAULT_MAJOR_MINOR_PATH
     payload = load_json(DATA_DIR / relative)
     return normalize_programs(payload)
+
+
+def load_constraints(constraints_relative: Path | None = None):
+    relative = constraints_relative or DEFAULT_CONSTRAINTS_PATH
+    return load_json(DATA_DIR / relative)
 
 
 def normalize_programs(payload):
@@ -246,7 +253,14 @@ def make_semester_graph_elements(courses):
 
         for prereq in course.get("prerequisites", []):
             if prereq in available_codes:
-                edges.append(Edge(id=f"{prereq}-{target}", start=prereq, end=target))
+                edges.append(
+                    Edge(
+                        id=f"{prereq}-{target}",
+                        start=prereq,
+                        end=target,
+                        properties={"directed": True, "edge_type": "prerequisite"},
+                    )
+                )
 
     return nodes, edges
 
@@ -266,26 +280,15 @@ def make_program_roadmap_elements(
     selected_sets=None,
     year_range=(1, 4),
 ):
-    selected_sets = selected_sets or ["set_a", "set_b", "set_c", "set_d", "set_e"]
-
-    code_to_sets = collect_code_to_sets(criteria)
-    base_codes = collect_requirement_codes(criteria, selected_sets)
-
-    present_base_codes = {code for code in base_codes if code in course_index}
-    selected_codes = set(present_base_codes)
-
-    if include_prereq_support:
-        stack = list(present_base_codes)
-        while stack:
-            code = stack.pop()
-            course = course_index.get(code)
-            if not course:
-                continue
-
-            for prereq in course.get("prerequisites", []):
-                if prereq in course_index and prereq not in selected_codes:
-                    selected_codes.add(prereq)
-                    stack.append(prereq)
+    selection = collect_program_codes(
+        criteria=criteria,
+        course_index=course_index,
+        selected_sets=selected_sets,
+        include_prereq_support=include_prereq_support,
+        year_range=year_range,
+    )
+    code_to_sets = selection["code_to_sets"]
+    selected_codes = set(selection["visible_codes"])
 
     y_min, y_max = year_range
     year_groups = [year for year in range(y_min, y_max + 1)]
@@ -342,14 +345,21 @@ def make_program_roadmap_elements(
 
         for prereq in course.get("prerequisites", []):
             if prereq in filtered_codes:
-                edges.append(Edge(id=f"{prereq}-{code}", start=prereq, end=code))
+                edges.append(
+                    Edge(
+                        id=f"{prereq}-{code}",
+                        start=prereq,
+                        end=code,
+                        properties={"directed": True, "edge_type": "prerequisite"},
+                    )
+                )
 
     return {
         "nodes": nodes,
         "edges": edges,
         "visible_codes": sorted(filtered_codes),
-        "base_codes_present": sorted(present_base_codes),
-        "base_codes_missing": sorted(base_codes.difference(present_base_codes)),
+        "base_codes_present": sorted(selection["base_codes_present"]),
+        "base_codes_missing": sorted(selection["base_codes_missing"]),
     }
 
 
@@ -449,6 +459,373 @@ def suggest_pathway(criteria, limit=18):
                 ordered.append(code)
 
     return ", ".join(ordered[:limit])
+
+
+def collect_program_codes(
+    criteria,
+    course_index,
+    selected_sets=None,
+    include_prereq_support=True,
+    year_range=(1, 4),
+):
+    """Collect course codes for a selected program with optional prereq expansion.
+
+    Returns a payload used by roadmap, analytics, and planning functions.
+    """
+
+    selected_sets = selected_sets or ["set_a", "set_b", "set_c", "set_d", "set_e"]
+    code_to_sets = collect_code_to_sets(criteria)
+    base_codes = collect_requirement_codes(criteria, selected_sets)
+    present_base_codes = {code for code in base_codes if code in course_index}
+
+    selected_codes = set(present_base_codes)
+    if include_prereq_support:
+        stack = list(present_base_codes)
+        while stack:
+            code = stack.pop()
+            course = course_index.get(code)
+            if not course:
+                continue
+
+            for prereq in course.get("prerequisites", []):
+                if prereq in course_index and prereq not in selected_codes:
+                    selected_codes.add(prereq)
+                    stack.append(prereq)
+
+    y_min, y_max = year_range
+    visible_codes = set()
+    for code in selected_codes:
+        course = course_index.get(code)
+        if not course:
+            continue
+
+        year = course_year(course)
+        if year is None:
+            continue
+        if y_min <= year <= y_max:
+            visible_codes.add(code)
+
+    return {
+        "code_to_sets": code_to_sets,
+        "visible_codes": visible_codes,
+        "base_codes_present": present_base_codes,
+        "base_codes_missing": base_codes.difference(present_base_codes),
+    }
+
+
+def build_dependency_digraph(course_index, selected_codes):
+    """Build directed prerequisite graph: prereq -> dependent course."""
+
+    graph = nx.DiGraph()
+
+    for code in sorted(selected_codes):
+        course = course_index.get(code)
+        if not course:
+            continue
+
+        graph.add_node(
+            code,
+            course_name=course.get("course_name"),
+            subject=course.get("subject"),
+            credits=course.get("credits"),
+            semesters=course.get("semesters", []),
+            kind=course.get("kind"),
+            first_sem=course_first_sem(course),
+            year=course_year(course),
+        )
+
+    for code in sorted(selected_codes):
+        course = course_index.get(code)
+        if not course:
+            continue
+
+        for prereq in course.get("prerequisites", []):
+            if prereq in selected_codes:
+                graph.add_edge(prereq, code)
+
+    return graph
+
+
+def detect_cycles(graph):
+    """Return list of directed cycles, each as ordered course-code list."""
+
+    return [cycle for cycle in nx.simple_cycles(graph)]
+
+
+def topological_order(graph):
+    """Return topological ordering if DAG, else empty list."""
+
+    if not nx.is_directed_acyclic_graph(graph):
+        return []
+    return list(nx.topological_sort(graph))
+
+
+def unreachable_from_start(graph, course_index, start_semester=1):
+    """Find nodes unreachable from feasible start nodes at chosen semester."""
+
+    starters = []
+    for code in graph.nodes:
+        course = course_index.get(code, {})
+        semesters = course.get("semesters") or []
+        if not semesters:
+            continue
+        # Root nodes are feasible if at least one offering exists at/after start.
+        if graph.in_degree(code) == 0 and max(semesters) >= start_semester:
+            starters.append(code)
+
+    reachable = set(starters)
+    for source in starters:
+        reachable.update(nx.descendants(graph, source))
+
+    return {
+        "starters": sorted(starters),
+        "reachable": sorted(reachable),
+        "unreachable": sorted(set(graph.nodes).difference(reachable)),
+    }
+
+
+def representative_paths(
+    graph,
+    target_codes,
+    max_paths_per_target=3,
+    max_depth=12,
+):
+    """Collect representative source->target prerequisite paths.
+
+    Exhaustive path enumeration can be expensive; this returns up to
+    `max_paths_per_target` per target.
+    """
+
+    roots = [node for node, indeg in graph.in_degree() if indeg == 0]
+    out = {}
+
+    for target in target_codes:
+        if target not in graph:
+            continue
+
+        found = []
+        for root in roots:
+            if len(found) >= max_paths_per_target:
+                break
+
+            if root == target:
+                found.append([target])
+                continue
+
+            if not nx.has_path(graph, root, target):
+                continue
+
+            for path in nx.all_simple_paths(graph, root, target, cutoff=max_depth):
+                found.append(path)
+                if len(found) >= max_paths_per_target:
+                    break
+
+        if not found:
+            found = [[target]]
+
+        out[target] = found
+
+    return out
+
+
+def bottleneck_table(graph, top_n=12):
+    """Compute bottleneck indicators for courses in directed graph."""
+
+    if graph.number_of_nodes() == 0:
+        return []
+
+    betweenness = nx.betweenness_centrality(graph) if graph.number_of_nodes() > 1 else {}
+    rows = []
+
+    for code in graph.nodes:
+        rows.append(
+            {
+                "course_code": code,
+                "in_degree": graph.in_degree(code),
+                "direct_dependents": graph.out_degree(code),
+                "all_downstream": len(nx.descendants(graph, code)),
+                "betweenness": round(float(betweenness.get(code, 0.0)), 4),
+            }
+        )
+
+    rows.sort(
+        key=lambda row: (
+            row["all_downstream"],
+            row["direct_dependents"],
+            row["betweenness"],
+        ),
+        reverse=True,
+    )
+    return rows[:top_n]
+
+
+def plan_courses_by_term(
+    graph,
+    course_index,
+    start_semester=1,
+    max_courses_per_term=4,
+    max_terms=8,
+    priority_codes=None,
+    already_completed=None,
+    max_credits_per_term=None,
+):
+    """Build a constrained term-by-term plan for selected graph nodes."""
+
+    if not nx.is_directed_acyclic_graph(graph):
+        return {
+            "is_complete": False,
+            "reason": "Graph has prerequisite cycles",
+            "plan": {},
+            "scheduled": [],
+            "blocked": sorted(graph.nodes),
+            "blocked_details": [],
+        }
+
+    priority_codes = set(priority_codes or [])
+    completed = set(already_completed or []).intersection(set(graph.nodes))
+    remaining = set(graph.nodes).difference(completed)
+    plan = {}
+
+    start = int(start_semester)
+    end = start + int(max_terms) - 1
+
+    for semester in range(start, end + 1):
+        available = []
+        for code in sorted(remaining):
+            course = course_index.get(code, {})
+            offered = semester in (course.get("semesters") or [])
+            if not offered:
+                continue
+
+            prereqs = set(graph.predecessors(code))
+            if prereqs.issubset(completed):
+                available.append(code)
+
+        available.sort(
+            key=lambda code: (
+                0 if code in priority_codes else 1,
+                -graph.out_degree(code),
+                code,
+            )
+        )
+
+        chosen = []
+        credit_cap = int(max_credits_per_term) if max_credits_per_term is not None else None
+        chosen_credits = 0
+
+        for code in available:
+            if len(chosen) >= int(max_courses_per_term):
+                break
+
+            course_credits = int(course_index.get(code, {}).get("credits", 0) or 0)
+            if credit_cap is not None and chosen_credits + course_credits > credit_cap:
+                continue
+
+            chosen.append(code)
+            chosen_credits += course_credits
+
+        if chosen:
+            plan[semester] = chosen
+            completed.update(chosen)
+            remaining.difference_update(chosen)
+
+        if not remaining:
+            break
+
+    blocked = sorted(remaining)
+    blocked_details = []
+    for code in blocked:
+        prereqs = sorted(set(graph.predecessors(code)).difference(completed))
+        course = course_index.get(code, {})
+        offered_terms = course.get("semesters") or []
+        blocked_details.append(
+            {
+                "course_code": code,
+                "unsatisfied_prereqs": prereqs,
+                "offered_terms": offered_terms,
+            }
+        )
+
+    return {
+        "is_complete": len(blocked) == 0,
+        "reason": "complete" if len(blocked) == 0 else "constraints_or_prereqs_blocked",
+        "plan": plan,
+        "scheduled": sorted(completed),
+        "blocked": blocked,
+        "blocked_details": blocked_details,
+    }
+
+
+def build_program_dependency_analysis(
+    criteria,
+    course_index,
+    selected_sets=None,
+    include_prereq_support=True,
+    year_range=(1, 4),
+    start_semester=1,
+    max_courses_per_term=4,
+    max_terms=8,
+    already_completed=None,
+    max_credits_per_term=None,
+):
+    """Full analysis payload for dependency graph + planning dashboard."""
+
+    selection = collect_program_codes(
+        criteria=criteria,
+        course_index=course_index,
+        selected_sets=selected_sets,
+        include_prereq_support=include_prereq_support,
+        year_range=year_range,
+    )
+
+    selected_codes = selection["visible_codes"]
+    graph = build_dependency_digraph(course_index, selected_codes)
+
+    cycles = detect_cycles(graph)
+    topo = topological_order(graph)
+
+    compulsory = set(requirement_codes_by_set(criteria).get("set_d", []))
+    present_compulsory = sorted([code for code in compulsory if code in selected_codes])
+
+    reachability = unreachable_from_start(
+        graph=graph,
+        course_index=course_index,
+        start_semester=start_semester,
+    )
+
+    plan = plan_courses_by_term(
+        graph=graph,
+        course_index=course_index,
+        start_semester=start_semester,
+        max_courses_per_term=max_courses_per_term,
+        max_terms=max_terms,
+        priority_codes=present_compulsory,
+        already_completed=already_completed,
+        max_credits_per_term=max_credits_per_term,
+    )
+
+    rep_paths = representative_paths(
+        graph=graph,
+        target_codes=present_compulsory[:8],
+        max_paths_per_target=3,
+        max_depth=12,
+    )
+
+    return {
+        "graph": graph,
+        "cycles": cycles,
+        "topological_order": topo,
+        "bottlenecks": bottleneck_table(graph),
+        "reachability": reachability,
+        "representative_paths": rep_paths,
+        "plan": plan,
+        "selected_codes": sorted(selected_codes),
+        "base_codes_present": sorted(selection["base_codes_present"]),
+        "base_codes_missing": sorted(selection["base_codes_missing"]),
+        "node_count": graph.number_of_nodes(),
+        "edge_count": graph.number_of_edges(),
+        "is_dag": len(cycles) == 0,
+    }
 
 
 if __name__ == "__main__":
