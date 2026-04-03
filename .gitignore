@@ -6,6 +6,7 @@ __pycache__/
 # virtual environment
 new_env/
 venv/
+.venv
 .env/
 
 # Mac files
@@ -24,3 +25,4 @@ data/processed/*.json
 #Data
 data/IISER-P/Course Contents_aug/
 data/IISER-P/Course Contents_aug
+
