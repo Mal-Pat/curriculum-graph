@@ -289,6 +289,16 @@ def _inject_design():
             font-weight: 600;
         }
 
+        .footer-note {
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.65rem 0.8rem;
+            color: #334155;
+            font-size: 0.92rem;
+        }
+
         @keyframes fade-up {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
@@ -316,6 +326,20 @@ def _hero():
         <div class="hero">
           <h1>Curriculum Graph Studio</h1>
           <p>Plan smarter across Semester 1-8: track credits to 184, compare major-minor pathways, and de-risk prerequisites early.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _footer_notes():
+    st.markdown(
+        """
+        <div class="footer-note">
+            Merge helper: run the report pipeline from repo root with
+            <code>/Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_dashboard_report.py --out-dir docs/reports/latest</code>
+            and run syntax checks with
+            <code>/Users/ayush/miniconda3/envs/graph_env/bin/python -m py_compile src/app.py src/graph.py src/validate_major_minor.py src/generate_dashboard_report.py</code>.
         </div>
         """,
         unsafe_allow_html=True,
@@ -2590,6 +2614,8 @@ def main():
 
         with tab_lookup["Data Quality"]:
             _render_quality(courses, programs)
+
+    _footer_notes()
 
 
 if __name__ == "__main__":

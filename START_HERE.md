@@ -1,41 +1,41 @@
-## Start Here (Clean Main Baseline)
+## Start Here (Current Dashboard)
 
-Your repository is now reset to `origin/main` and ready to use.
+This project now runs through the Streamlit app entrypoint in `src/app.py`.
 
-### 1) Backup of your previous work
-
-Your pre-reset code snapshot is saved here:
-
-`/Users/ayush/Desktop/curriculum-graph_old_code_20260403_194941`
-
-This backup is outside git and safe to inspect anytime.
-
-### 2) Generate quick plots
-
-Run:
+### 1) Install dependencies
 
 ```bash
-/Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_course_plots.py \
+pip install -r requirements.txt
+```
+
+### 2) Run dashboard
+
+```bash
+streamlit run src/app.py
+```
+
+### 3) Generate detailed report + plots
+
+```bash
+/Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_dashboard_report.py \
   --courses data/IISER-P/all_courses.json \
-  --out-dir outputs/plots
+  --programs data/IISER-P/major_minor_requirements.json \
+  --constraints data/IISER-P/college_constraints.json \
+  --out-dir docs/reports/latest
 ```
 
-This creates:
+Generated artifacts:
 
-- `outputs/plots/courses_per_semester.png`
-- `outputs/plots/courses_per_year.png`
-- `outputs/plots/subject_distribution.png`
-- `outputs/plots/kind_distribution.png`
-- `outputs/plots/prereq_count_distribution.png`
+- `docs/reports/latest/dashboard_report.md`
+- `docs/reports/latest/report_summary.json`
+- `docs/reports/latest/plots/*.png`
 
-### 3) Run the app from main
+### 4) Merge-ready sanity checks
 
 ```bash
-streamlit run src/graph.py
+/Users/ayush/miniconda3/envs/graph_env/bin/python -m py_compile src/app.py src/graph.py src/validate_major_minor.py src/generate_dashboard_report.py
 ```
 
-### 4) Optional: compare with your old work
-
-Open this folder to copy ideas/code selectively:
-
-`/Users/ayush/Desktop/curriculum-graph_old_code_20260403_194941`
+```bash
+PYTHONPATH=src /Users/ayush/miniconda3/envs/graph_env/bin/streamlit run src/app.py --server.headless true --server.port 8522
+```

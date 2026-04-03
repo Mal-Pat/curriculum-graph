@@ -1,0 +1,35 @@
+{
+  "generated_at": "2026-04-03 23:34:47",
+  "courses": 264,
+  "program_entries": 16,
+  "stats": {
+    "courses": 264,
+    "programs": 16,
+    "subjects": 9,
+    "prereq_edges": 94,
+    "avg_credits": 3.42,
+    "kind_breakdown": {
+      "lab": 18,
+      "normal": 216,
+      "semester_project": 30
+    }
+  },
+  "quality_counts": {
+    "duplicate_course_codes": 0,
+    "missing_prereq_links": 0,
+    "duplicate_program_entries": 0,
+    "programs_with_unknown_codes": 0,
+    "missing_semesters": 0,
+    "self_prereq_courses": 0
+  },
+  "plots": [
+    "courses_by_first_semester.png",
+    "credits_by_first_semester.png",
+    "courses_by_year.png",
+    "subject_distribution_top.png",
+    "kind_distribution.png",
+    "prerequisite_count_distribution.png",
+    "subject_semester_heatmap.png"
+  ],
+  "report_markdown": "docs/reports/latest/dashboard_report.md"
+}
