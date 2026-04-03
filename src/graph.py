@@ -635,6 +635,33 @@ def collect_program_codes(
     }
 
 
+def build_edges_from_courses(course_codes, course_index):
+    """Return prerequisite edges among the provided course codes.
+
+    This lightweight helper is used by UI summaries that need edge lists
+    without creating full graph widgets.
+    """
+
+    selected_codes = {code for code in (course_codes or []) if code in course_index}
+    edges = []
+
+    for code in sorted(selected_codes):
+        course = course_index.get(code, {})
+        for prereq in course.get("prerequisites", []):
+            if prereq in selected_codes:
+                edges.append(
+                    {
+                        "id": f"{prereq}-{code}",
+                        "start": prereq,
+                        "end": code,
+                        "directed": True,
+                        "edge_type": "prerequisite",
+                    }
+                )
+
+    return edges
+
+
 def build_dependency_digraph(course_index, selected_codes):
     """Build directed prerequisite graph: prereq -> dependent course."""
 

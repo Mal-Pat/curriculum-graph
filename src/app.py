@@ -58,6 +58,20 @@ def _force_rerun():
         st.experimental_rerun()
 
 
+def _show_df(data, **kwargs):
+    """Render dataframes with forward-compatible width handling.
+
+    Streamlit deprecated use_container_width in favor of width. This helper
+    keeps old call sites readable while normalizing behavior in one place.
+    """
+
+    if "use_container_width" in kwargs and "width" not in kwargs:
+        use_container = kwargs.pop("use_container_width")
+        kwargs["width"] = "stretch" if use_container else "content"
+    kwargs.setdefault("width", "stretch")
+    st.dataframe(data, **kwargs)
+
+
 def _inject_design():
     st.markdown(
         """
@@ -402,11 +416,60 @@ def _semester_pair_rows(courses, pair):
 
 SET_ORDER = ["set_a", "set_b", "set_c", "set_d", "set_e"]
 
+ALLOWED_MAJOR_KEYS = {
+    "physics",
+    "chemistry",
+    "biology",
+    "earthandclimatescience",
+    "ecs",
+}
+
+ALLOWED_MINOR_KEYS = {
+    "physics",
+    "chemistry",
+    "biology",
+    "earthandclimatescience",
+    "ecs",
+    "datascience",
+    "ds",
+}
+
 GRAPH_VISUAL_PROFILES = {
     "Readable": {"node_scale": 1.18, "group_scale": 1.35, "edge_scale": 1.45},
     "Balanced": {"node_scale": 1.0, "group_scale": 1.2, "edge_scale": 1.0},
     "Compact": {"node_scale": 0.88, "group_scale": 1.05, "edge_scale": 0.82},
 }
+
+
+def _subject_key(subject):
+    """Normalize subject labels to a comparison-friendly key."""
+
+    return "".join(ch for ch in str(subject).lower() if ch.isalnum())
+
+
+def _is_allowed_program(subject, program_type):
+    """Return whether a program entry is allowed by IISER policy filters."""
+
+    key = _subject_key(subject)
+    p_type = (program_type or "").strip().lower()
+    if p_type == "major":
+        return key in ALLOWED_MAJOR_KEYS
+    if p_type == "minor":
+        return key in ALLOWED_MINOR_KEYS
+    return False
+
+
+def _filter_program_index_for_policy(program_index):
+    """Filter program index to only allowed major/minor offerings."""
+
+    filtered = {}
+    removed = []
+    for (subject, p_type), criteria in program_index.items():
+        if _is_allowed_program(subject, p_type):
+            filtered[(subject, p_type)] = criteria
+        else:
+            removed.append((subject, p_type))
+    return filtered, sorted(removed)
 
 
 def _foundation_compulsory_codes(constraints, upto_semester=3):
@@ -672,7 +735,66 @@ def _render_year_semester_distribution(title, course_codes, course_index):
     c2.metric("Semesters covered", covered_semesters)
     c3.metric("Courses in view", total_courses)
     c4.metric("Credits in view", total_credits)
-    st.dataframe(rows, use_container_width=True)
+    _show_df(rows, use_container_width=True)
+
+
+def _semester_transition_rows(edges, course_index):
+    """Build transition counts from prerequisite edges grouped by semester."""
+
+    def _edge_endpoints(edge):
+        # Accept both dict edges and yFiles Edge objects.
+        if isinstance(edge, dict):
+            return edge.get("start"), edge.get("end")
+
+        start = getattr(edge, "start", None)
+        end = getattr(edge, "end", None)
+
+        if start is None and hasattr(edge, "get"):
+            start = edge.get("start")
+        if end is None and hasattr(edge, "get"):
+            end = edge.get("end")
+
+        return start, end
+
+    transition_counts = {}
+
+    for edge in edges:
+        start, end = _edge_endpoints(edge)
+        if not start or not end:
+            continue
+
+        start_sem = cg.course_first_sem(course_index.get(start, {}))
+        end_sem = cg.course_first_sem(course_index.get(end, {}))
+        if start_sem is None or end_sem is None:
+            continue
+
+        key = (start_sem, end_sem)
+        transition_counts[key] = transition_counts.get(key, 0) + 1
+
+    rows = []
+    for (from_sem, to_sem), count in sorted(transition_counts.items()):
+        rows.append(
+            {
+                "From semester": from_sem,
+                "To semester": to_sem,
+                "Transition": f"S{from_sem} -> S{to_sem}",
+                "Prereq links": count,
+            }
+        )
+
+    return rows
+
+
+def _render_semester_transition_summary(edges, course_index):
+    """Show semester-to-semester transition table for the current graph."""
+
+    rows = _semester_transition_rows(edges, course_index)
+    if not rows:
+        st.info("No semester transition summary available for current graph.")
+        return
+
+    st.markdown("#### Semester-to-Semester Prerequisite Transitions")
+    _show_df(rows, use_container_width=True)
 
 
 def _graph_clarity_controls(prefix, default_layout="Hierarchic"):
@@ -808,7 +930,7 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         sem3_group_options = list(max_group.get("available_courses") or [])
 
     with st.expander("Common Compulsory Structure (Sem 1-3)", expanded=False):
-        st.dataframe(_course_rows(foundation_codes, course_index), use_container_width=True)
+        _show_df(_course_rows(foundation_codes, course_index), use_container_width=True)
         if sem3_group_options:
             st.caption(
                 f"Semester 3 common elective options (pick up to {sem3_group_cap}): "
@@ -851,6 +973,16 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         include_prereqs = col1.checkbox("Include prerequisite chain", value=True)
         hide_isolated = col2.checkbox("Hide isolated nodes", value=False)
         use_program_lens = col3.checkbox("Program lens (Major/Minor)", value=False)
+
+        graph_structure = st.radio(
+            "Transition emphasis",
+            options=[
+                "Year boxes with semester inside",
+                "Semester-to-semester flow",
+            ],
+            horizontal=True,
+            key="catalog_graph_structure",
+        )
 
         clarity_cfg = _graph_clarity_controls("catalog", default_layout="Tree")
 
@@ -930,7 +1062,13 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         st.warning("No courses match current filters")
         return
 
-    nodes, edges = cg.make_year_semester_graph_elements(filtered)
+    if graph_structure == "Semester-to-semester flow":
+        nodes, edges = cg.make_semester_graph_elements(filtered)
+        selected_group_prefixes = ["group_sem_"]
+    else:
+        nodes, edges = cg.make_year_semester_graph_elements(filtered)
+        selected_group_prefixes = ["group_catalog_year_"]
+
     display_edges = _filtered_edges_for_mode(edges, course_index, clarity_cfg["edge_mode"])
     nodes, display_edges = _apply_graph_visual_profile(
         nodes,
@@ -940,9 +1078,14 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         label_mode=clarity_cfg["label_mode"],
     )
 
-    visible_courses = len([n for n in nodes if not n.id.startswith("group_catalog_year_")])
-    visible_sem_groups = len([n for n in nodes if "_sem_" in n.id and n.id.startswith("group_catalog_year_")])
-    visible_year_groups = len([n for n in nodes if n.id.startswith("group_catalog_year_") and "_sem_" not in n.id])
+    visible_courses = len([n for n in nodes if not n.id.startswith("group_")])
+    visible_sem_groups = len(
+        [
+            n for n in nodes
+            if n.id.startswith("group_sem_") or (n.id.startswith("group_catalog_year_") and "_sem_" in n.id)
+        ]
+    )
+    visible_year_groups = len({cg.course_year(c) for c in filtered if cg.course_year(c) is not None})
     visible_edges = len(display_edges)
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Courses visible", visible_courses)
@@ -961,13 +1104,13 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         with left:
             st.markdown("**Offered in both Semester 5 and 7**")
             if pair_57_rows:
-                st.dataframe(pair_57_rows, use_container_width=True)
+                _show_df(pair_57_rows, use_container_width=True)
             else:
                 st.info("No matching courses in current filtered view.")
         with right:
             st.markdown("**Offered in both Semester 6 and 8**")
             if pair_68_rows:
-                st.dataframe(pair_68_rows, use_container_width=True)
+                _show_df(pair_68_rows, use_container_width=True)
             else:
                 st.info("No matching courses in current filtered view.")
 
@@ -977,6 +1120,7 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         [c.get("course_code") for c in filtered if c.get("course_code")],
         course_index,
     )
+    _render_semester_transition_summary(display_edges, course_index)
 
     widget = StreamlitGraphWidget(
         nodes=nodes,
@@ -1008,10 +1152,10 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
 
     selected_codes = _selected_graph_course_codes(
         selected_nodes,
-        group_prefixes=["group_catalog_year_"],
+        group_prefixes=selected_group_prefixes,
     )
     if selected_codes:
-        st.dataframe(
+        _show_df(
             _selected_course_detail_rows(selected_codes, course_index),
             use_container_width=True,
         )
@@ -1022,7 +1166,7 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
         missing_from_view = sorted([code for code in focus_codes if code not in {c.get("course_code") for c in filtered}])
         with st.expander("Lens courses not visible in current filters"):
             if missing_from_view:
-                st.dataframe(_course_rows(missing_from_view, course_index), use_container_width=True)
+                _show_df(_course_rows(missing_from_view, course_index), use_container_width=True)
             else:
                 st.success("All program-lens courses are visible in current map.")
 
@@ -1098,7 +1242,7 @@ def _render_program_roadmap(program_index, course_index):
 
     if roadmap["base_codes_missing"]:
         st.warning("Some rule-list courses are missing from catalog data")
-        st.dataframe(
+        _show_df(
             {"missing_course_codes": roadmap["base_codes_missing"]},
             use_container_width=True,
         )
@@ -1112,6 +1256,7 @@ def _render_program_roadmap(program_index, course_index):
         roadmap["visible_codes"],
         course_index,
     )
+    _render_semester_transition_summary(display_edges, course_index)
 
     widget = StreamlitGraphWidget(
         nodes=nodes,
@@ -1144,7 +1289,7 @@ def _render_program_roadmap(program_index, course_index):
     selected_codes = _selected_graph_course_codes(selected_nodes, group_prefixes=["group_year_"])
     if selected_codes:
         label_lookup = {code: {label} for code, label in _code_requirement_label_lookup(criteria).items()}
-        st.dataframe(
+        _show_df(
             _selected_course_detail_rows(
                 selected_codes,
                 course_index,
@@ -1239,7 +1384,7 @@ def _render_student_planner(program_index, course_index, constraints):
 
     if foundation_seed:
         with st.expander("Auto-included common Sem 1-3 compulsory courses", expanded=False):
-            st.dataframe(_course_rows(foundation_seed, course_index), use_container_width=True)
+            _show_df(_course_rows(foundation_seed, course_index), use_container_width=True)
     state_key = "planner_completed_courses"
     if state_key not in st.session_state:
         st.session_state[state_key] = default_seed
@@ -1307,6 +1452,8 @@ def _render_student_planner(program_index, course_index, constraints):
         known_courses,
         course_index,
     )
+    input_edges = cg.build_edges_from_courses(known_courses, course_index)
+    _render_semester_transition_summary(input_edges, course_index)
     if unknown_courses:
         st.warning("Unknown course codes in planner input: " + ", ".join(unknown_courses))
 
@@ -1339,7 +1486,7 @@ def _render_student_planner(program_index, course_index, constraints):
     with s1:
         st.markdown(f"**{major_subject} Major**")
         mb = major_result.get("set_breakdown", {}) or {}
-        st.dataframe(
+        _show_df(
             [
                 {
                     "Category": "Compulsory",
@@ -1367,7 +1514,7 @@ def _render_student_planner(program_index, course_index, constraints):
     with s2:
         st.markdown(f"**{minor_subject} Minor**")
         nb = minor_result.get("set_breakdown", {}) or {}
-        st.dataframe(
+        _show_df(
             [
                 {
                     "Category": "Compulsory",
@@ -1409,7 +1556,7 @@ def _render_student_planner(program_index, course_index, constraints):
     st.markdown("#### Requirement Courses Not Yet Selected")
     remaining_rows = major_remaining_rows + minor_remaining_rows
     if remaining_rows:
-        st.dataframe(remaining_rows, use_container_width=True)
+        _show_df(remaining_rows, use_container_width=True)
     else:
         st.success("All listed major/minor requirement courses are in your current planner input.")
 
@@ -1454,13 +1601,13 @@ def _render_student_planner(program_index, course_index, constraints):
                     "projected_total_credits": cumulative,
                 }
             )
-        st.dataframe(rows, use_container_width=True)
+        _show_df(rows, use_container_width=True)
     else:
         st.info("No schedule generated. Try increasing max courses/credits per term.")
 
     if plan_payload.get("blocked_details"):
         with st.expander("Blocked courses in planner"):
-            st.dataframe(plan_payload["blocked_details"], use_container_width=True)
+            _show_df(plan_payload["blocked_details"], use_container_width=True)
 
     st.markdown("#### Combined Major-Minor Dependency Graph")
     st.caption("Color legend: MAJOR=blue, MINOR=teal, BOTH=orange, SUPPORT PREREQ=gray")
@@ -1481,6 +1628,7 @@ def _render_student_planner(program_index, course_index, constraints):
         visual_mode=planner_clarity_cfg["visual_mode"],
         label_mode=planner_clarity_cfg["label_mode"],
     )
+    _render_semester_transition_summary(display_edges, course_index)
 
     planner_widget = StreamlitGraphWidget(
         nodes=combined_nodes,
@@ -1519,7 +1667,7 @@ def _render_student_planner(program_index, course_index, constraints):
             for code, sets in mapping.items():
                 merged_set_lookup.setdefault(code, set()).update(sets)
 
-        st.dataframe(
+        _show_df(
             _selected_course_detail_rows(
                 selected_codes,
                 course_index,
@@ -1589,7 +1737,7 @@ def _render_combination_simulator(program_index, course_index, constraints):
 
     base_completed = list(dict.fromkeys(foundation_codes + selected_sem3_electives))
     with st.expander("Base completed courses used for simulation", expanded=False):
-        st.dataframe(_course_rows(base_completed, course_index), use_container_width=True)
+        _show_df(_course_rows(base_completed, course_index), use_container_width=True)
 
     total_semesters = int((constraints or {}).get("num_semesters", 8) or 8)
     max_terms = max(1, total_semesters - int(start_semester) + 1)
@@ -1688,7 +1836,7 @@ def _render_combination_simulator(program_index, course_index, constraints):
         return
 
     combo_rows.sort(key=lambda row: (row["Plan complete"] != "Yes", row["Blocked"], row["Combination"]))
-    st.dataframe(combo_rows, use_container_width=True)
+    _show_df(combo_rows, use_container_width=True)
 
     selected_combo = st.selectbox("Inspect a combination", [row["Combination"] for row in combo_rows], key="sim_combo_select")
     combo_payload = combo_index[selected_combo]
@@ -1700,10 +1848,10 @@ def _render_combination_simulator(program_index, course_index, constraints):
     d3.metric("Blocked courses", len(combo_payload["plan"].get("blocked", [])))
 
     with st.expander("Compulsory courses in this combination", expanded=False):
-        st.dataframe(_course_rows(combo_payload["compulsory_codes"], course_index), use_container_width=True)
+        _show_df(_course_rows(combo_payload["compulsory_codes"], course_index), use_container_width=True)
 
     with st.expander("Elective options in this combination", expanded=False):
-        st.dataframe(_course_rows(combo_payload["elective_codes"], course_index), use_container_width=True)
+        _show_df(_course_rows(combo_payload["elective_codes"], course_index), use_container_width=True)
 
     st.markdown("#### Suggested Plan for Selected Combination")
     if combo_payload["plan"].get("plan"):
@@ -1719,7 +1867,7 @@ def _render_combination_simulator(program_index, course_index, constraints):
                     "credits": sum(int(course_index.get(code, {}).get("credits", 0) or 0) for code in codes),
                 }
             )
-        st.dataframe(rows, use_container_width=True)
+        _show_df(rows, use_container_width=True)
     else:
         st.info("No feasible plan generated for this combination with current simulation constraints.")
 
@@ -1742,6 +1890,7 @@ def _render_combination_simulator(program_index, course_index, constraints):
         visual_mode=sim_clarity_cfg["visual_mode"],
         label_mode=sim_clarity_cfg["label_mode"],
     )
+    _render_semester_transition_summary(display_edges, course_index)
 
     sim_widget = StreamlitGraphWidget(
         nodes=sim_nodes,
@@ -1767,7 +1916,7 @@ def _render_combination_simulator(program_index, course_index, constraints):
         label_lookup = {}
         label_lookup.update({code: "Compulsory" for code in combo_payload["compulsory_codes"]})
         label_lookup.update({code: "Elective option" for code in combo_payload["elective_codes"]})
-        st.dataframe(
+        _show_df(
             _selected_course_detail_rows(
                 picked_codes,
                 course_index,
@@ -1853,12 +2002,12 @@ def _render_pathway_algorithms(program_index, course_index):
     if analysis["cycles"]:
         st.error("Cycle(s) detected in prerequisite graph; topological sorting and strict planning may fail.")
         cycle_rows = [{"cycle": " -> ".join(c + [c[0]])} for c in analysis["cycles"]]
-        st.dataframe(cycle_rows, use_container_width=True)
+        _show_df(cycle_rows, use_container_width=True)
 
     st.markdown("#### Topological Order")
     topo = analysis["topological_order"]
     if topo:
-        st.dataframe(
+        _show_df(
             [{"position": idx + 1, "course_code": code} for idx, code in enumerate(topo)],
             use_container_width=True,
         )
@@ -1879,17 +2028,17 @@ def _render_pathway_algorithms(program_index, course_index):
                     "credits": credits,
                 }
             )
-        st.dataframe(plan_rows, use_container_width=True)
+        _show_df(plan_rows, use_container_width=True)
     else:
         st.info("No courses could be scheduled with current constraints.")
 
     if plan_payload.get("blocked_details"):
         with st.expander("Blocked courses details"):
-            st.dataframe(plan_payload["blocked_details"], use_container_width=True)
+            _show_df(plan_payload["blocked_details"], use_container_width=True)
 
     if unreachable:
         with st.expander("Unreachable nodes details"):
-            st.dataframe({"course_code": unreachable}, use_container_width=True)
+            _show_df({"course_code": unreachable}, use_container_width=True)
 
     st.markdown("#### Representative Paths to Completion Courses")
     rep_paths = analysis["representative_paths"]
@@ -1905,14 +2054,14 @@ def _render_pathway_algorithms(program_index, course_index):
                         "length": len(path),
                     }
                 )
-        st.dataframe(rows, use_container_width=True)
+        _show_df(rows, use_container_width=True)
     else:
         st.info("No representative paths available for current selection.")
 
     st.markdown("#### Bottleneck Courses")
     bottlenecks = analysis["bottlenecks"]
     if bottlenecks:
-        st.dataframe(bottlenecks, use_container_width=True)
+        _show_df(bottlenecks, use_container_width=True)
     else:
         st.info("No bottleneck analytics available for current selection.")
 
@@ -1989,7 +2138,7 @@ def _render_rules(program_index, course_index):
     ]:
         st.markdown(f"#### {heading}")
         if codes:
-            st.dataframe(_course_rows(codes, course_index), use_container_width=True)
+            _show_df(_course_rows(codes, course_index), use_container_width=True)
         else:
             st.info("No courses in this category for current program.")
 
@@ -2043,7 +2192,7 @@ def _render_validation(program_index, course_index):
     m1.metric("Parsed courses", len(pathway))
     m2.metric("Unknown codes", len(unknown_codes))
     if rows:
-        st.dataframe(rows, use_container_width=True)
+        _show_df(rows, use_container_width=True)
 
     if unknown_codes:
         st.warning("Unknown codes in pathway: " + ", ".join(unknown_codes))
@@ -2100,7 +2249,7 @@ def _render_validation(program_index, course_index):
                 "Rule check": "excluded from totals",
             },
         ]
-        st.dataframe(cat_rows, use_container_width=True)
+        _show_df(cat_rows, use_container_width=True)
 
         not_selected_rows = _not_selected_requirement_rows(
             criteria,
@@ -2110,7 +2259,7 @@ def _render_validation(program_index, course_index):
         )
         if not_selected_rows:
             with st.expander("Requirement courses not selected"):
-                st.dataframe(not_selected_rows, use_container_width=True)
+                _show_df(not_selected_rows, use_container_width=True)
 
         if result.get("errors"):
             st.error("Requirement violations found")
@@ -2210,13 +2359,22 @@ def main():
         constraints = {"min_degree_credits": 184, "num_semesters": 8}
 
     course_index = cg.index_courses(courses)
-    program_index, duplicate_keys = cg.build_program_index(programs)
+    program_index_raw, duplicate_keys = cg.build_program_index(programs)
+    program_index, removed_program_keys = _filter_program_index_for_policy(program_index_raw)
 
     _render_overview(courses, programs)
 
     if duplicate_keys:
         duplicate_text = ", ".join([f"{s} {t}" for s, t in duplicate_keys])
         st.warning("Duplicate program entries found; first entry used for each key: " + duplicate_text)
+
+    if removed_program_keys:
+        removed_text = ", ".join([f"{subject} {p_type}" for subject, p_type in removed_program_keys])
+        st.info(
+            "Policy filter active. Showing only allowed IISER options: "
+            "Majors in Physics/Chemistry/Biology/Earth and Climate Science and minors in those plus Data Science. "
+            "Filtered out: " + removed_text
+        )
 
     tab_catalog, tab_roadmap, tab_planner, tab_simulator, tab_algorithms, tab_rules, tab_validate, tab_quality = st.tabs(
         [
