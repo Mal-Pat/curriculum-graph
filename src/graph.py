@@ -13,18 +13,18 @@ DEFAULT_MAJOR_MINOR_PATH = Path("IISER-P/major_minor_requirements.json")
 DEFAULT_CONSTRAINTS_PATH = Path("IISER-P/college_constraints.json")
 
 COURSE_KIND_COLOR_MAP = {
-    "normal": "#1f7a8c",
-    "lab": "#2a9d8f",
-    "semester_project": "#e9c46a",
+    "normal": "#2563eb",  # lecture-heavy theory courses
+    "lab": "#0f766e",  # lab and practical courses
+    "semester_project": "#d97706",  # project-centric courses
 }
 
 SET_COLOR_MAP = {
-    "set_d": "#d1495b",  # compulsory
-    "set_a": "#0077b6",  # minimum required from pool
-    "set_b": "#f4a261",  # capped pool
-    "set_c": "#2a9d8f",  # supplementary
-    "set_e": "#8d99ae",  # excluded / not counted
-    "support": "#6c757d",  # added prerequisite support nodes
+    "set_d": "#be123c",  # compulsory
+    "set_a": "#1d4ed8",  # minimum required from pool
+    "set_b": "#ea580c",  # capped pool
+    "set_c": "#0f766e",  # supplementary
+    "set_e": "#64748b",  # excluded / not counted
+    "support": "#475569",  # added prerequisite support nodes
 }
 
 

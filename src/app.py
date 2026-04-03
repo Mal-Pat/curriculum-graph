@@ -2498,6 +2498,22 @@ def main():
     _inject_design()
     _hero()
 
+    t1, t2 = st.columns([2, 3])
+    with t1:
+        st.toggle(
+            "Student mode (simplified dashboard)",
+            value=True,
+            key="ui_student_mode",
+            help="Keeps the interface cleaner with student-friendly graph defaults and essential tabs.",
+        )
+    with t2:
+        st.toggle(
+            "Show advanced analysis tabs",
+            value=False,
+            key="ui_show_advanced",
+            help="Enable expert tabs: Pathway Algorithms, Rules Explorer, Validation, and Data Quality.",
+        )
+
     courses_relative = Path(sys.argv[1]) if len(sys.argv) > 1 else cg.DEFAULT_COURSES_PATH
 
     try:
@@ -2532,42 +2548,48 @@ def main():
             "Filtered out: " + removed_text
         )
 
-    tab_catalog, tab_roadmap, tab_planner, tab_simulator, tab_algorithms, tab_rules, tab_validate, tab_quality = st.tabs(
-        [
-            "Catalog Graph",
-            "Major/Minor Roadmap",
-            "Student Planner",
-            "Combination Simulator",
-            "Pathway Algorithms",
-            "Rules Explorer",
-            "Pathway Validation",
-            "Data Quality",
-        ]
-    )
+    base_tabs = [
+        "Catalog Graph",
+        "Major/Minor Roadmap",
+        "Student Planner",
+        "Combination Simulator",
+    ]
+    advanced_tabs = [
+        "Pathway Algorithms",
+        "Rules Explorer",
+        "Pathway Validation",
+        "Data Quality",
+    ]
 
-    with tab_catalog:
+    show_advanced = bool(st.session_state.get("ui_show_advanced", False))
+    tab_labels = base_tabs + (advanced_tabs if show_advanced else [])
+    tabs = st.tabs(tab_labels)
+    tab_lookup = {label: tab for label, tab in zip(tab_labels, tabs)}
+
+    with tab_lookup["Catalog Graph"]:
         _render_catalog_graph(courses, course_index, program_index, constraints)
 
-    with tab_roadmap:
+    with tab_lookup["Major/Minor Roadmap"]:
         _render_program_roadmap(program_index, course_index)
 
-    with tab_planner:
+    with tab_lookup["Student Planner"]:
         _render_student_planner(program_index, course_index, constraints)
 
-    with tab_simulator:
+    with tab_lookup["Combination Simulator"]:
         _render_combination_simulator(program_index, course_index, constraints)
 
-    with tab_algorithms:
-        _render_pathway_algorithms(program_index, course_index)
+    if show_advanced:
+        with tab_lookup["Pathway Algorithms"]:
+            _render_pathway_algorithms(program_index, course_index)
 
-    with tab_rules:
-        _render_rules(program_index, course_index)
+        with tab_lookup["Rules Explorer"]:
+            _render_rules(program_index, course_index)
 
-    with tab_validate:
-        _render_validation(program_index, course_index)
+        with tab_lookup["Pathway Validation"]:
+            _render_validation(program_index, course_index)
 
-    with tab_quality:
-        _render_quality(courses, programs)
+        with tab_lookup["Data Quality"]:
+            _render_quality(courses, programs)
 
 
 if __name__ == "__main__":
