@@ -1,7 +1,7 @@
 """Generate quick static plots from the course catalog JSON.
 
 Usage:
-  /Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_course_plots.py \
+    python src/legacy/generate_course_plots.py \
     --courses data/IISER-P/all_courses.json \
     --out-dir outputs/plots
 """

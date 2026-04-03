@@ -1,6 +1,6 @@
 # Curriculum Dashboard Report
 
-Generated: 2026-04-03 23:34:47
+Generated: 2026-04-03 23:43:50
 
 ## Executive Summary
 - Total courses: 264
