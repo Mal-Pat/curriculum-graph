@@ -412,7 +412,7 @@ curriculum modeling, and the open-source tools that enabled this work.
 \section{Author Contributions}
 \begin{itemize}
     \item Ayush Raj: UI development, testing, and codebase structuring.
-    \item Malhar Patel: Graph algorithms and dependency analytics.
+    \item Malhar Patel: UI development, graph algorithms, and dependency analytics.
     \item Sankar Maharajan: Data preprocessing and graph validation.
     \item Applen Tahu: Data extraction and JSON schema design.
 \end{itemize}
@@ -496,6 +496,20 @@ python -m streamlit run src/app.py --server.headless true --server.port 8522
 
 \begin{figure}[tbp]
     \centering
+    \IfFileExists{./figs/graph_look_1.png}{%
+        \includegraphics[width=0.95\textwidth,trim={40 110 15 160},clip]{./figs/graph_look_1.png}%
+    }{%
+        \fbox{\parbox[c][0.45\textwidth][c]{0.9\textwidth}{\centering
+            Missing figure:\\
+            \path{./figs/graph_look_1.png}
+        }}%
+    }
+    \caption{Year-wise prerequisite graph view showing set labels and reduced clutter (dashboard screenshot).}
+\end{figure}
+
+
+\begin{figure}[tbp]
+    \centering
     \IfFileExists{./figs/graph_look_2.png}{%
         \includegraphics[width=0.95\textwidth,trim={20 30 20 20},clip]{./figs/graph_look_2.png}%
     }{%
@@ -510,7 +524,7 @@ python -m streamlit run src/app.py --server.headless true --server.port 8522
             }}%
         }%
     }
-    \caption{Graph look 2 showing the cleaned dashboard and student planner context.}
+    \caption{Student-mode dashboard overview showing KPIs, policy filtering, and the planner entry point.}
 \end{figure}
 
 
