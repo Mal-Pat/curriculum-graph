@@ -348,9 +348,9 @@ def make_year_semester_graph_elements(courses):
 
         color = COURSE_KIND_COLOR_MAP.get(course.get("kind"), "#6c757d")
         label = (
-            f"{code}\\n{course.get('course_name', '')}"
-            f"\\nY{year} S{first_sem} | {course.get('credits', 0)}cr"
-            f"\\nOffered: {sem_text} ({offering_pattern})"
+            f"{code}\n{course.get('course_name', '')}"
+            f"\nY{year} S{first_sem} | {course.get('credits', 0)}cr"
+            f"\nOffered: {sem_text} ({offering_pattern})"
         )
 
         nodes.append(

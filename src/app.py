@@ -239,6 +239,56 @@ def _inject_design():
             color: #1f2937;
         }
 
+        .legend-wrap {
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 0.45rem 0.65rem;
+            margin: 0.35rem 0 0.65rem 0;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 0.35rem;
+        }
+
+        .legend-row {
+            display: flex;
+            gap: 0.45rem;
+            flex-wrap: wrap;
+        }
+
+        .legend-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.32rem;
+            border-radius: 999px;
+            padding: 0.18rem 0.5rem;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            color: #334155;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(15, 23, 42, 0.24);
+        }
+
+        .mode-chip {
+            background: linear-gradient(135deg, rgba(15, 118, 110, 0.12), rgba(21, 94, 117, 0.1));
+            border: 1px solid rgba(15, 118, 110, 0.28);
+            border-radius: 12px;
+            padding: 0.5rem 0.7rem;
+            margin: 0.25rem 0 0.85rem 0;
+            color: #134e4a;
+            font-weight: 600;
+        }
+
         @keyframes fade-up {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
@@ -268,6 +318,28 @@ def _hero():
           <p>Plan smarter across Semester 1-8: track credits to 184, compare major-minor pathways, and de-risk prerequisites early.</p>
         </div>
         """,
+        unsafe_allow_html=True,
+    )
+
+
+def _is_student_mode():
+    return bool(st.session_state.get("ui_student_mode", True))
+
+
+def _render_color_legend(title, items):
+    chips = "".join(
+        [
+            f"<span class='legend-chip'><span class='legend-dot' style='background:{color}'></span>{label}</span>"
+            for label, color in items
+        ]
+    )
+    st.markdown(
+        (
+            "<div class='legend-wrap'>"
+            f"<div class='legend-title'>{title}</div>"
+            f"<div class='legend-row'>{chips}</div>"
+            "</div>"
+        ),
         unsafe_allow_html=True,
     )
 
@@ -303,18 +375,15 @@ def _major_minor_combined_elements(
     edges = []
     role_lookup = {}
 
-    role_color = {
-        "major": "#0077b6",
-        "minor": "#2a9d8f",
-        "both": "#e76f51",
-        "support": "#6c757d",
-    }
-
     for year in range(y_min, y_max + 1):
         nodes.append(
             cg.Node(
                 id=f"group_combined_year_{year}",
-                properties={"label": f"Year {year}", "isGroup": True},
+                properties={
+                    "label": f"Year {year}",
+                    "isGroup": True,
+                    "color": "#dbeafe",
+                },
             )
         )
 
@@ -343,7 +412,7 @@ def _major_minor_combined_elements(
                 properties={
                     "label": label,
                     "parent_id": f"group_combined_year_{year}",
-                    "color": role_color[role],
+                    "color": ROLE_COLOR_MAP[role],
                     "role": role,
                 },
             )
@@ -438,6 +507,13 @@ GRAPH_VISUAL_PROFILES = {
     "Readable": {"node_scale": 1.18, "group_scale": 1.35, "edge_scale": 1.45},
     "Balanced": {"node_scale": 1.0, "group_scale": 1.2, "edge_scale": 1.0},
     "Compact": {"node_scale": 0.88, "group_scale": 1.05, "edge_scale": 0.82},
+}
+
+ROLE_COLOR_MAP = {
+    "major": "#1d4ed8",
+    "minor": "#0f766e",
+    "both": "#c2410c",
+    "support": "#475569",
 }
 
 
@@ -738,23 +814,25 @@ def _render_year_semester_distribution(title, course_codes, course_index):
     _show_df(rows, use_container_width=True)
 
 
+def _edge_endpoints(edge):
+    """Read edge endpoints from either dict-like or object-style edge payloads."""
+
+    if isinstance(edge, dict):
+        return edge.get("start"), edge.get("end")
+
+    start = getattr(edge, "start", None)
+    end = getattr(edge, "end", None)
+
+    if start is None and hasattr(edge, "get"):
+        start = edge.get("start")
+    if end is None and hasattr(edge, "get"):
+        end = edge.get("end")
+
+    return start, end
+
+
 def _semester_transition_rows(edges, course_index):
     """Build transition counts from prerequisite edges grouped by semester."""
-
-    def _edge_endpoints(edge):
-        # Accept both dict edges and yFiles Edge objects.
-        if isinstance(edge, dict):
-            return edge.get("start"), edge.get("end")
-
-        start = getattr(edge, "start", None)
-        end = getattr(edge, "end", None)
-
-        if start is None and hasattr(edge, "get"):
-            start = edge.get("start")
-        if end is None and hasattr(edge, "get"):
-            end = edge.get("end")
-
-        return start, end
 
     transition_counts = {}
 
@@ -797,8 +875,32 @@ def _render_semester_transition_summary(edges, course_index):
     _show_df(rows, use_container_width=True)
 
 
-def _graph_clarity_controls(prefix, default_layout="Hierarchic"):
+def _render_graph_support_tables(distribution_title, course_codes, edges, course_index, expanded=False):
+    with st.expander("Graph insights tables", expanded=expanded):
+        _render_year_semester_distribution(distribution_title, course_codes, course_index)
+        _render_semester_transition_summary(edges, course_index)
+
+
+def _graph_clarity_controls(prefix, default_layout="Hierarchic", student_mode=False):
     with st.expander("Graph Clarity Controls", expanded=False):
+        if student_mode:
+            use_student_defaults = st.checkbox(
+                "Use student-friendly graph defaults",
+                value=True,
+                key=f"{prefix}_student_defaults",
+                help="Readable labels and simpler prerequisite arrows for easier scanning.",
+            )
+            if use_student_defaults:
+                st.caption(
+                    "Preset active: Readable nodes, Code + Name labels, within-year prerequisite arrows."
+                )
+                return {
+                    "visual_mode": "Readable",
+                    "label_mode": "Code + Name",
+                    "edge_mode": "Within same year",
+                    "layout": LAYOUT_OPTIONS.get(default_layout, Layout.HIERARCHIC),
+                }
+
         c1, c2, c3, c4 = st.columns(4)
         visual_mode = c1.selectbox(
             "Visual mode",
@@ -836,8 +938,7 @@ def _filtered_edges_for_mode(edges, course_index, edge_mode):
 
     out = []
     for edge in edges:
-        start = edge.get("start") if hasattr(edge, "get") else None
-        end = edge.get("end") if hasattr(edge, "get") else None
+        start, end = _edge_endpoints(edge)
         if not start or not end:
             continue
 
@@ -868,7 +969,7 @@ def _apply_graph_visual_profile(nodes, edges, course_index, visual_mode, label_m
         if label_mode == "Code only":
             node["label"] = node_id
         elif label_mode == "Code + Name":
-            node["label"] = f"{node_id}\\n{course.get('course_name', '')}"
+            node["label"] = f"{node_id}\n{course.get('course_name', '')}"
 
     for edge in edges:
         edge["edge_scale"] = profile["edge_scale"]
@@ -915,6 +1016,17 @@ def _render_overview(courses, programs):
 def _render_catalog_graph(courses, course_index, program_index, constraints):
     st.subheader("Student Course Map")
     st.caption("Year boxes contain semester clusters; arrows show prerequisite flow across the map.")
+    student_mode = _is_student_mode()
+
+    if student_mode:
+        st.markdown(
+            """
+            <div class="mode-chip">
+                Student mode active: simplified graph defaults and cleaner summaries.
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     focus_codes = None
 
@@ -984,7 +1096,7 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
             key="catalog_graph_structure",
         )
 
-        clarity_cfg = _graph_clarity_controls("catalog", default_layout="Tree")
+        clarity_cfg = _graph_clarity_controls("catalog", default_layout="Tree", student_mode=student_mode)
 
         if use_program_lens and program_index:
             major_subjects = sorted({subject for (subject, p_type) in program_index if p_type == "Major"})
@@ -1114,13 +1226,21 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
             else:
                 st.info("No matching courses in current filtered view.")
 
-    st.caption("Node color by kind: normal=#1f7a8c, lab=#2a9d8f, semester_project=#e9c46a. Labels include offered semesters.")
-    _render_year_semester_distribution(
-        "Year/Semester Distribution",
-        [c.get("course_code") for c in filtered if c.get("course_code")],
-        course_index,
+    _render_color_legend(
+        "Catalog color guide",
+        [
+            ("Normal", cg.COURSE_KIND_COLOR_MAP.get("normal", "#2563eb")),
+            ("Lab", cg.COURSE_KIND_COLOR_MAP.get("lab", "#0f766e")),
+            ("Semester project", cg.COURSE_KIND_COLOR_MAP.get("semester_project", "#d97706")),
+        ],
     )
-    _render_semester_transition_summary(display_edges, course_index)
+    _render_graph_support_tables(
+        distribution_title="Year/Semester Distribution",
+        course_codes=[c.get("course_code") for c in filtered if c.get("course_code")],
+        edges=display_edges,
+        course_index=course_index,
+        expanded=False,
+    )
 
     widget = StreamlitGraphWidget(
         nodes=nodes,
@@ -1174,6 +1294,7 @@ def _render_catalog_graph(courses, course_index, program_index, constraints):
 def _render_program_roadmap(program_index, course_index):
     st.subheader("Major/Minor Roadmap Graph")
     st.caption("Pick a program to see Year 1 to Year 4 pathway with prerequisites linked.")
+    student_mode = _is_student_mode()
 
     if not program_index:
         st.info("No major/minor program rules loaded")
@@ -1209,7 +1330,7 @@ def _render_program_roadmap(program_index, course_index):
         help="Also show prerequisite courses that are not explicitly listed in rule sets.",
     )
     year_range = col2.slider("Year range", min_value=1, max_value=4, value=(1, 4))
-    clarity_cfg = _graph_clarity_controls("roadmap", default_layout="Orthogonal")
+    clarity_cfg = _graph_clarity_controls("roadmap", default_layout="Orthogonal", student_mode=student_mode)
 
     roadmap = cg.make_program_roadmap_elements(
         criteria,
@@ -1247,16 +1368,25 @@ def _render_program_roadmap(program_index, course_index):
             use_container_width=True,
         )
 
-    st.caption(
-        "Color guide: compulsory=#d1495b, elective options=#0077b6/#f4a261/#2a9d8f, not-counted=#8d99ae, prerequisite support=#6c757d"
+    _render_color_legend(
+        "Roadmap color guide",
+        [
+            ("Compulsory", cg.SET_COLOR_MAP.get("set_d", "#d1495b")),
+            ("Elective pool", cg.SET_COLOR_MAP.get("set_a", "#0077b6")),
+            ("Capped pool", cg.SET_COLOR_MAP.get("set_b", "#f4a261")),
+            ("Supplementary", cg.SET_COLOR_MAP.get("set_c", "#2a9d8f")),
+            ("Not counted", cg.SET_COLOR_MAP.get("set_e", "#8d99ae")),
+            ("Support prereq", cg.SET_COLOR_MAP.get("support", "#6c757d")),
+        ],
     )
 
-    _render_year_semester_distribution(
-        "Roadmap Year/Semester Distribution",
-        roadmap["visible_codes"],
-        course_index,
+    _render_graph_support_tables(
+        distribution_title="Roadmap Year/Semester Distribution",
+        course_codes=roadmap["visible_codes"],
+        edges=display_edges,
+        course_index=course_index,
+        expanded=False,
     )
-    _render_semester_transition_summary(display_edges, course_index)
 
     widget = StreamlitGraphWidget(
         nodes=nodes,
@@ -1304,6 +1434,7 @@ def _render_program_roadmap(program_index, course_index):
 def _render_student_planner(program_index, course_index, constraints):
     st.subheader("Student Planner")
     st.caption("Track progress to 184 credits by Semester 8 while balancing major and minor requirements.")
+    student_mode = _is_student_mode()
 
     st.markdown(
         """
@@ -1447,13 +1578,14 @@ def _render_student_planner(program_index, course_index, constraints):
     st.progress(min(1.0, earned_credits / max(1, degree_target)))
     st.caption(f"Progress: {earned_credits}/{degree_target} credits")
 
-    _render_year_semester_distribution(
-        "Current Input Year/Semester Distribution",
-        known_courses,
-        course_index,
-    )
     input_edges = cg.build_edges_from_courses(known_courses, course_index)
-    _render_semester_transition_summary(input_edges, course_index)
+    _render_graph_support_tables(
+        distribution_title="Current Input Year/Semester Distribution",
+        course_codes=known_courses,
+        edges=input_edges,
+        course_index=course_index,
+        expanded=False,
+    )
     if unknown_courses:
         st.warning("Unknown course codes in planner input: " + ", ".join(unknown_courses))
 
@@ -1610,15 +1742,17 @@ def _render_student_planner(program_index, course_index, constraints):
             _show_df(plan_payload["blocked_details"], use_container_width=True)
 
     st.markdown("#### Combined Major-Minor Dependency Graph")
-    st.caption("Color legend: MAJOR=blue, MINOR=teal, BOTH=orange, SUPPORT PREREQ=gray")
-
-    _render_year_semester_distribution(
-        "Combined Graph Year/Semester Distribution",
-        list(combined_graph.nodes),
-        course_index,
+    _render_color_legend(
+        "Combined graph color guide",
+        [
+            ("Major", ROLE_COLOR_MAP["major"]),
+            ("Minor", ROLE_COLOR_MAP["minor"]),
+            ("Shared (both)", ROLE_COLOR_MAP["both"]),
+            ("Support prereq", ROLE_COLOR_MAP["support"]),
+        ],
     )
 
-    planner_clarity_cfg = _graph_clarity_controls("planner", default_layout="Hierarchic")
+    planner_clarity_cfg = _graph_clarity_controls("planner", default_layout="Hierarchic", student_mode=student_mode)
 
     display_edges = _filtered_edges_for_mode(combined_edges, course_index, planner_clarity_cfg["edge_mode"])
     combined_nodes, display_edges = _apply_graph_visual_profile(
@@ -1628,7 +1762,13 @@ def _render_student_planner(program_index, course_index, constraints):
         visual_mode=planner_clarity_cfg["visual_mode"],
         label_mode=planner_clarity_cfg["label_mode"],
     )
-    _render_semester_transition_summary(display_edges, course_index)
+    _render_graph_support_tables(
+        distribution_title="Combined Graph Year/Semester Distribution",
+        course_codes=list(combined_graph.nodes),
+        edges=display_edges,
+        course_index=course_index,
+        expanded=False,
+    )
 
     planner_widget = StreamlitGraphWidget(
         nodes=combined_nodes,
@@ -1700,6 +1840,7 @@ def _render_combination_simulator(program_index, course_index, constraints):
     st.caption(
         "Simulate all valid major-minor combinations using common Sem 1-3 compulsory courses and elective options."
     )
+    student_mode = _is_student_mode()
 
     if not program_index:
         st.info("No major/minor program rules loaded")
@@ -1880,7 +2021,16 @@ def _render_combination_simulator(program_index, course_index, constraints):
     )
 
     st.markdown("#### Combination Dependency Graph")
-    sim_clarity_cfg = _graph_clarity_controls("sim_combo", default_layout="Hierarchic")
+    _render_color_legend(
+        "Combination graph color guide",
+        [
+            ("Major", ROLE_COLOR_MAP["major"]),
+            ("Minor", ROLE_COLOR_MAP["minor"]),
+            ("Shared (both)", ROLE_COLOR_MAP["both"]),
+            ("Support prereq", ROLE_COLOR_MAP["support"]),
+        ],
+    )
+    sim_clarity_cfg = _graph_clarity_controls("sim_combo", default_layout="Hierarchic", student_mode=student_mode)
 
     display_edges = _filtered_edges_for_mode(sim_edges, course_index, sim_clarity_cfg["edge_mode"])
     sim_nodes, display_edges = _apply_graph_visual_profile(
@@ -1890,7 +2040,13 @@ def _render_combination_simulator(program_index, course_index, constraints):
         visual_mode=sim_clarity_cfg["visual_mode"],
         label_mode=sim_clarity_cfg["label_mode"],
     )
-    _render_semester_transition_summary(display_edges, course_index)
+    _render_graph_support_tables(
+        distribution_title="Combination Graph Year/Semester Distribution",
+        course_codes=list(code for code in combo_payload["plan"].get("scheduled", [])),
+        edges=display_edges,
+        course_index=course_index,
+        expanded=False,
+    )
 
     sim_widget = StreamlitGraphWidget(
         nodes=sim_nodes,
