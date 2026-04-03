@@ -5,11 +5,14 @@
 % ---- ENTER YOUR PROJECT DETAILS BELOW
 
 % ---- title of the project
-\title{Curriculum Graph Studio: Student-Centric Curriculum Planning with Dependency Analytics}
+\title{Curriculum Graph: Student-Centric Curriculum Planning with Dependency Analytics}
 
 % ---- names of team members
 \author{
-    \small Ayush
+    \small Ayush \and
+    \small Malhar Patel \and
+    \small Sankar Maharajan \and
+    \small Applen Tahu
     }
 
 % ---- enter the team number below
@@ -131,6 +134,22 @@ major/minor criteria entries \citep{iiser_data}. Data-health checks report no
 duplicate course codes, no missing prerequisite links, and no unknown
 requirement codes.
 
+\subsection{Implementation Summary}
+The final codebase is organized into clear modules:
+
+\begin{itemize}
+    \item \texttt{src/app.py}: Streamlit dashboard and interaction logic.
+    \item \texttt{src/graph.py}: graph construction, planning, and analytics
+    utilities.
+    \item \texttt{src/validate\_major\_minor.py}: rule validation and
+    requirement checks.
+    \item \texttt{src/generate\_dashboard\_report.py}: report and plot
+    generation pipeline.
+\end{itemize}
+
+This structure enabled a maintainable workflow where UI improvements and
+algorithmic improvements could be developed independently and then integrated.
+
 \subsection{Graph Modeling and Planning}
 We build a directed graph $G=(V,E)$ where $V$ is the selected course set and
 $E$ contains edges $(u,v)$ whenever course $u$ is a prerequisite of course $v$.
@@ -187,6 +206,34 @@ Table~\ref{tab:summary} reports key metrics from the latest run.
     \end{tabular}
 \end{table}
 
+\subsection{Delivered System Features}
+The following deliverables were completed and validated in the current version:
+
+\begin{itemize}
+    \item Student mode and advanced mode toggles for clean navigation.
+    \item Policy-filtered major/minor options for institutional constraints.
+    \item Year-semester structured prerequisite graphs with readable labels.
+    \item Semester transition summaries for better planning visibility.
+    \item Constrained term-by-term planner with blocked-course diagnostics.
+    \item Major-minor combination simulator for comparative pathway analysis.
+    \item Data quality checks and pathway validation reports.
+    \item Automated markdown report and plot generation pipeline.
+\end{itemize}
+
+\begin{figure}[tbp]
+    \centering
+    \IfFileExists{./figs/major_minor_overview.png}{%
+        \includegraphics[width=0.92\textwidth]{./figs/major_minor_overview.png}%
+    }{%
+        \fbox{\parbox[c][0.35\textwidth][c]{0.85\textwidth}{\centering
+            Missing figure:\\
+            \path{./figs/major_minor_overview.png}
+        }}%
+    }
+    \caption{Overview of major-minor requirement structure used in the planning system.}
+    \label{fig:majmin-overview}
+\end{figure}
+
 \subsection{Visual Analytics and Plots}
 Figure~\ref{fig:sem-year} shows the course distribution by semester and year,
 while Fig.~\ref{fig:subject-patterns} shows subject-level and prerequisite
@@ -196,12 +243,12 @@ structure patterns.
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/courses_by_first_semester.png}
+        \includegraphics[width=\textwidth]{./figs/courses_by_first_semester.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/courses_by_year.png}
+        \includegraphics[width=\textwidth]{./figs/courses_by_year.png}
     \end{minipage}
     \caption{Course availability distribution over semester and academic year.}
     \label{fig:sem-year}
@@ -211,12 +258,12 @@ structure patterns.
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/subject_distribution_top.png}
+        \includegraphics[width=\textwidth]{./figs/subject_distribution_top.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/prerequisite_count_distribution.png}
+        \includegraphics[width=\textwidth]{./figs/prerequisite_count_distribution.png}
     \end{minipage}
     \caption{Subject concentration and prerequisite count structure.}
     \label{fig:subject-patterns}
@@ -236,6 +283,21 @@ The upgraded dashboard improves practical usability in three ways:
 In student testing scenarios, the planner can surface blocked courses with
 unsatisfied prerequisites and propose semester-wise alternatives under credit
 and load constraints.
+
+For readability, high-resolution dashboard screenshots are included in the
+Appendix as full-width figures (instead of compact side-by-side thumbnails).
+
+\subsection{Discussion of Outcomes}
+The final dashboard is not only visually cleaner but also operationally more
+reliable. Key reliability and usability outcomes include:
+
+\begin{itemize}
+    \item No blocking data-quality issues in the current dataset snapshot.
+    \item Stable headless startup and compile checks on the final codebase.
+    \item Clone-safe commands and reproducible report generation.
+    \item Better student readability through reduced clutter and clearer graph
+    semantics.
+\end{itemize}
 
 \section{Conclusion and Outlook}
 Curriculum Graph Studio now functions as a complete planning and analytics
@@ -258,9 +320,13 @@ We acknowledge the course and program-rule data sources provided for IISER Pune
 curriculum modeling, and the open-source tools that enabled this work.
 
 \section{Author Contributions}
-Ayush designed the architecture, implemented graph logic and dashboard
-integration, developed the planning and reporting pipeline, and prepared the
-final manuscript.
+\begin{itemize}
+    \item Applen Tahu: Data Extraction, JSON Schema design, and UI Design.
+    \item Malhar Patel: Graph Algorithms and UI Construction.
+    \item Sankar Maharajan: Data Preprocessing and Graph Validation.
+    \item Ayush: System integration, planner/report pipeline implementation,
+    dashboard polish, and final report compilation.
+\end{itemize}
 
 \section{Code availability}
 The code for this project is available in the course project repository
@@ -271,7 +337,8 @@ Representative artifacts generated from the current codebase are available in:
 \begin{itemize}
     \item \texttt{docs/reports/latest/dashboard\_report.md}
     \item \texttt{docs/reports/latest/report\_summary.json}
-    \item \texttt{docs/reports/latest/plots/}
+    \item \texttt{docs/reports/latest/plots/} (generated source plots)
+    \item \texttt{Report/report/figs/} (submission-local copies used by this report)
 \end{itemize}
 
 % --------------------------------------------------------------------
@@ -292,39 +359,57 @@ Place your custom screenshots in \texttt{Report/report/figs/}.
     \centering
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/credits_by_first_semester.png}
+        \includegraphics[width=\textwidth]{./figs/credits_by_first_semester.png}
     \end{minipage}
     \hfill
     \begin{minipage}{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/kind_distribution.png}
+        \includegraphics[width=\textwidth]{./figs/kind_distribution.png}
     \end{minipage}
     \caption{Credit load trend and course-kind distribution.}
 \end{figure}
 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{../../docs/reports/latest/plots/subject_semester_heatmap.png}
-    \caption{Subject-semester offering heatmap for top subjects.}
+    \IfFileExists{./figs/graph_look_1.png}{%
+        \includegraphics[width=0.95\textwidth,trim={20 260 20 10},clip]{./figs/graph_look_1.png}%
+    }{%
+        \IfFileExists{./figs/graph look 1.png}{%
+            \includegraphics[width=0.95\textwidth,trim={20 260 20 10},clip]{./figs/graph look 1.png}%
+        }{%
+            \fbox{\parbox[c][0.45\textwidth][c]{0.9\textwidth}{\centering
+                Missing figure:\\
+                \path{./figs/graph_look_1.png}\\
+                (or)\\
+                \path{./figs/graph look 1.png}
+            }}%
+        }%
+    }
+    \caption{Graph look 1 (cropped for readability to remove large blank margins).}
 \end{figure}
 
 \begin{figure}[tbp]
     \centering
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \safeincludegraphicsalt{./figs/graph_look_1.png}{./figs/graph look 1.png}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{0.48\textwidth}
-        \centering
-        \safeincludegraphicsalt{./figs/graph_look_2.png}{./figs/grapg look2.png}
-    \end{minipage}
-    \caption{Custom graph visualizations provided by the project team.}
+    \IfFileExists{./figs/graph_look_2.png}{%
+        \includegraphics[width=0.95\textwidth,trim={20 30 20 20},clip]{./figs/graph_look_2.png}%
+    }{%
+        \IfFileExists{./figs/grapg look2.png}{%
+            \includegraphics[width=0.95\textwidth,trim={20 30 20 20},clip]{./figs/grapg look2.png}%
+        }{%
+            \fbox{\parbox[c][0.45\textwidth][c]{0.9\textwidth}{\centering
+                Missing figure:\\
+                \path{./figs/graph_look_2.png}\\
+                (or)\\
+                \path{./figs/grapg look2.png}
+            }}%
+        }%
+    }
+    \caption{Graph look 2 showing the cleaned dashboard and student planner context.}
 \end{figure}
 
 \begin{figure}[tbp]
     \centering
-    \begin{minipage}{0.85\textwidth}
+    \begin{minipage}{0.92\textwidth}
         \centering
         \safeincludegraphicsalt{./figs/ss2.png}{./figs/SS2.png}
     \end{minipage}
