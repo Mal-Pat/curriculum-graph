@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "College Constraints Schema",
+  "description": "Contains overall information about the college and its degree program",
+  "type": "object",
+  "required": ["min_degree_credits", "num_semesters", "semesters"],
+  "properties": {
+    "min_degree_credits": {"type": "integer"},
+    "num_semesters": {"type": "integer"},
+    "semesters": {
+        "type": "array",
+        "items": {"$ref": "#/$defs/semester"}
+    }
+  },
+  "$defs": {
+    "course": { "type": "string" },
+    "semester": {
+        "type": "object",
+        "required": ["semester_number", "min_credits", "max_credits", "compulsory_courses", "max_group"],
+        "properties": {
+            "semester_number": {"type": "integer"},
+            "min_credits": {"type": "integer"},
+            "max_credits": {"type": "integer"},
+            "compulsory_courses": {
+                "type": ["array", "null"],
+                "items": {"$ref": "#/$defs/course"}
+            },
+            "max_group": {
+                "type": ["object", "null"],
+                "properties": {
+                    "max_allowed": {"type": "integer"},
+                    "available_courses": {
+                        "type": "array",
+                        "items": {"$ref": "#/$defs/course"}
+                    }
+                },
+                "required": ["max_allowed", "available_courses"]
+            }
+        }
+    }
+  }
+}

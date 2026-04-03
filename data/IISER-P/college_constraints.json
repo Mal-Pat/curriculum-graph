@@ -1,42 +1,165 @@
 {
-  "min_degree_credits": 220,
-  "num_semesters": 10,
-
-  "fixed_semesters": {
-    "1": {
-      "total_credits": 27,
-      "compulsory": 27,
-      "elective": 0
+  "min_degree_credits": 184,
+  "num_semesters": 8,
+  "semesters": [
+    {
+      "semester_number": 1,
+      "min_credits": 27,
+      "max_credits": 27,
+      "compulsory_courses": [
+        "BI1113",
+        "BI1123",
+        "CH1113",
+        "EC1213",
+        "MT1113",
+        "PH1113",
+        "PH1123",
+        "TD1113",
+        "TD1123"
+      ],
+      "max_group": null
     },
-
-    "2": {
-      "total_credits": 24,
-      "compulsory": 24,
-      "elective": 0
+    {
+      "semester_number": 2,
+      "min_credits": 24,
+      "max_credits": 24,
+      "compulsory_courses": [
+        "BI1213",
+        "CH1223",
+        "CH1213",
+        "EC1223",
+        "HS1223",
+        "MT1213",
+        "MT1223",
+        "PH1213"
+      ],
+      "max_group": null
     },
-
-    "3": {
-      "total_credits": 24,
-      "compulsory": 18,
-      "elective": 6
+    {
+      "semester_number": 3,
+      "min_credits": 24,
+      "max_credits": 24,
+      "compulsory_courses": [
+        "BI2113",
+        "CH2113",
+        "EC2113",
+        "HS2123",
+        "MT2113",
+        "PH2113"
+      ],
+      "max_group": {
+        "max_allowed": "2",
+        "available_courses": [
+          "BI2123",
+          "CH2243",
+          "EC2123",
+          "MT2123",
+          "PH2123"
+        ]
+      }
     },
-
-    "4": {
-      "total_credits": 24,
-      "compulsory": 6,
-      "elective": 18
+    {
+      "semester_number": 4,
+      "min_credits": 24,
+      "max_credits": 24,
+      "compulsory_courses": [
+        "TD2213",
+        "TD2223"
+      ],
+      "max_group": {
+        "max_allowed": "6",
+        "available_courses": [
+          "BI2213",
+          "BI2223",
+          "BI2233",
+          "CH2213",
+          "CH2223",
+          "CH2233",
+          "EC2213",
+          "EC2243",
+          "EC2253",
+          "MT2213",
+          "MT2223",
+          "MT2233",
+          "PH2213",
+          "PH2223",
+          "PH2233"
+        ]
+      }
+    },
+    {
+      "semester_number": 5,
+      "min_credits": 18,
+      "max_credits": 28,
+      "compulsory_courses": null,
+      "max_group": {
+        "max_allowed": "1",
+        "available_courses": [
+          "BI3313",
+          "CH3313",
+          "EC3313",
+          "MT3313",
+          "HS3313",
+          "PH3313",
+          "DS3313"
+        ]
+      }
+    },
+    {
+      "semester_number": 6,
+      "min_credits": 18,
+      "max_credits": 28,
+      "compulsory_courses": null,
+      "max_group": {
+        "max_allowed": "1",
+        "available_courses": [
+          "BI3613",
+          "CH3613",
+          "EC3613",
+          "MT3613",
+          "HS3613",
+          "PH3613",
+          "DS3613"
+        ]
+      }
+    },
+    {
+      "semester_number": 7,
+      "min_credits": 18,
+      "max_credits": 28,
+      "compulsory_courses": null,
+      "max_group": {
+        "max_allowed": "1",
+        "available_courses": [
+          "BI4313",
+          "CH4313",
+          "EC4313",
+          "MT4313",
+          "HS4313",
+          "PH4313",
+          "DS4313",
+          "SE4313"
+        ]
+      }
+    },
+    {
+      "semester_number": 8,
+      "min_credits": 18,
+      "max_credits": 28,
+      "compulsory_courses": null,
+      "max_group": {
+        "max_allowed": "1",
+        "available_courses": [
+          "BI4613",
+          "CH4613",
+          "EC4613",
+          "MT4613",
+          "HS4613",
+          "PH4613",
+          "DS4613",
+          "SE4613"
+        ]
+      }
     }
-  },
-
-  "flexible_semesters": {
-    "semesters": [5, 6, 7, 8],
-    "min_credits": 18,
-    "max_credits": 28
-  },
-
-  "thesis_phase": {
-    "semesters": [9, 10],
-    "total_credits": 36,
-    "type": "MS_thesis"
-  }
+  ]
 }
