@@ -31,10 +31,10 @@ curriculum-graph/
 ├── .gitignore                # Files ignored by git
 │
 ├── src/                      # Source code
-│   ├── graph.py              # Main Streamlit visualization app
-│   ├── graph_analysis.py     # Graph algorithms (cycle detection, etc.)
-│   ├── validate_schema.py    # JSON schema validation script
-│   └── utils.py              # Helper functions
+│   ├── app.py                # Main Streamlit dashboard entrypoint
+│   ├── graph.py              # Graph/data logic used by app.py
+│   ├── validate_major_minor.py
+│   └── legacy/               # Older/non-pipeline scripts moved out of active path
 │
 ├── data/                     # Data files
 │   ├── courses_schema.json
@@ -92,6 +92,12 @@ uv pip install -r requirements.txt # for a uv venv
 The data for all courses should be added as a Json file following the Json Schema given at `data/courses_schema.json` inside the `data` directory.
 
 Run:
+
+```bash
+streamlit run src/app.py <relative-data-path>
+```
+
+Backward-compatible command is still supported:
 
 ```bash
 streamlit run src/graph.py <relative-data-path>

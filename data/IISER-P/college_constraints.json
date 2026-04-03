@@ -48,7 +48,7 @@
         "PH2113"
       ],
       "max_group": {
-        "max_allowed": "2",
+        "max_allowed": 2,
         "available_courses": [
           "BI2123",
           "CH2243",
@@ -67,7 +67,7 @@
         "TD2223"
       ],
       "max_group": {
-        "max_allowed": "6",
+        "max_allowed": 6,
         "available_courses": [
           "BI2213",
           "BI2223",
@@ -93,7 +93,7 @@
       "max_credits": 28,
       "compulsory_courses": null,
       "max_group": {
-        "max_allowed": "1",
+        "max_allowed": 1,
         "available_courses": [
           "BI3313",
           "CH3313",
@@ -111,7 +111,7 @@
       "max_credits": 28,
       "compulsory_courses": null,
       "max_group": {
-        "max_allowed": "1",
+        "max_allowed": 1,
         "available_courses": [
           "BI3613",
           "CH3613",
@@ -129,7 +129,7 @@
       "max_credits": 28,
       "compulsory_courses": null,
       "max_group": {
-        "max_allowed": "1",
+        "max_allowed": 1,
         "available_courses": [
           "BI4313",
           "CH4313",
@@ -148,7 +148,7 @@
       "max_credits": 28,
       "compulsory_courses": null,
       "max_group": {
-        "max_allowed": "1",
+        "max_allowed": 1,
         "available_courses": [
           "BI4613",
           "CH4613",
