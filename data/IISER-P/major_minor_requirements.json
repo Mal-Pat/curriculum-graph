@@ -213,5 +213,61 @@
             "set_d": null,
             "set_e": null
         }
+    },
+    {
+        "program_metadata": {"subject": "Physics", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": 8, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": null,
+            "set_e": null
+        }
+    },
+    {
+        "program_metadata": {"subject": "Biology", "major_or_minor": "Major"},
+        "overall_requirements" : {"minimum_total_courses": 15, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": {
+                "minimum_required_from_set": 8,
+                "available_courses": [
+                    "BI3124",
+                    "BI3134",
+                    "BI3144",
+                    "BI3154",
+                    "BI3164",
+                    "BI3174",
+                    "BI3184",
+                    "BI3194",
+                    "BI3344",
+                    "BI4164",
+                    "BI3214",
+                    "BI3224",
+                    "BI3234",
+                    "BI3254",
+                    "BI3264",
+                    "BI3274",
+                    "BI3284",
+                    "BI3424",
+                    "BI3444"
+                ]
+            },
+            "set_b": null,
+            "set_c": null,
+            "set_d": null,
+            "set_e": null
+        }
+    },
+    {
+        "program_metadata": {"subject": "Biology", "major_or_minor": "Minor"},
+        "overall_requirements" : {"minimum_total_courses": 8, "minimum_total_credits": 0},
+        "requirements_by_set" : {
+            "set_a": null,
+            "set_b": null,
+            "set_c": null,
+            "set_d": null,
+            "set_e": null
+        }
     }
 ]
