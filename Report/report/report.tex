@@ -9,7 +9,7 @@
 
 % ---- names of team members
 \author{
-    \small Ayush \and
+    \small Ayush Raj \and
     \small Malhar Patel \and
     \small Sankar Maharajan \and
     \small Applen Tahu
@@ -66,23 +66,13 @@
     }%
 }
 
-\begin{abstract}
-We present \textit{Curriculum Graph Studio}, a student-first dashboard for
-major/minor planning using prerequisite dependency analytics. The system
-integrates an interactive directed graph interface, requirement-aware
-validation, constrained semester planning, and automated reporting with plots.
-The current IISER Pune dataset contains 264 courses across 9 subjects and 16
-program-rule entries (major and minor combinations). Our pipeline performs
-quality checks (duplicates, missing links, invalid requirement codes),
-constructs directed prerequisite graphs, identifies bottlenecks, and generates
-feasible term plans under realistic constraints (credits, semester offerings,
-and requirement priorities). Beyond algorithmic correctness, we focus on
-readability: student mode, cleaner legends, semester transition summaries, and
-policy-filtered pathways. The resulting dashboard and report artifacts are
-clone-safe, reproducible, and deployment-ready for curriculum advising.
-\end{abstract}
-
 \section{Introduction}
+We developed \textit{Curriculum Graph}, a student-centric dashboard for
+major/minor planning that combines prerequisite dependency analytics with an
+interactive UI. The system helps students understand course dependencies,
+validate program requirements, and plan feasible semesters under offering and
+credit constraints.
+
 Curriculum planning is often difficult for students because prerequisite
 relationships, semester offerings, and major/minor rules are spread across
 multiple documents. A graph-based representation is naturally suited for this
@@ -115,7 +105,8 @@ The concrete objectives are:
     \item Validate major/minor pathways against rule sets.
     \item Generate constrained semester plans (course and credit caps).
     \item Provide an accessible UI with student mode and advanced mode.
-    \item Produce a detailed report with plots and quality metrics.
+    \item Ensure reliability through testing, validation checks, and a clean
+    modular code structure.
 \end{itemize}
 
 \section{Methods}
@@ -143,12 +134,44 @@ The final codebase is organized into clear modules:
     utilities.
     \item \texttt{src/validate\_major\_minor.py}: rule validation and
     requirement checks.
-    \item \texttt{src/generate\_dashboard\_report.py}: report and plot
-    generation pipeline.
 \end{itemize}
 
 This structure enabled a maintainable workflow where UI improvements and
 algorithmic improvements could be developed independently and then integrated.
+
+\subsection{Data Quality and Rule Validation}
+Before graph construction and planning, we run a quality report over both the
+course catalog and the major/minor rule JSON. These checks are intended to
+catch data issues that would otherwise mislead students.
+
+The quality report flags:
+\begin{itemize}
+    \item duplicate course codes and duplicate program-rule entries,
+    \item missing prerequisite links (a prerequisite code not present in the catalog),
+    \item self-prerequisites (a course listing itself as a prerequisite),
+    \item missing semester-offering tags,
+    \item unknown requirement codes inside Set A--E rule lists.
+\end{itemize}
+
+The major/minor rules are encoded as a set-based schema:
+\begin{itemize}
+    \item \textbf{Set D}: compulsory courses that must be included,
+    \item \textbf{Set A}: elective pool with a minimum selection requirement,
+    \item \textbf{Set B}: elective pool with a maximum allowed cap,
+    \item \textbf{Set C}: supplementary pool that can contribute to totals,
+    \item \textbf{Set E}: courses that are excluded (not counted) from totals.
+\end{itemize}
+
+In addition to set-wise constraints, the validator checks overall minimum
+course-count and credit requirements. The dashboard reports both the student
+input totals and the counted totals after applying Set E exclusions.
+
+Requirement validation is performed set-wise (Sets A/B/C/D/E) and overall
+(minimum courses and minimum credits). Additionally, we support a
+prerequisite-completeness check that can be configured as \textit{strict}
+(treated as errors), \textit{advisory} (treated as warnings), or \textit{off}
+(ignored). This prevents students from accidentally selecting advanced courses
+without ensuring all prerequisites are included in their plan.
 
 \subsection{Graph Modeling and Planning}
 We build a directed graph $G=(V,E)$ where $V$ is the selected course set and
@@ -169,6 +192,21 @@ offering availability and prerequisite satisfaction,
 where $\mathcal{O}(s)$ is the set of courses offered in semester $s$, and
 $\mathcal{C}_{\mathrm{done}}$ is the completed course set.
 
+\subsubsection{Graph Integrity Checks (Cycle / Loop Detection)}
+Since prerequisite graphs must be acyclic to support strict scheduling, we
+explicitly detect directed cycles (loops) in the prerequisite graph. If any
+cycle is present, the dashboard highlights the cycle and the constrained
+planner exits early with a clear reason. When the graph is a DAG, we compute a
+topological order to provide a prerequisite-respecting sequence.
+
+We also compute reachability from start-feasible root nodes (courses with no
+incoming prerequisites and at least one offering at/after the chosen start
+semester). Unreachable nodes indicate either offering constraints or a
+prerequisite chain that cannot be satisfied under the selected horizon.
+
+Finally, we compute bottleneck indicators (downstream reach and betweenness
+centrality) to identify high-impact courses that unlock many others.
+
 \subsection{Dashboard Design}
 The dashboard has two usage modes:
 
@@ -182,6 +220,29 @@ The dashboard has two usage modes:
 To reduce cognitive overload, graph legends are explicit, transition summaries
 are collapsible, and major/minor options are policy-filtered to approved
 offerings in the current deployment profile.
+
+The UI uses progressive disclosure: essential views are visible by default,
+while heavier diagnostics are placed behind toggles/expanders. A key
+readability feature is the \textit{Graph Clarity Controls}, which let users
+choose (i) a visual density profile, (ii) label detail level, (iii) whether to
+show all prerequisite arrows or only within-year arrows, and (iv) layout style
+(hierarchic/orthogonal/organic/tree). This makes the same underlying graph
+usable for both quick planning and deeper debugging.
+
+Interactive selection is central to the design: clicking nodes reveals course
+metadata (credits, offerings, subject/kind) and requirement-role labels (e.g.,
+compulsory vs elective pool). This reduces the need to cross-reference external
+documents while planning.
+
+\subsection{Testing and Robustness}
+Reliability was treated as a first-class requirement because students interact
+with the system through an embedded graph renderer. The dashboard wraps graph
+rendering calls in a safe execution path that surfaces errors without breaking
+the entire page. On the analytics side, cycle detection prevents the planner
+from producing invalid schedules, and quality reports help identify catalog
+issues (missing prerequisites, duplicates, missing offerings) early. We also
+use lightweight smoke tests (syntax checks and headless app startup) to ensure
+the app remains runnable across machines.
 
 \section{Results}
 \subsection{Quantitative Summary}
@@ -214,10 +275,13 @@ The following deliverables were completed and validated in the current version:
     \item Policy-filtered major/minor options for institutional constraints.
     \item Year-semester structured prerequisite graphs with readable labels.
     \item Semester transition summaries for better planning visibility.
+    \item Graph integrity checks: cycle (loop) detection, DAG/topological order
+    diagnostics, and reachability summaries.
     \item Constrained term-by-term planner with blocked-course diagnostics.
+    \item Bottleneck analytics (downstream reach and betweenness) to identify
+    high-impact prerequisite courses.
     \item Major-minor combination simulator for comparative pathway analysis.
     \item Data quality checks and pathway validation reports.
-    \item Automated markdown report and plot generation pipeline.
 \end{itemize}
 
 \begin{figure}[tbp]
@@ -276,8 +340,19 @@ The upgraded dashboard improves practical usability in three ways:
     \item Cleaner student-first navigation with optional advanced tabs.
     \item Better graph readability via consistent legends, role-aware colors,
     and transition summaries.
-    \item Integrated reporting pipeline that exports reproducible markdown,
-    summary JSON, and publication-ready plots.
+    \item Cleaner module separation (UI vs. graph logic vs. validation) to
+    support testing and maintainable iteration.
+\end{itemize}
+
+A typical student workflow is:
+\begin{itemize}
+    \item start in student mode and pick a major/minor program,
+    \item explore the roadmap graph clustered by year and semester,
+    \item inspect transition summaries to understand which semesters depend on
+    earlier courses,
+    \item mark completed courses and generate a constrained term plan,
+    \item review blocked-course explanations when constraints prevent full
+    completion.
 \end{itemize}
 
 In student testing scenarios, the planner can surface blocked courses with
@@ -294,15 +369,30 @@ reliable. Key reliability and usability outcomes include:
 \begin{itemize}
     \item No blocking data-quality issues in the current dataset snapshot.
     \item Stable headless startup and compile checks on the final codebase.
-    \item Clone-safe commands and reproducible report generation.
+    \item Structured validation outputs that support testing and correctness.
     \item Better student readability through reduced clutter and clearer graph
     semantics.
+\end{itemize}
+
+\subsection{Limitations}
+\begin{itemize}
+    \item The semester planner is a greedy, constraint-based heuristic; it
+    produces feasible schedules when possible but does not guarantee a globally
+    optimal plan.
+    \item Outputs depend on the accuracy and completeness of the JSON snapshot
+    (course offerings, prerequisite lists, and program rules). Changes in the
+    catalog or handbook rules require updating these inputs.
+    \item Some prerequisite checks are policy-driven (strict/advisory/off) and
+    do not model co-requisites or timetable-level constraints (e.g., clashes).
+    \item Very dense graphs can still be visually complex; the dashboard
+    mitigates this via filters and clarity controls, but readability may vary
+    with program size.
 \end{itemize}
 
 \section{Conclusion and Outlook}
 Curriculum Graph Studio now functions as a complete planning and analytics
 stack: data quality checks, dependency graphs, constrained planning, pathway
-validation, and report generation. The most significant contribution is the
+validation, and a student-friendly dashboard UI. The most significant contribution is the
 combination of graph-theoretic logic with a student-friendly interaction layer,
 which makes technical analytics actionable for academic decision-making.
 
@@ -321,25 +411,61 @@ curriculum modeling, and the open-source tools that enabled this work.
 
 \section{Author Contributions}
 \begin{itemize}
-    \item Applen Tahu: Data Extraction, JSON Schema design, and UI Design.
-    \item Malhar Patel: Graph Algorithms and UI Construction.
-    \item Sankar Maharajan: Data Preprocessing and Graph Validation.
-    \item Ayush: System integration, planner/report pipeline implementation,
-    dashboard polish, and final report compilation.
+    \item Ayush Raj: UI development, testing, and codebase structuring.
+    \item Malhar Patel: UI development, graph algorithms, and dependency analytics.
+    \item Sankar Maharajan: Data preprocessing and graph validation.
+    \item Applen Tahu: Data extraction and JSON schema design.
 \end{itemize}
 
 \section{Code availability}
-The code for this project is available in the course project repository
-containing the \texttt{src/app.py}, \texttt{src/graph.py}, and
-\texttt{src/generate\_dashboard\_report.py} modules.
+Source code (GitHub): \url{https://github.com/Mal-Pat/curriculum-graph/tree/main}.
 
-Representative artifacts generated from the current codebase are available in:
+Key modules include \texttt{src/app.py} (dashboard UI), \texttt{src/graph.py}
+(graph construction and planning), and \texttt{src/validate\_major\_minor.py}
+(requirement validation).
+
+\section{How to Run (Streamlit Dashboard)}
+The dashboard is designed to be clone-safe and runnable locally with Python and
+Streamlit.
+
+\subsection{Clone and install}
+\begin{enumerate}
+    \item Clone the repository and enter it:
+    \begin{verbatim}
+git clone https://github.com/Mal-Pat/curriculum-graph.git
+cd curriculum-graph
+    \end{verbatim}
+
+    \item Create and activate a virtual environment (macOS/Linux):
+    \begin{verbatim}
+python -m venv .venv
+source .venv/bin/activate
+    \end{verbatim}
+
+    \item Install dependencies:
+    \begin{verbatim}
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+    \end{verbatim}
+\end{enumerate}
+
+\subsection{Run the app}
+\begin{verbatim}
+python -m streamlit run src/app.py
+\end{verbatim}
+
+\noindent Notes:
 \begin{itemize}
-    \item \texttt{docs/reports/latest/dashboard\_report.md}
-    \item \texttt{docs/reports/latest/report\_summary.json}
-    \item \texttt{docs/reports/latest/plots/} (generated source plots)
-    \item \texttt{Report/report/figs/} (submission-local copies used by this report)
+    \item Default dataset path: \texttt{data/IISER-P/}.
+    \item Use \textit{Student mode} for simplified navigation and graph defaults.
+    \item Enable \textit{Advanced analysis tabs} for cycle checks, topological
+    ordering, reachability analysis, and detailed validation/data quality.
 \end{itemize}
+
+For a quick headless smoke test:
+\begin{verbatim}
+python -m streamlit run src/app.py --server.headless true --server.port 8522
+\end{verbatim}
 
 % --------------------------------------------------------------------
 % --------------------------------------------------------------------
@@ -353,8 +479,6 @@ Representative artifacts generated from the current codebase are available in:
 \section{Appendix}
 
 \subsection{Additional figures}
-Place your custom screenshots in \texttt{Report/report/figs/}.
-
 \begin{figure}[tbp]
     \centering
     \begin{minipage}{0.48\textwidth}
@@ -369,24 +493,20 @@ Place your custom screenshots in \texttt{Report/report/figs/}.
     \caption{Credit load trend and course-kind distribution.}
 \end{figure}
 
+
 \begin{figure}[tbp]
     \centering
     \IfFileExists{./figs/graph_look_1.png}{%
-        \includegraphics[width=0.95\textwidth,trim={20 260 20 10},clip]{./figs/graph_look_1.png}%
+        \includegraphics[width=0.95\textwidth,trim={40 110 15 160},clip]{./figs/graph_look_1.png}%
     }{%
-        \IfFileExists{./figs/graph look 1.png}{%
-            \includegraphics[width=0.95\textwidth,trim={20 260 20 10},clip]{./figs/graph look 1.png}%
-        }{%
-            \fbox{\parbox[c][0.45\textwidth][c]{0.9\textwidth}{\centering
-                Missing figure:\\
-                \path{./figs/graph_look_1.png}\\
-                (or)\\
-                \path{./figs/graph look 1.png}
-            }}%
-        }%
+        \fbox{\parbox[c][0.45\textwidth][c]{0.9\textwidth}{\centering
+            Missing figure:\\
+            \path{./figs/graph_look_1.png}
+        }}%
     }
-    \caption{Graph look 1 (cropped for readability to remove large blank margins).}
+    \caption{Year-wise prerequisite graph view showing set labels and reduced clutter (dashboard screenshot).}
 \end{figure}
+
 
 \begin{figure}[tbp]
     \centering
@@ -404,17 +524,10 @@ Place your custom screenshots in \texttt{Report/report/figs/}.
             }}%
         }%
     }
-    \caption{Graph look 2 showing the cleaned dashboard and student planner context.}
+    \caption{Student-mode dashboard overview showing KPIs, policy filtering, and the planner entry point.}
 \end{figure}
 
-\begin{figure}[tbp]
-    \centering
-    \begin{minipage}{0.92\textwidth}
-        \centering
-        \safeincludegraphicsalt{./figs/ss2.png}{./figs/SS2.png}
-    \end{minipage}
-    \caption{Dashboard UI screenshot (student mode and planner view).}
-\end{figure}
+
 
 \subsection{Algorithms}
 \begin{minipage}{0.7\textwidth}
@@ -435,22 +548,6 @@ Place your custom screenshots in \texttt{Report/report/figs/}.
         \end{algorithmic}
     \end{algorithm}
 \end{minipage}
-
-
-\subsection{Code snippets}
-
-The following snippet illustrates clone-safe execution for report generation.
-
-\begin{verbatim}
-python src/generate_dashboard_report.py \
-  --courses data/IISER-P/all_courses.json \
-  --programs data/IISER-P/major_minor_requirements.json \
-  --constraints data/IISER-P/college_constraints.json \
-  --out-dir docs/reports/latest
-\end{verbatim}
-
-The resulting markdown summary includes bottleneck tables, data quality counts,
-and embedded plot references for reproducible review.
 
 
 % --------------------------------------------------------------------
