@@ -3,201 +3,110 @@
   "title": "Major/Minor Criteria",
   "description": "Json Schema for Major/Minor academic requirements",
   "type": "array",
-  "items": {
-    "$ref": "#/$defs/requirements"
-  },
+  "items": { "$ref": "#/$defs/requirements" },
   "$defs": {
     "requirements": {
       "type": "object",
       "required": [
         "program_metadata",
-        "is_offered",
-        "is_complete",
-        "prerequisites_policy",
         "overall_requirements",
-        "requirements_by_set",
-        "notes"
+        "requirements_by_set"
       ],
       "properties": {
         "program_metadata": {
           "type": "object",
           "properties": {
-            "subject": {
-              "type": "string",
-              "enum": [
-                "Biology",
-                "Chemistry",
-                "Physics",
-                "Mathematics",
-                "Earth and Climate Science",
-                "Data Science",
-                "Trans Disciplinary",
-                "Science Education",
-                "Humanities and Social Sciences"
-              ]
-            },
-            "major_or_minor": {
-              "type": "string",
-              "enum": [
-                "Major",
-                "Minor"
-              ]
-            }
+            "subject": { "type": "string", "enum": [
+              "Biology", 
+              "Chemistry", 
+              "Physics", 
+              "Mathematics", 
+              "Earth and Climate Science", 
+              "Data Science",
+              "Humanities and Social Sciences"
+            ] },
+            "major_or_minor": { "type": "string", "enum": ["Major", "Minor"] }
           },
-          "required": [
-            "subject",
-            "major_or_minor"
-          ]
-        },
-        "is_offered": {
-          "type": "boolean"
-        },
-        "is_complete": {
-          "type": "boolean"
-        },
-        "prerequisites_policy": {
-          "type": "string",
-          "enum": [
-            "strict",
-            "advisory",
-            "off"
-          ]
+          "required": ["subject", "major_or_minor"]
         },
         "overall_requirements": {
           "type": "object",
           "properties": {
-            "minimum_total_courses": {
-              "type": [
-                "integer",
-                "null"
-              ]
-            },
-            "minimum_total_credits": {
-              "type": [
-                "integer",
-                "null"
-              ]
-            }
+            "minimum_total_courses": { "type": ["integer", "null"] },
+            "minimum_total_credits": { "type": ["integer", "null"] }
           },
-          "required": [
-            "minimum_total_courses",
-            "minimum_total_credits"
-          ]
+          "required": ["minimum_total_courses", "minimum_total_credits"]
         },
         "requirements_by_set": {
           "type": "object",
           "properties": {
-            "set_a": {
-              "$ref": "#/$defs/set_a_requirement"
-            },
-            "set_b": {
-              "$ref": "#/$defs/set_b_requirement"
-            },
-            "set_c": {
-              "$ref": "#/$defs/set_c_requirement"
-            },
-            "set_d": {
-              "$ref": "#/$defs/set_d_requirement"
-            }
+            "set_a": { "$ref": "#/$defs/set_a_requirement" },
+            "set_b": { "$ref": "#/$defs/set_b_requirement" },
+            "set_c": { "$ref": "#/$defs/set_c_requirement" },
+            "set_d": { "$ref": "#/$defs/set_d_requirement" },
+            "set_e": { "$ref": "#/$defs/set_e_requirement" }
           },
-          "required": [
-            "set_a",
-            "set_b",
-            "set_c",
-            "set_d"
-          ]
-        },
-        "notes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "required": ["set_a", "set_b", "set_c", "set_d", "set_e"]
         }
       }
     },
-    "course": {
-      "type": "string"
-    },
+    "course": { "type": "string" },
     "set_a_requirement": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "description": "Some minimum number of courses required from this set.",
       "properties": {
-        "minimum_required_from_set": {
-          "type": "integer",
-          "default": 1
-        },
+        "minimum_required_from_set": { "type": "integer" },
         "available_courses": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/course"
-          }
+          "items": { "$ref": "#/$defs/course" }
         }
       },
-      "required": [
-        "minimum_required_from_set",
-        "available_courses"
-      ]
+      "required": ["minimum_required_from_set", "available_courses"]
     },
     "set_b_requirement": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "description": "Some maximum number of courses allowed from this set.",
       "properties": {
-        "maximum_allowed_from_set": {
-          "type": "integer"
-        },
+        "maximum_allowed_from_set": { "type": "integer" },
         "available_courses": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/course"
-          }
+          "items": { "$ref": "#/$defs/course" }
         }
       },
-      "required": [
-        "maximum_allowed_from_set",
-        "available_courses"
-      ]
+      "required": ["maximum_allowed_from_set", "available_courses"]
     },
     "set_c_requirement": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "description": "Supplementary courses to fulfill major/minor requirements.",
       "properties": {
         "available_courses": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/course"
-          }
+          "items": { "$ref": "#/$defs/course" }
         }
       },
-      "required": [
-        "available_courses"
-      ]
+      "required": ["available_courses"]
     },
     "set_d_requirement": {
-      "type": [
-        "object",
-        "null"
-      ],
+      "type": ["object", "null"],
       "description": "Compulsory courses for Major/Minor.",
       "properties": {
         "compulsory_courses": {
           "type": "array",
-          "items": {
-            "$ref": "#/$defs/course"
-          }
+          "items": { "$ref": "#/$defs/course" }
         }
       },
-      "required": [
-        "compulsory_courses"
-      ]
+      "required": ["compulsory_courses"]
+    },
+    "set_e_requirement": {
+      "type": ["object", "null"],
+      "description": "Courses NOT counted for Major/Minor.",
+      "properties": {
+        "not_counted_courses": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/course" }
+        }
+      },
+      "required": ["not_counted_courses"]
     }
   }
 }
