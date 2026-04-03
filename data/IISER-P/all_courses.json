@@ -1041,6 +1041,16 @@
       "kind": "normal"
     },
     {
+    "course_code": "DS4144",
+    "subject": "Data Science",
+    "course_name": "Deep Learning",
+    "credits": 4,
+    "semesters": [7],
+    "prerequisites": ["MT1223", "MT2113", "TD2223"],
+    "aliases": [],
+    "kind": "normal"
+    },
+    {
       "course_code": "DS4313",
       "subject": "Data Science",
       "course_name": "Semester Project",
@@ -1099,6 +1109,36 @@
       "prerequisites": [],
       "aliases": [],
       "kind": "normal"
+    },
+    {
+    "course_code": "DS3294",
+    "subject": "Data Science",
+    "course_name": "Data Science Practice",
+    "credits": 4,
+    "semesters": [6],
+    "prerequisites": [],
+    "aliases": [],
+    "kind": "normal"
+    },
+    {
+    "course_code": "DS3424",
+    "subject": "Data Science",
+    "course_name": "Computational Thinking for Science",
+    "credits": 4,
+    "semesters": [6, 8],
+    "prerequisites": [],
+    "aliases": [],
+    "kind": "normal"
+    },
+    {
+    "course_code": "DS3434",
+    "subject": "Data Science",
+    "course_name": "Mathematical and Statistical Optimization",
+    "credits": 4,
+    "semesters": [6, 8],
+    "prerequisites": ["MT1223", "MT2113", "TD2223"],
+    "aliases": [],
+    "kind": "normal"
     },
     {
       "course_code": "DS3613",
