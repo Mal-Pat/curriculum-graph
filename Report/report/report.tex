@@ -1,0 +1,376 @@
+\input{preamble.tex}
+
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+% ---- ENTER YOUR PROJECT DETAILS BELOW
+
+% ---- title of the project
+\title{Curriculum Graph Studio: Student-Centric Curriculum Planning with Dependency Analytics}
+
+% ---- names of team members
+\author{
+    \small Ayush
+    }
+
+% ---- enter the team number below
+\rhead{Curriculum Graph Team}
+
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+
+
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+% ---- DO NOT CHANGE THIS BLOCK OF CODE
+\begin{document}
+\maketitle
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+
+
+
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+% ---- WRITE YOUR REPORT BELOW
+
+% Helper macros for optional local screenshots.
+% If an image is missing, a placeholder box is shown instead of failing compile.
+\newcommand{\safeincludegraphics}[1]{%
+    \IfFileExists{#1}{%
+        \includegraphics[width=\textwidth]{#1}%
+    }{%
+        \fbox{\parbox[c][0.48\textwidth][c]{0.95\textwidth}{\centering
+            Missing figure:\\
+            \path{#1}
+        }}%
+    }%
+}
+
+\newcommand{\safeincludegraphicsalt}[2]{%
+    \IfFileExists{#1}{%
+        \includegraphics[width=\textwidth]{#1}%
+    }{%
+        \IfFileExists{#2}{%
+            \includegraphics[width=\textwidth]{#2}%
+        }{%
+            \fbox{\parbox[c][0.48\textwidth][c]{0.95\textwidth}{\centering
+                Missing figure:\\
+                \path{#1}\\
+                (or)\\
+                \path{#2}
+            }}%
+        }%
+    }%
+}
+
+\begin{abstract}
+We present \textit{Curriculum Graph Studio}, a student-first dashboard for
+major/minor planning using prerequisite dependency analytics. The system
+integrates an interactive directed graph interface, requirement-aware
+validation, constrained semester planning, and automated reporting with plots.
+The current IISER Pune dataset contains 264 courses across 9 subjects and 16
+program-rule entries (major and minor combinations). Our pipeline performs
+quality checks (duplicates, missing links, invalid requirement codes),
+constructs directed prerequisite graphs, identifies bottlenecks, and generates
+feasible term plans under realistic constraints (credits, semester offerings,
+and requirement priorities). Beyond algorithmic correctness, we focus on
+readability: student mode, cleaner legends, semester transition summaries, and
+policy-filtered pathways. The resulting dashboard and report artifacts are
+clone-safe, reproducible, and deployment-ready for curriculum advising.
+\end{abstract}
+
+\section{Introduction}
+Curriculum planning is often difficult for students because prerequisite
+relationships, semester offerings, and major/minor rules are spread across
+multiple documents. A graph-based representation is naturally suited for this
+problem: courses are modeled as nodes and prerequisites as directed edges.
+Graph traversal, topological logic, and bottleneck analysis then become useful
+for practical advising and semester-by-semester planning \citep{networkx_2008}.
+
+The main challenge is not only algorithmic; it is also usability. Even a
+correct graph can be hard to use if the interface is cluttered or if required
+insights are buried in technical detail. We therefore combine backend graph
+analytics with a student-facing dashboard built in Streamlit \citep{streamlit}
+and yFiles for interactive graph rendering \citep{yfiles_streamlit}.
+
+
+\section{Problem Statement and Objectives}
+Our goal is to build a reproducible, policy-aware planning system that answers
+the following student questions:
+
+\begin{itemize}
+    \item What should I take next semester given my completed courses?
+    \item Which prerequisites are blocking my progress?
+    \item Is my current pathway valid for my major and minor?
+    \item Can I still reach the degree target under term constraints?
+\end{itemize}
+
+The concrete objectives are:
+
+\begin{itemize}
+    \item Build clean dependency graphs with semester and year structure.
+    \item Validate major/minor pathways against rule sets.
+    \item Generate constrained semester plans (course and credit caps).
+    \item Provide an accessible UI with student mode and advanced mode.
+    \item Produce a detailed report with plots and quality metrics.
+\end{itemize}
+
+\section{Methods}
+\subsection{Data}
+The system uses three primary JSON inputs:
+
+\begin{itemize}
+    \item Course catalog: course code, name, credits, subject, kind,
+    prerequisites, and semester offerings.
+    \item Major/minor requirement rules: set-wise constraints and exclusions.
+    \item College constraints: number of semesters and minimum degree credits.
+\end{itemize}
+
+In the current snapshot, the dataset contains 264 courses, 9 subjects, and 16
+major/minor criteria entries \citep{iiser_data}. Data-health checks report no
+duplicate course codes, no missing prerequisite links, and no unknown
+requirement codes.
+
+\subsection{Graph Modeling and Planning}
+We build a directed graph $G=(V,E)$ where $V$ is the selected course set and
+$E$ contains edges $(u,v)$ whenever course $u$ is a prerequisite of course $v$.
+The planning engine uses semester offerings and prerequisite satisfaction to
+select feasible courses term-by-term.
+
+At a high level, the semester planner greedily selects available courses while
+respecting per-term caps and prioritizing compulsory requirements. The process
+is described in Algorithm~\ref{alg:planner}.
+
+For each course $c$, feasibility in semester $s$ is defined by two conditions:
+offering availability and prerequisite satisfaction,
+\begin{align}
+    c \in \mathcal{O}(s), \label{eq:offering}\\
+    \mathrm{pred}(c) \subseteq \mathcal{C}_{\mathrm{done}}, \label{eq:prereq}
+\end{align}
+where $\mathcal{O}(s)$ is the set of courses offered in semester $s$, and
+$\mathcal{C}_{\mathrm{done}}$ is the completed course set.
+
+\subsection{Dashboard Design}
+The dashboard has two usage modes:
+
+\begin{itemize}
+    \item \textbf{Student mode}: fewer tabs, cleaner defaults, readable labels,
+    and within-year arrow emphasis.
+    \item \textbf{Advanced mode}: full algorithm diagnostics, rule explorer,
+    validation internals, and quality views.
+\end{itemize}
+
+To reduce cognitive overload, graph legends are explicit, transition summaries
+are collapsible, and major/minor options are policy-filtered to approved
+offerings in the current deployment profile.
+
+\section{Results}
+\subsection{Quantitative Summary}
+Table~\ref{tab:summary} reports key metrics from the latest run.
+
+\begin{table}[tbp]
+    \centering
+    \caption{Dataset and system summary statistics.}
+    \label{tab:summary}
+    \begin{tabular}{|l|c|}
+        \hline
+        Metric & Value \\
+        \hline
+        Total courses & 264 \\
+        Program entries (major/minor) & 16 \\
+        Subjects covered & 9 \\
+        Prerequisite edges & 94 \\
+        Average credits per course & 3.42 \\
+        Missing prerequisite links & 0 \\
+        Unknown requirement-code hits & 0 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsection{Visual Analytics and Plots}
+Figure~\ref{fig:sem-year} shows the course distribution by semester and year,
+while Fig.~\ref{fig:subject-patterns} shows subject-level and prerequisite
+structure patterns.
+
+\begin{figure}[tbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/courses_by_first_semester.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/courses_by_year.png}
+    \end{minipage}
+    \caption{Course availability distribution over semester and academic year.}
+    \label{fig:sem-year}
+\end{figure}
+
+\begin{figure}[tbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/subject_distribution_top.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/prerequisite_count_distribution.png}
+    \end{minipage}
+    \caption{Subject concentration and prerequisite count structure.}
+    \label{fig:subject-patterns}
+\end{figure}
+
+\subsection{Dashboard Outcome}
+The upgraded dashboard improves practical usability in three ways:
+
+\begin{itemize}
+    \item Cleaner student-first navigation with optional advanced tabs.
+    \item Better graph readability via consistent legends, role-aware colors,
+    and transition summaries.
+    \item Integrated reporting pipeline that exports reproducible markdown,
+    summary JSON, and publication-ready plots.
+\end{itemize}
+
+In student testing scenarios, the planner can surface blocked courses with
+unsatisfied prerequisites and propose semester-wise alternatives under credit
+and load constraints.
+
+\section{Conclusion and Outlook}
+Curriculum Graph Studio now functions as a complete planning and analytics
+stack: data quality checks, dependency graphs, constrained planning, pathway
+validation, and report generation. The most significant contribution is the
+combination of graph-theoretic logic with a student-friendly interaction layer,
+which makes technical analytics actionable for academic decision-making.
+
+Future work includes:
+
+\begin{itemize}
+    \item personalized pathway recommendations based on student goals,
+    \item what-if simulation for delayed/failed prerequisites,
+    \item integration with institutional enrollment systems,
+    \item longitudinal evaluation of advising outcomes.
+\end{itemize}
+
+\section{Acknowledgements}
+We acknowledge the course and program-rule data sources provided for IISER Pune
+curriculum modeling, and the open-source tools that enabled this work.
+
+\section{Author Contributions}
+Ayush designed the architecture, implemented graph logic and dashboard
+integration, developed the planning and reporting pipeline, and prepared the
+final manuscript.
+
+\section{Code availability}
+The code for this project is available in the course project repository
+containing the \texttt{src/app.py}, \texttt{src/graph.py}, and
+\texttt{src/generate\_dashboard\_report.py} modules.
+
+Representative artifacts generated from the current codebase are available in:
+\begin{itemize}
+    \item \texttt{docs/reports/latest/dashboard\_report.md}
+    \item \texttt{docs/reports/latest/report\_summary.json}
+    \item \texttt{docs/reports/latest/plots/}
+\end{itemize}
+
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+% ---- DO NOT CHANGE THIS BLOCK OF CODE
+\section{References}
+\bibliography{refs}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+
+
+\section{Appendix}
+
+\subsection{Additional figures}
+Place your custom screenshots in \texttt{Report/report/figs/}.
+
+\begin{figure}[tbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/credits_by_first_semester.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../../docs/reports/latest/plots/kind_distribution.png}
+    \end{minipage}
+    \caption{Credit load trend and course-kind distribution.}
+\end{figure}
+
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../../docs/reports/latest/plots/subject_semester_heatmap.png}
+    \caption{Subject-semester offering heatmap for top subjects.}
+\end{figure}
+
+\begin{figure}[tbp]
+    \centering
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \safeincludegraphicsalt{./figs/graph_look_1.png}{./figs/graph look 1.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.48\textwidth}
+        \centering
+        \safeincludegraphicsalt{./figs/graph_look_2.png}{./figs/grapg look2.png}
+    \end{minipage}
+    \caption{Custom graph visualizations provided by the project team.}
+\end{figure}
+
+\begin{figure}[tbp]
+    \centering
+    \begin{minipage}{0.85\textwidth}
+        \centering
+        \safeincludegraphicsalt{./figs/ss2.png}{./figs/SS2.png}
+    \end{minipage}
+    \caption{Dashboard UI screenshot (student mode and planner view).}
+\end{figure}
+
+\subsection{Algorithms}
+\begin{minipage}{0.7\textwidth}
+    \begin{algorithm}[H]
+        \caption{Constrained Semester Planner}\label{alg:planner}
+        \begin{algorithmic}
+        \Require Directed graph $G$, course index $I$, start semester $s_0$, term caps
+        \Ensure Semester plan $P$ and blocked set $B$
+            \State Initialize completed set $C$ from known history
+            \For{$s = s_0$ to planning horizon}
+                \State Find feasible set $F_s = \{c \mid c \in \mathcal{O}(s) \wedge pred(c) \subseteq C\}$
+                \State Rank $F_s$ by priority and downstream dependency impact
+                \State Select courses under course-count and credit caps
+                \State Add selected courses to $P[s]$ and update $C$
+            \EndFor
+            \State $B \gets V(G) \setminus C$
+            \State \Return $P, B$
+        \end{algorithmic}
+    \end{algorithm}
+\end{minipage}
+
+
+\subsection{Code snippets}
+
+The following snippet illustrates clone-safe execution for report generation.
+
+\begin{verbatim}
+python src/generate_dashboard_report.py \
+  --courses data/IISER-P/all_courses.json \
+  --programs data/IISER-P/major_minor_requirements.json \
+  --constraints data/IISER-P/college_constraints.json \
+  --out-dir docs/reports/latest
+\end{verbatim}
+
+The resulting markdown summary includes bottleneck tables, data quality counts,
+and embedded plot references for reproducible review.
+
+
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------
+% ---- DO NOT CHANGE THIS BLOCK OF CODE
+\end{document}
+% --------------------------------------------------------------------
+% --------------------------------------------------------------------

@@ -1,0 +1,34 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Hagberg et~al.(2008)Hagberg, Schult, and Swart]{networkx_2008}
+A.~A. Hagberg, D.~A. Schult, and P.~J. Swart.
+\newblock Exploring network structure, dynamics, and function using networkx.
+\newblock \emph{Proceedings of the 7th Python in Science Conference (SciPy
+  2008)}, pages 11--15, 2008.
+
+\bibitem[{IISER Pune}(2026)]{iiser_data}
+{IISER Pune}.
+\newblock Iiser pune curriculum data files (course catalog, major/minor
+  requirements, and constraints), 2026.
+\newblock Project dataset used in this report.
+
+\bibitem[{Streamlit Inc.}(2026)]{streamlit}
+{Streamlit Inc.}
+\newblock Streamlit documentation.
+\newblock \url{https://docs.streamlit.io/}, 2026.
+\newblock Accessed: 2026-04-03.
+
+\bibitem[{yWorks GmbH}(2026)]{yfiles_streamlit}
+{yWorks GmbH}.
+\newblock yfiles graphs for streamlit.
+\newblock
+  \url{https://github.com/yWorks/yfiles-for-html-demos/tree/master/demos/toolkit/streamlit},
+  2026.
+\newblock Accessed: 2026-04-03.
+
+\end{thebibliography}
