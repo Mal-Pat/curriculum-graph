@@ -8,7 +8,7 @@ This script creates a merge-ready report artifact that summarizes:
 - visual plots for quick inspection.
 
 Example:
-  /Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_dashboard_report.py \
+    python src/generate_dashboard_report.py \
     --courses data/IISER-P/all_courses.json \
     --programs data/IISER-P/major_minor_requirements.json \
     --constraints data/IISER-P/college_constraints.json \

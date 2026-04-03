@@ -337,9 +337,9 @@ def _footer_notes():
         """
         <div class="footer-note">
             Merge helper: run the report pipeline from repo root with
-            <code>/Users/ayush/miniconda3/envs/graph_env/bin/python src/generate_dashboard_report.py --out-dir docs/reports/latest</code>
+            <code>python src/generate_dashboard_report.py --out-dir docs/reports/latest</code>
             and run syntax checks with
-            <code>/Users/ayush/miniconda3/envs/graph_env/bin/python -m py_compile src/app.py src/graph.py src/validate_major_minor.py src/generate_dashboard_report.py</code>.
+            <code>python -m py_compile src/app.py src/graph.py src/validate_major_minor.py src/generate_dashboard_report.py</code>.
         </div>
         """,
         unsafe_allow_html=True,
